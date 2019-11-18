@@ -157,6 +157,15 @@ alias l='ls -CFlh'
 alias woo='fortune'
 alias lsd="ls -alF | grep /$"
 
+alias ipe='curl ipinfo.io/ip'
+alias ipi='ipconfig getifaddr en0'
+alias c='clear'
+
+
+
+
+
+
 # This is GOLD for finding out what is taking so much space on your drives!
 alias diskspace="du -S | sort -n -r |more"
 
