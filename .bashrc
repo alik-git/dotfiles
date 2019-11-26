@@ -162,7 +162,8 @@ alias ipi='ipconfig getifaddr en0'
 alias c='clear'
 
 
-
+#my aliases 
+alias ea='cd /home/kuwajerw/csc477_ws/src/csc477_fall19/estimation_assignment'
 
 
 
