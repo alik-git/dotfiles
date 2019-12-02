@@ -160,6 +160,7 @@ alias lsd="ls -alF | grep /$"
 alias ipe='curl ipinfo.io/ip'
 alias ipi='ipconfig getifaddr en0'
 alias c='clear'
+alias rk='killall -9 rosmaster'
 
 
 #my aliases 
