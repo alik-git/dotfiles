@@ -1,0 +1,39 @@
+{
+    "window.zoomLevel": 1,
+    "python.pythonPath": "/home/kuwajerw/anaconda3/envs/pyt/bin/python",
+    "multiCommand.commands": [
+
+        {
+          "command": "multiCommand.printVariable",
+     
+          "sequence": [
+            "editor.action.clipboardCopyAction",
+            "editor.action.insertLineAfter",
+            {
+              "command": "type",
+              "args": {
+                "text": "print(\""
+              }
+            },
+            "editor.action.clipboardPasteAction",
+            {
+              "command": "type",
+              "args": {
+                "text": ": \" + str("
+              }
+            },
+            "editor.action.clipboardPasteAction",
+            {
+                "command": "type",
+                "args": {
+                  "text": "))"
+                }
+              }
+          ]
+        }
+    ],
+    "workbench.iconTheme": "vscode-icons",
+    "vsicons.presets.jsOfficial": true,
+    "vsicons.presets.foldersAllDefaultIcon": true,
+    "workbench.colorTheme": "Monokai"
+}
