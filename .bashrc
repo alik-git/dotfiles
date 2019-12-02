@@ -169,7 +169,9 @@ alias ea='cd /home/kuwajerw/csc477_ws/src/csc477_fall19/estimation_assignment'
 
 
 # This is GOLD for finding out what is taking so much space on your drives!
-alias diskspace="du -S | sort -n -r |more"
+alias diskspace="du -BM -S | sort -n -r |more"
+alias dsp="sudo du -aBM -d 1 . | sort -nr | head -20"
+alias dfc="df -h /dev/sda1 --output=source,fstype,size,used,avail,pcent"
 
 # Command line mplayer movie watching for the win.
 alias mp="mplayer -fs"

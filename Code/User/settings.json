@@ -1,6 +1,7 @@
 {
     "window.zoomLevel": 1,
     "python.pythonPath": "/home/kuwajerw/anaconda3/envs/pyt/bin/python",
+    "editor.minimap.showSlider": "always",
     "multiCommand.commands": [
 
         {
