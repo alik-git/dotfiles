@@ -165,6 +165,7 @@ alias rk='killall -9 rosmaster'
 
 #my aliases 
 alias ea='cd /home/kuwajerw/csc477_ws/src/csc477_fall19/estimation_assignment'
+alias dot='cd ~/Projects/dotfiles/'
 
 
 
