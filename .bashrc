@@ -161,6 +161,7 @@ alias ipe='curl ipinfo.io/ip'
 alias ipi='ipconfig getifaddr en0'
 alias c='clear'
 alias rk='killall -9 rosmaster'
+alias h='cd ~'
 
 
 #my aliases 
