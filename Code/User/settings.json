@@ -37,5 +37,30 @@
     "workbench.iconTheme": "vscode-icons",
     "vsicons.presets.jsOfficial": true,
     "vsicons.presets.foldersAllDefaultIcon": true,
-    "workbench.colorTheme": "Monokai"
+    "workbench.colorTheme": "Monokai",
+    "vim.useCtrlKeys": false,
+    "vim.insertModeKeyBindings": [
+      {
+          "before": ["j", "j"],
+          "after": ["<Esc>"]
+      }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+      {
+          "before": [
+              ">"
+          ],
+          "commands": [
+              "editor.action.indentLines"
+          ]
+      },
+      {
+          "before": [
+              "<"
+          ],
+          "commands": [
+              "editor.action.outdentLines"
+          ]
+      },
+  ]
 }

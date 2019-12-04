@@ -36,7 +36,7 @@ nmap k gk
 """" Vim Appearance
 
 " put colorscheme files in ~/.vim/colors/
-colorscheme murphy      " good colorschemes: murphy, slate, molokai, badwolf, solarized
+colorscheme murphy " good colorschemes: murphy, slate, molokai, badwolf, solarized
 
 " use filetype-based syntax highlighting, ftplugins, and indentation
 syntax enable

@@ -202,3 +202,5 @@ up(){
   fi
   cd $d
 }
+	
+eval "$(thefuck --alias)"
