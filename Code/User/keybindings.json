@@ -1,6 +1,26 @@
 // Place your key bindings in this file to override the defaults
 [
     {
+      "key": "up",
+      "command": "cursorUp",
+      "when": "editorTextFocus && vim.active && !inDebugRepl && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+    },
+    {
+      "key": "down",
+      "command": "cursorDown",
+      "when": "editorTextFocus && vim.active && !inDebugRepl && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+    },
+    {
+      "key": "k",
+      "command": "cursorUp",
+      "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode == 'Normal' && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+    },
+    {
+      "key": "j",
+      "command": "cursorDown",
+      "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode == 'Normal' && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+    },
+    {
         "key": "alt+q",
         "command": "multiCommand.printVariable",
       
@@ -16,6 +36,7 @@
               "before": ["j", "j"],
               "after": ["<Esc>"]
           }
-      ]}
+          ]
+      }
 
 ]
