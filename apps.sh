@@ -8,9 +8,14 @@ apt-get install spotify-client -y
 apt install neofetch -y
 -H pip install thefuck -y
 apt install qbittorrent -y
-sudo snap install emacs -y
+snap install emacs -y
 add-apt-repository multiverse
 apt install steam -y
+add-apt-repository ppa:mdeslaur/steamos
+apt-get update
+apt-get install steamos-xpad-dkms linux-headers-generic -y
+apt install sysfsutils
+echo "/module/bluetooth/parameters/disable_ertm=1" >> /etc/sysfs.conf
 
 
 apt install software-properties-common apt-transport-https wget -y
