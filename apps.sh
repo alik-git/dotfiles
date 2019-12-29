@@ -6,6 +6,8 @@ apt-get install gimp -y
 snap install vlc -y
 apt-get install spotify-client -y
 apt install neofetch -y
+sudo -H pip install thefuck
+
 
 
 apt install software-properties-common apt-transport-https wget -y
