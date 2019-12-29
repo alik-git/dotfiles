@@ -8,8 +8,9 @@ apt-get install spotify-client -y
 apt install neofetch -y
 -H pip install thefuck -y
 apt install qbittorrent -y
-
-
+sudo snap install emacs -y
+add-apt-repository multiverse
+apt install steam -y
 
 
 apt install software-properties-common apt-transport-https wget -y
