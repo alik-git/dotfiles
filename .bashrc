@@ -166,7 +166,7 @@ alias h='cd ~'
 
 #my aliases 
 alias ea='cd /home/kuwajerw/csc477_ws/src/csc477_fall19/estimation_assignment'
-alias dot='cd ~/Projects/dotfiles/'
+alias dot='cd ~/dotfiles/'
 
 
 
