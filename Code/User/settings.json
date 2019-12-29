@@ -62,5 +62,7 @@
               "editor.action.outdentLines"
           ]
       },
-  ]
+  ],
+  "git.enableSmartCommit": true,
+  "sync.gist": "593c280dbe75266c126ee7a7a216402c"
 }
