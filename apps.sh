@@ -11,7 +11,6 @@ apt install qbittorrent -y
 sudo snap install emacs -y
 add-apt-repository multiverse
 apt install steam -y
-apt install steam -y
 
 
 apt install software-properties-common apt-transport-https wget -y
