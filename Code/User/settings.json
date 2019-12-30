@@ -64,5 +64,16 @@
       },
   ],
   "git.enableSmartCommit": true,
-  "sync.gist": "593c280dbe75266c126ee7a7a216402c"
+  "sync.gist": "593c280dbe75266c126ee7a7a216402c",
+  "python.linting.pylintArgs": [
+    "--errors-only",
+    "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
+    ],
+  "bracket-pair-colorizer-2.colors": [
+      "DodgerBlue ",
+      "Chartreuse ",
+      "HotPink ",
+      "Cornsilk ",
+      "DarkSalmon" 
+  ]
 }

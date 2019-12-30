@@ -13,6 +13,7 @@ apt install neofetch -y
 -H pip install thefuck -y
 apt install qbittorrent -y
 snap install emacs -y
+apt-get install gparted -y
 
 # some settings changes 
 

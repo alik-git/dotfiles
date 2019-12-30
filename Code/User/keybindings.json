@@ -31,6 +31,9 @@
       { "key": "tab",                  
         "command": "selectNextSuggestion",
         "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
+      { "key": "shift+tab",                  
+        "command": "selectPrevSuggestion",
+        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
       { "vim.insertModeKeyBindings": [
           {
               "before": ["j", "j"],
