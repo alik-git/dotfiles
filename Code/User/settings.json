@@ -9,6 +9,7 @@
           "command": "multiCommand.printVariable",
      
           "sequence": [
+            "toggleVim",
             "editor.action.clipboardCopyAction",
             "editor.action.insertLineAfter",
             {
@@ -30,7 +31,8 @@
                 "args": {
                   "text": "))"
                 }
-              }
+            },
+            "toggleVim",
           ]
         }
     ],

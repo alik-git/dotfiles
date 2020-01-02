@@ -26,20 +26,24 @@
       
         // use the following if you wish to limit the command to python files
         "when": "resourceExtname == .py"
-      },
+    },
 
-      { "key": "tab",                  
-        "command": "selectNextSuggestion",
-        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
-      { "key": "shift+tab",                  
-        "command": "selectPrevSuggestion",
-        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
-      { "vim.insertModeKeyBindings": [
-          {
-              "before": ["j", "j"],
-              "after": ["<Esc>"]
-          }
-          ]
-      }
+    { "key": "tab",                  
+      "command": "selectNextSuggestion",
+      "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
+    { "key": "shift+tab",                  
+      "command": "selectPrevSuggestion",
+      "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
+    { "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+      ]
+    },
+    {
+      "command": "toggleVim",
+      "key": "ctrl+k ctrl+v"
+    }
 
 ]
