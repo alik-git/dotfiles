@@ -9,6 +9,7 @@
           "command": "multiCommand.printVariable",
      
           "sequence": [
+            "toggleVim",
             "editor.action.clipboardCopyAction",
             "editor.action.insertLineAfter",
             {
@@ -30,19 +31,33 @@
                 "args": {
                   "text": "))"
                 }
-              }
+            },
+            "toggleVim",
           ]
         }
     ],
-    "workbench.iconTheme": "vscode-icons",
+    // "workbench.iconTheme": "vscode-icons",
     "vsicons.presets.jsOfficial": true,
     "vsicons.presets.foldersAllDefaultIcon": true,
-    "workbench.colorTheme": "Monokai",
     "vim.useCtrlKeys": false,
     "vim.insertModeKeyBindings": [
       {
           "before": ["j", "j"],
           "after": ["<Esc>"]
+      },
+      {
+          "before": ["f", "f"],
+          "after":["p", "r", "i", "n", "t", "("]
+      }
+    ],
+    "vim.normalModeKeyBindings": [
+      {
+          "before": ["f", "f"],
+          "commands": ["editor.action.commentLine"]
+      },
+      {
+        "before": [";"],
+        "after": [":"]
       }
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
@@ -62,5 +77,22 @@
               "editor.action.outdentLines"
           ]
       },
-  ]
+    ],
+  "git.enableSmartCommit": true,
+  "sync.gist": "593c280dbe75266c126ee7a7a216402c",
+  // "python.linting.pylintArgs": [
+  //   "--errors-only",
+  //   "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
+  //   ],
+  "bracket-pair-colorizer-2.showHorizontalScopeLine": false,
+  "bracket-pair-colorizer-2.showVerticalScopeLine": true,
+  "bracket-pair-colorizer-2.colors": [
+      "DodgerBlue ",
+      "Chartreuse ",
+      "HotPink ",
+      "Cornsilk ",
+      "DarkSalmon" 
+  ],
+  "workbench.activityBar.visible": true,
+  "workbench.colorTheme": "Monokai"
 }

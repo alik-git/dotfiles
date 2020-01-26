@@ -1,21 +1,52 @@
 // Place your key bindings in this file to override the defaults
 [
     {
+      "key": "up",
+      "command": "cursorUp",
+      "when": "editorTextFocus && vim.active && !inDebugRepl && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+    },
+    {
+      "key": "down",
+      "command": "cursorDown",
+      "when": "editorTextFocus && vim.active && !inDebugRepl && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+    },
+    {
+      "key": "k",
+      "command": "cursorUp",
+      "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode == 'Normal' && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+    },
+    {
+      "key": "j",
+      "command": "cursorDown",
+      "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode == 'Normal' && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+    },
+    {
         "key": "alt+q",
         "command": "multiCommand.printVariable",
       
         // use the following if you wish to limit the command to python files
         "when": "resourceExtname == .py"
-      },
+    },
 
-      { "key": "tab",                  
-        "command": "selectNextSuggestion",
-        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
-      { "vim.insertModeKeyBindings": [
-          {
-              "before": ["j", "j"],
-              "after": ["<Esc>"]
-          }
-      ]}
-
+    { "key": "tab",                  
+      "command": "selectNextSuggestion",
+      "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
+    { "key": "shift+tab",                  
+      "command": "selectPrevSuggestion",
+      "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
+    { "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+      ]
+    },
+    {
+      "command": "toggleVim",
+      "key": "ctrl+k ctrl+v"
+    },
+    {
+      "key": "alt+x",
+      "command": "workbench.action.toggleActivityBarVisibility"
+    }
 ]
