@@ -34,13 +34,7 @@
     { "key": "shift+tab",                  
       "command": "selectPrevSuggestion",
       "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
-    { "vim.insertModeKeyBindings": [
-        {
-            "before": ["j", "j"],
-            "after": ["<Esc>"]
-        }
-      ]
-    },
+
     {
       "command": "toggleVim",
       "key": "ctrl+k ctrl+v"
