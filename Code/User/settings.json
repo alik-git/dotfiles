@@ -3,6 +3,14 @@
     "python.pythonPath": "/home/kuwajerw/anaconda3/envs/pyt/bin/python",
     "editor.minimap.showSlider": "always",
     "vim.overrideCopy": true,
+    "editor.smoothScrolling": false,
+    // "editor.wordWrap": "on",
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wrappingIndent": "same",
+    "editor.wordWrapColumn": 80,
+    "rewrap.autoWrap.enabled": true,
+ 
+    "editor.renderWhitespace": "boundary", 
     "multiCommand.commands": [
 
         {
@@ -36,15 +44,28 @@
           ]
         }
     ],
-    "workbench.iconTheme": "vscode-icons",
+    // "workbench.iconTheme": "vscode-icons",
     "vsicons.presets.jsOfficial": true,
     "vsicons.presets.foldersAllDefaultIcon": true,
-    "workbench.colorTheme": "Monokai",
     "vim.useCtrlKeys": false,
     "vim.insertModeKeyBindings": [
       {
           "before": ["j", "j"],
           "after": ["<Esc>"]
+      },
+      {
+          "before": ["f", "f"],
+          "after":["p", "r", "i", "n", "t", "(", "\""]
+      }
+    ],
+    "vim.normalModeKeyBindings": [
+      {
+          "before": ["f", "f"],
+          "commands": ["editor.action.commentLine"]
+      },
+      {
+        "before": [";"],
+        "after": [":"]
       }
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
@@ -64,18 +85,131 @@
               "editor.action.outdentLines"
           ]
       },
-  ],
+    ],
   "git.enableSmartCommit": true,
   "sync.gist": "593c280dbe75266c126ee7a7a216402c",
-  "python.linting.pylintArgs": [
-    "--errors-only",
-    "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
-    ],
+  // "python.linting.pylintArgs": [
+  //   "--errors-only",
+  //   "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
+  //   ],
+  "bracket-pair-colorizer-2.showHorizontalScopeLine": false,
+  "bracket-pair-colorizer-2.showVerticalScopeLine": true,
   "bracket-pair-colorizer-2.colors": [
       "DodgerBlue ",
       "Chartreuse ",
       "HotPink ",
       "Cornsilk ",
       "DarkSalmon" 
-  ]
-}
+  ],
+
+  "editor.tokenColorCustomizations": {
+    "[Monokai]": {
+      "textMateRules": [
+        {
+            "scope": [
+                "meta.function-call.generic.python"
+            ],
+            "settings": {
+                "foreground": "#cbfcff",
+                "fontStyle": "italic"
+            }
+        },
+        {
+          "scope": [
+              "variable.parameter.function.language.python"
+          ],
+          "settings": {
+              "foreground": "#84ffe4"
+          }
+        },
+        {
+          "scope": [
+              "variable.parameter.function.language.special.self.python"
+          ],
+          "settings": {
+              // "foreground": "#11dfb2"
+          }
+        },
+        {
+          "scope": [
+              "support.function.builtin.python"
+          ],
+          "settings": {
+              "fontStyle": "italic bold"
+          }
+        },
+        {
+          "scope": [
+              "meta.function-call.arguments.python"
+          ],
+          "settings": {
+            "foreground":"#f1d9ff",
+          }
+        },
+        {
+          "scope": [
+              "string.quoted.single.python"
+          ],
+          "settings": {
+            "foreground":"#8af8ccd2",
+          }
+        },
+        {
+          "scope": [
+              "constant.numeric"
+          ],
+          "settings": {
+            "foreground":"#9ff7ff",
+          }
+        },
+        {
+          "scope": [
+              "constant.other.caps.python"
+          ],
+          "settings": {
+            "foreground":"#fff5bc",
+          }
+        },
+        {
+          "scope": [
+              "source.python"
+          ],
+          "settings": {
+            "foreground":"#d7e2ff",
+          }
+        },
+        {
+          "scope": [
+              "comment.line.number-sign.python"
+          ],
+          "settings": {
+            "foreground":"#a6f0bc",
+          }
+        }
+        // {
+        //   "scope": [
+        //       "meta.member.access.python"
+        //   ],
+        //   "settings": {
+        //       "fontStyle": "italic bold"
+        //   }
+        // }
+
+      ]
+    }
+  },
+
+  "workbench.colorCustomizations": {
+    "[Monokai]": {
+      "statusBar.background": "#2a63ff5d",
+      
+
+        
+          // "sideBar.background": "#347890"
+    }
+  },
+  "workbench.activityBar.visible": true,
+  "workbench.colorTheme": "Monokai",
+  "editor.fontFamily": “Source Code Pro”,
+  "editor.fontLigatures": true
+  }
