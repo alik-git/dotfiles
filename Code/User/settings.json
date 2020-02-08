@@ -55,7 +55,7 @@
       },
       {
           "before": ["f", "f"],
-          "after":["p", "r", "i", "n", "t", "(", "\""]
+          "after":["p", "r", "i", "n", "t", "("]
       }
     ],
     "vim.normalModeKeyBindings": [
@@ -88,10 +88,10 @@
     ],
   "git.enableSmartCommit": true,
   "sync.gist": "593c280dbe75266c126ee7a7a216402c",
-  // "python.linting.pylintArgs": [
-  //   "--errors-only",
-  //   "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
-  //   ],
+  "python.linting.pylintArgs": [
+    "--errors-only",
+    "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
+    ],
   "bracket-pair-colorizer-2.showHorizontalScopeLine": false,
   "bracket-pair-colorizer-2.showVerticalScopeLine": true,
   "bracket-pair-colorizer-2.colors": [
@@ -210,6 +210,5 @@
   },
   "workbench.activityBar.visible": true,
   "workbench.colorTheme": "Monokai",
-  "editor.fontFamily": “Source Code Pro”,
   "editor.fontLigatures": true
   }
