@@ -177,6 +177,14 @@
           "settings": {
             "foreground":"#d7e2ff",
           }
+        },
+        {
+          "scope": [
+              "comment.line.number-sign.python"
+          ],
+          "settings": {
+            "foreground":"#a6f0bc",
+          }
         }
         // {
         //   "scope": [

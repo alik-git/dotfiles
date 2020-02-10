@@ -42,5 +42,9 @@
     {
       "key": "alt+x",
       "command": "workbench.action.toggleActivityBarVisibility"
+    },
+    {
+      "key": "shift+alt+q",
+      "command": "rewrap.toggleAutoWrap"
     }
 ]
