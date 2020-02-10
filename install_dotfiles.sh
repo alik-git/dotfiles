@@ -9,23 +9,23 @@ done
 
 # bashrc stuff
 rm ~/.bashrc
-ln -sv ~/dotfiles/.bashrc ~
+ln -sv ~/repos/dotfiles/.bashrc ~
 
 # vscode stuff
 # settings
 rm ~/.config/Code/User/settings.json
-ln -sv ~/dotfiles/Code/User/settings.json ~/.config/Code/User/
+ln -sv ~/repos/dotfiles/Code/User/settings.json ~/.config/Code/User/
 
 # shortcuts
 rm ~/.config/Code/User/keybindings.json
-ln -sv ~/dotfiles/Code/User/keybindings.json ~/.config/Code/User/
+ln -sv ~/repos/dotfiles/Code/User/keybindings.json ~/.config/Code/User/
 
 
 
 
 # vim stuff 
 rm ~/.vimrc
-ln -sv ~/dotfiles/.vimrc ~
+ln -sv ~/repos/dotfiles/.vimrc ~
 
 
 
