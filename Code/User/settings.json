@@ -10,7 +10,7 @@
     "editor.wordWrapColumn": 80,
     "rewrap.autoWrap.enabled": true,
  
-    // "editor.renderWhitespace": "boundary", 
+    "editor.renderWhitespace": "none", 
     "multiCommand.commands": [
 
         {
