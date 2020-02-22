@@ -10,10 +10,11 @@ apt install gnome-tweaks -y
 apt install adwaita-icon-theme-full
 apt-get install spotify-client -y
 apt install neofetch -y
--H pip install thefuck -y
 apt install qbittorrent -y
 snap install emacs -y
 apt-get install gparted -y
+apt install python3-dev python3-pip python3-setuptools -y
+pip3 install thefuck -y
 
 # some settings changes 
 
