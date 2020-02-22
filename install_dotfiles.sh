@@ -8,24 +8,24 @@ do
 done
 
 # bashrc stuff
-rm ~/.bashrc
-ln -sv ~/dotfiles/.bashrc ~
+rm -f ~/.bashrc
+ln -sv ~/repos/dotfiles/.bashrc ~
 
-# vscode stuff
-# settings
-rm ~/.config/Code/User/settings.json
-ln -sv ~/dotfiles/Code/User/settings.json ~/.config/Code/User/
+# # vscode stuff
+# # settings
+# rm -f ~/.config/Code/User/settings.json
+# ln -sv ~/dotfiles/Code/User/settings.json ~/.config/Code/User/
 
-# shortcuts
-rm ~/.config/Code/User/keybindings.json
-ln -sv ~/dotfiles/Code/User/keybindings.json ~/.config/Code/User/
+# # shortcuts
+# rm -f ~/.config/Code/User/keybindings.json
+# ln -sv ~/dotfiles/Code/User/keybindings.json ~/.config/Code/User/
 
 
 
 
 # vim stuff 
-rm ~/.vimrc
-ln -sv ~/dotfiles/.vimrc ~
+rm -f ~/.vimrc
+ln -sv ~/repos/dotfiles/.vimrc ~
 
 
 
