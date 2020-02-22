@@ -10,7 +10,7 @@
     "editor.wordWrapColumn": 80,
     "rewrap.autoWrap.enabled": true,
  
-    "editor.renderWhitespace": "boundary", 
+    "editor.renderWhitespace": "none", 
     "multiCommand.commands": [
 
         {
@@ -55,7 +55,7 @@
       },
       {
           "before": ["f", "f"],
-          "after":["p", "r", "i", "n", "t", "("]
+          "after":["p", "r", "i", "n", "t", "(", "\""]
       }
     ],
     "vim.normalModeKeyBindings": [
@@ -88,10 +88,10 @@
     ],
   "git.enableSmartCommit": true,
   "sync.gist": "593c280dbe75266c126ee7a7a216402c",
-  "python.linting.pylintArgs": [
-    "--errors-only",
-    "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
-    ],
+  // "python.linting.pylintArgs": [
+  //   "--errors-only",
+  //   "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
+  //   ],
   "bracket-pair-colorizer-2.showHorizontalScopeLine": false,
   "bracket-pair-colorizer-2.showVerticalScopeLine": true,
   "bracket-pair-colorizer-2.colors": [
@@ -135,7 +135,7 @@
               "support.function.builtin.python"
           ],
           "settings": {
-              "fontStyle": "italic bold"
+              // "fontStyle": "italic bold"
           }
         },
         {
@@ -201,7 +201,7 @@
 
   "workbench.colorCustomizations": {
     "[Monokai]": {
-      "statusBar.background": "#2a63ff5d",
+      "statusBar.background": "#8fffe73d",
       
 
         
@@ -210,5 +210,6 @@
   },
   "workbench.activityBar.visible": true,
   "workbench.colorTheme": "Monokai",
-  "editor.fontLigatures": true
-  }
+  "python.dataScience.sendSelectionToInteractiveWindow": true,
+  "python.dataScience.askForKernelRestart": false
+}
