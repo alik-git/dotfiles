@@ -15,7 +15,7 @@ snap install emacs -y
 apt-get install gparted -y
 apt install python3-dev python3-pip python3-setuptools -y
 pip3 install thefuck -y
-sudo apt install thefuck -y
+apt install thefuck -y
 apt-get install xclip -y
 # discord 
 wget -O discord.deb "https://discordapp.com/api/download?platform=linux&format=deb"

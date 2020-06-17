@@ -168,6 +168,7 @@ alias h='cd ~'
 alias ea='cd /home/kuwajerw/csc477_ws/src/csc477_fall19/estimation_assignment'
 alias dot='cd ~/repos/dotfiles/'
 alias repos='cd ~/repos'
+alias tv='/bin/bash /home/kuwajerw/.screenlayout/3vert.sh'
 
 
 
