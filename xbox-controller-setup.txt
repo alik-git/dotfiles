@@ -1,0 +1,20 @@
+https://github.com/atar-axis/xpadneo
+
+is where I got all the info 
+
+
+what is an observable functions 
+
+state
+
+manifolds and hilbert spaces 
+
+single non linear dynamic system 
+
+check anser with video 
+
+#!/bin/sh
+%(xrandr)s
+
+
+/bin/bash /home/kuwajerw/.screenlayout/3vert.sh
