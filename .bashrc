@@ -137,13 +137,13 @@ unset __conda_setup
 
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/kuwajerw/.mujoco/mujoco200/bin
-source /opt/ros/melodic/setup.bash
+# source /opt/ros/melodic/setup.bash
 
 
 
-export ROS_HOME=~/.ros
-source /opt/ros/melodic/setup.bash
-source ~/csc477_ws/devel/setup.bash
+# export ROS_HOME=~/.ros
+# source /opt/ros/melodic/setup.bash
+# source ~/csc477_ws/devel/setup.bash
 
 
 
