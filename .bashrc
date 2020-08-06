@@ -137,13 +137,13 @@ unset __conda_setup
 
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/kuwajerw/.mujoco/mujoco200/bin
-source /opt/ros/melodic/setup.bash
+# source /opt/ros/melodic/setup.bash
 
 
 
-export ROS_HOME=~/.ros
-source /opt/ros/melodic/setup.bash
-source ~/csc477_ws/devel/setup.bash
+# export ROS_HOME=~/.ros
+# source /opt/ros/melodic/setup.bash
+# source ~/csc477_ws/devel/setup.bash
 
 
 
@@ -170,7 +170,17 @@ alias dot='cd ~/repos/dotfiles/'
 alias repos='cd ~/repos'
 alias tv='/bin/bash /home/kuwajerw/.screenlayout/3vert.sh'
 alias web='bundle exec jekyll serve'
+alias rre='conda activate rre'
+alias bre='conda activate bre'
 
+
+
+
+# adding stuff to python path
+export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/hylaa"
+
+# adding stuff to matlab path
+alias mat='/home/kuwajerw/MATLAB/R2020a/bin/matlab'
 
 
 # This is GOLD for finding out what is taking so much space on your drives!
