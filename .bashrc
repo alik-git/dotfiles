@@ -169,7 +169,17 @@ alias ea='cd /home/kuwajerw/csc477_ws/src/csc477_fall19/estimation_assignment'
 alias dot='cd ~/repos/dotfiles/'
 alias repos='cd ~/repos'
 alias tv='/bin/bash /home/kuwajerw/.screenlayout/3vert.sh'
+alias rre='conda activate rre'
+alias bre='conda activate bre'
 
+
+
+
+# adding stuff to python path
+export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/hylaa"
+
+# adding stuff to matlab path
+alias mat='/home/kuwajerw/MATLAB/R2020a/bin/matlab'
 
 
 # This is GOLD for finding out what is taking so much space on your drives!
