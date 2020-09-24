@@ -140,10 +140,10 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/kuwajerw/.mujoco/mujoco200/bin
 # source /opt/ros/melodic/setup.bash
 
 
-
-# export ROS_HOME=~/.ros
-# source /opt/ros/melodic/setup.bash
-# source ~/csc477_ws/devel/setup.bash
+# Ros Setup
+export ROS_HOME=~/.ros
+source /opt/ros/melodic/setup.bash
+source ~/csc477_ws/devel/setup.bash
 
 
 
@@ -165,13 +165,34 @@ alias h='cd ~'
 
 
 #my aliases 
+
+# old 
+# alias tv='/bin/bash /home/kuwajerw/.screenlayout/3vert.sh'
+
+# python environments 
+alias rre='conda activate rre'
+alias bre='conda activate bre'
+alias d2l='conda activate d2l'
+alias carla='conda activate carla'
+alias rosp='conda activate rosp'
+alias hcl='conda activate hcl-env'
+
+# getting to directories
 alias ea='cd /home/kuwajerw/csc477_ws/src/csc477_fall19/estimation_assignment'
 alias dot='cd ~/repos/dotfiles/'
 alias repos='cd ~/repos'
-alias tv='/bin/bash /home/kuwajerw/.screenlayout/3vert.sh'
+alias eq='cd ~/repos/equivariantRepresentations; conda activate carla'
+alias pweb='cd ~/repos/alik-git.github.io/'
+
+# running stuff
 alias web='bundle exec jekyll serve'
-alias rre='conda activate rre'
-alias bre='conda activate bre'
+alias web='cd ~/repos/backwards-reachability/; bundle exec jekyll serve --livereload'
+alias wep='cd ~/repos/alik-git.github.io/; bundle exec jekyll serve --livereload'
+alias pweblaunch='cd ~/repos/alik-git.github.io/; yes | ./bin/deploy --user'
+alias runcarla='conda activate carla; cd ~/repos/carla/; ./CarlaUE4.sh -carla-server -benchmark -fps=30 -windowed -ResX=800 -ResY=600'
+
+# reload bashrc
+alias pop='echo "source ~/.bashrc"; source ~/.bashrc'
 
 
 
@@ -180,7 +201,7 @@ alias bre='conda activate bre'
 export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/hylaa"
 
 # adding stuff to matlab path
-alias mat='/home/kuwajerw/MATLAB/R2020a/bin/matlab'
+alias mat='/home/kuwajerw/repos/MATLAB/R2020a/bin/matlab'
 
 
 # This is GOLD for finding out what is taking so much space on your drives!
@@ -202,7 +223,7 @@ PATH="$HOME/bin:$PATH"
 
 
 
-up(){
+u(){
   local d=""
   limit=$1
   for ((i=1 ; i <= limit ; i++))
@@ -217,3 +238,6 @@ up(){
 }
 	
 eval "$(thefuck --alias)"
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
