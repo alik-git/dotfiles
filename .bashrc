@@ -136,7 +136,7 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/kuwajerw/.mujoco/mujoco200/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/kuwajerw/.mujoco/mujoco200/bin:/home/kuwajerw/anaconda3/lib
 # source /opt/ros/melodic/setup.bash
 
 
@@ -175,6 +175,7 @@ alias bre='conda activate bre'
 alias d2l='conda activate d2l'
 alias carla='conda activate carla'
 alias rosp='conda activate rosp'
+alias rosp2='conda activate rosp2'
 alias hcl='conda activate hcl-env'
 
 # getting to directories
