@@ -191,7 +191,8 @@ alias pweb='cd ~/repos/alik-git.github.io/'
 alias web='bundle exec jekyll serve'
 alias web='cd ~/repos/backwards-reachability/; bundle exec jekyll serve --livereload'
 alias wep='cd ~/repos/alik-git.github.io/; bundle exec jekyll serve --livereload'
-alias pweblaunch='cd ~/repos/alik-git.github.io/; yes | ./bin/deploy --user'
+alias pweb='cd ~/repos/alik-git.github.io/; bundle exec jekyll serve --livereload'
+alias pweblaunch='cd ~/repos/alik-git.github.io/; yes | ./bin/deploy --user; bundle exec jekyll serve --livereload'
 alias runcarla='conda activate carla; cd ~/repos/carla/; ./CarlaUE4.sh -carla-server -benchmark -fps=30 -windowed -ResX=800 -ResY=600'
 
 # reload bashrc
