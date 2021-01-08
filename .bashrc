@@ -170,6 +170,7 @@ alias h='cd ~'
 # alias tv='/bin/bash /home/kuwajerw/.screenlayout/3vert.sh'
 
 # python environments 
+alias ca='conda activate'
 alias rre='conda activate rre'
 alias bre='conda activate bre'
 alias d2l='conda activate d2l'
