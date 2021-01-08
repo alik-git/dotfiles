@@ -172,28 +172,14 @@ alias ht='history'
 
 # python environments 
 alias ca='conda activate'
-alias rre='conda activate rre'
-alias bre='conda activate bre'
-alias d2l='conda activate d2l'
-alias carla='conda activate carla'
-alias rosp='conda activate rosp'
-alias rosp2='conda activate rosp2'
-alias hcl='conda activate hcl-env'
 
 # getting to directories
-alias ea='cd /home/kuwajerw/csc477_ws/src/csc477_fall19/estimation_assignment'
 alias dot='cd ~/repos/dotfiles/'
 alias repos='cd ~/repos'
-alias eq='cd ~/repos/equivariantRepresentations; conda activate carla'
-alias pweb='cd ~/repos/alik-git.github.io/'
 
-# running stuff
-alias web='bundle exec jekyll serve'
-alias web='cd ~/repos/backwards-reachability/; bundle exec jekyll serve --livereload'
 alias wep='cd ~/repos/alik-git.github.io/; bundle exec jekyll serve --livereload'
 alias pweb='cd ~/repos/alik-git.github.io/; bundle exec jekyll serve --livereload'
 alias pweblaunch='cd ~/repos/alik-git.github.io/; yes | ./bin/deploy --user; bundle exec jekyll serve --livereload'
-alias runcarla='conda activate carla; cd ~/repos/carla/; ./CarlaUE4.sh -carla-server -benchmark -fps=30 -windowed -ResX=800 -ResY=600'
 
 # reload bashrc
 alias pop='echo "source ~/.bashrc"; source ~/.bashrc'
@@ -249,6 +235,38 @@ export PATH="$HOME/gems/bin:$PATH"
 hg(){
 
     search_term=$1
-
+    
     history | grep $search_term
 }
+
+
+alias rweb='cd ~/repos/rvl-lab-utoronto.github.io/; bundle exec jekyll serve --livereload'
+alias rwebl='cd ~/repos/rvl-lab-utoronto.github.io/; yes | ./bin/deploy; bundle exec jekyll serve --livereload'
+
+
+lis(){
+    suffix='fromImage70.pt'
+    for filename in *;
+        do echo \'$PWD/$filename/$suffix\',
+        done
+}
+
+dis(){
+    suffix=''
+    for filename in *;
+        do echo \'$PWD/$filename/$suffix\',
+        done
+}
+
+
+alias ras='cd ~/repos/Neighborhood/; ./AirSimNH.sh -windowed -ResX=800 -ResY=600'
+alias eq='cd ~/repos/equivariantRepresentations; conda activate carla'
+alias pweb='cd ~/repos/alik-git.github.io/'
+alias hu='conda activate rosp2; cd ~/csc477_ws/src/csc477_fall19/'
+alias air='cd ~/repos/ADRL/ADRL/; ./ADRL.sh -windowed -ResX=800 -ResY=600'
+alias drone='cd ~/repos/droneNavigationEquivariant/PythonClient/imitation_learning'
+alias dronem='cd ~/repos/droneNavigationEquivariant/PythonClient/multirotor'
+alias droneup='cd ~/repos/droneNavigationEquivariant/'
+alias runcarla='conda activate carla; cd ~/repos/carla/; ./CarlaUE4.sh -carla-server -benchmark -fps=30 -windowed -ResX=800 -ResY=600'
+alias gtd='ls -d $PWD/*'
+alias zip='for i in *; do echo '"'$PWD/''$i'/fromImage70.pt",'; done'
