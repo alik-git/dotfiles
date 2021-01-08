@@ -242,3 +242,10 @@ eval "$(thefuck --alias)"
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
+
+hg(){
+
+    search_term=$1
+
+    history | grep $search_term
+}
