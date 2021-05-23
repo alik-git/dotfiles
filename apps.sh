@@ -31,6 +31,11 @@ snap install discord
 
 # VSCode stuff 
 snap install --classic code
+
+# wesite stuff
+apt install ruby -y
+apt-get install ruby-dev -y
+apt install ruby-bundler -y
 # apt install software-properties-common apt-transport-https wget -y
 # wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
 # add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
