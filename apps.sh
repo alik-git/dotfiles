@@ -2,6 +2,8 @@
 
 # installing apps 
 apt install git -y
+git config --global user.name "Ali K"
+git config --global user.email "ali.kuwajerwala@mail.utoronto.ca"
 apt-get update  # To get the latest package lists
 apt-get install vim -y
 apt install build-essential -y
