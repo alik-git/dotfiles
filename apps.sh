@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # installing apps 
+apt install git -y
 apt-get update  # To get the latest package lists
 apt-get install vim -y
 apt install build-essential -y
@@ -21,7 +22,7 @@ apt-get install xclip -y
 snap install slack --classic
 
 # discord 
-snap install discord
+# snap install discord # commented out cause if you use snap to install discord it doesn't update properly you gotta go like snap refresh discord and its really annoying
 
 
 # some settings changes 
