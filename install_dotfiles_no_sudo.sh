@@ -1,6 +1,9 @@
 #!/bin/bash
 
 
+git config --global user.name "Ali K"
+git config --global user.email "ali.kuwajerwala@mail.utoronto.ca"
+
 COLORS="red green blue"
 for COLOR in $COLORS
 do
