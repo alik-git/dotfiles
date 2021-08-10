@@ -1,6 +1,4 @@
-ssh-keygen -t rsa -b 4096 -C aliqk1603@gmail.com
-
-apt-get install xclip
+ssh-keygen -t rsa -b 4096 -C ali.kuwajerwala@mail.utoronto.ca
 
 xclip -sel clip < ~/.ssh/id_rsa.pub
 
