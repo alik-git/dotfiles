@@ -24,7 +24,7 @@ apt-get install xclip -y
 snap install slack --classic
 
 # discord 
-# snap install discord # commented out cause if you use snap to install discord it doesn't update properly you gotta go like snap refresh discord and its really annoying
+snap install discord # commented out cause if you use snap to install discord it doesn't update properly you gotta go like snap refresh discord and its really annoying
 
 
 # some settings changes 
