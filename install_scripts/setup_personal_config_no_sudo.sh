@@ -11,12 +11,12 @@ do
 done
 
 # bashrc stuff
-rm -f ~/.bashrc
+mv ~/.bashrc ~/repos/dotfiles/personal_config/defaults/.default_bashrc
 ln -sv ~/repos/dotfiles/personal_config/.bashrc ~
 
 
 # vim stuff 
-rm -f ~/.vimrc
+mv ~/.vimrc ~/repos/dotfiles/personal_config/defaults/.default_vimrc
 ln -sv ~/repos/dotfiles/personal_config/.vimrc ~
 
 
