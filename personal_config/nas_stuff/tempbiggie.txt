@@ -1,0 +1,11 @@
+[Unit]
+Description=Automount CIFS Remote App Data
+Requires=network-online.target
+After=network-online.service
+
+[Automount]
+Where=/mnt/smbbiggie
+
+[Install]
+WantedBy=multi-user.target
+
