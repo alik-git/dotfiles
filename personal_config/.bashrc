@@ -141,9 +141,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/kuwajerw/.mujoco/mujoco200/bin:/ho
 
 
 # Ros Setup
-export ROS_HOME=~/.ros
-source /opt/ros/melodic/setup.bash
-source ~/csc477_ws/devel/setup.bash
+# export ROS_HOME=~/.ros
+# source /opt/ros/melodic/setup.bash
+# source ~/csc477_ws/devel/setup.bash
 
 
 
@@ -188,7 +188,7 @@ alias pop='echo "source ~/.bashrc"; source ~/.bashrc'
 
 
 # adding stuff to python path
-export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/hylaa"
+# export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/hylaa"
 
 # adding stuff to matlab path
 alias mat='/home/kuwajerw/repos/MATLAB/R2020a/bin/matlab'
