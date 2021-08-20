@@ -1,0 +1,10 @@
+[Unit]
+Description=Automount CIFS Remote Tank Automount
+Requires=network-online.target
+After=network-online.service
+
+[Automount]
+Where=/mnt/MyStuff
+
+[Install]
+WantedBy=multi-user.target

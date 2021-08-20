@@ -1,0 +1,14 @@
+# move file to /etc/systemd/system/mnt-MyStuff.mount
+[Unit]
+Description=CIFS Mount Tank 
+Wants=connman.service network-online.target
+After=connman.service network-online.target
+
+[Mount]
+What=//tank.local/tank/MyStuff
+Where=/mnt/MyStuff
+Type=cifs
+Options=credentials=/home/kuwajerw/repos/dotfiles/personal_config/nas_stuff/nas_creds,dir_mode=0775,file_mode=0664,uid=1000,gid=1000
+
+[Install]
+WantedBy=multi-user.target
