@@ -14,12 +14,12 @@ done
 
 # bashrc stuff
 mv ~/.bashrc ~/repos/dotfiles/personal_config/defaults/.default_bashrc
-ln -sv ~/repos/dotfiles/personal_config/.bashrc ~
+ln -sv ~/repos/dotfiles/personal_config/bashrc_stuff/.bashrc ~
 
 
 # vim stuff 
 mv ~/.vimrc ~/repos/dotfiles/personal_config/defaults/.default_vimrc
-ln -sv ~/repos/dotfiles/personal_config/.vimrc ~
+ln -sv ~/repos/dotfiles/personal_config/other/.vimrc ~
 
 
 
