@@ -16,6 +16,7 @@ apt-get install gparted -y
 apt install python3-dev python3-pip python3-setuptools -y
 apt-get install xclip -y
 apt install snapd -y
+apt install cifs-utils -y
 
 # commented out for now
 # pip3 install thefuck
