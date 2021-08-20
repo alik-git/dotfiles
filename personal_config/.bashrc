@@ -2,7 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -92,9 +91,6 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias sp='conda activate spinningup'
-alias ros2='conda activate ros2'
-alias pyt='conda activate pyt'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -120,55 +116,26 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/kuwajerw/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/kuwajerw/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/kuwajerw/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/kuwajerw/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
+######################################
+##### My Stuff #######################
+######################################
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/kuwajerw/.mujoco/mujoco200/bin:/home/kuwajerw/anaconda3/lib
-# source /opt/ros/melodic/setup.bash
+###############
+### Aliases ###
+###############
 
-
-# Ros Setup
-# export ROS_HOME=~/.ros
-# source /opt/ros/melodic/setup.bash
-# source ~/csc477_ws/devel/setup.bash
-
-
-
-source /etc/profile.d/bash_completion.sh
-
-
-# some more ls aliases
+# misc helpful shortcuts
 alias ll='ls -alh'
 alias la='ls -A'
 alias l='ls -CFlh'
-alias woo='fortune'
+
 alias lsd="ls -alF | grep /$"
 
-alias ipe='curl ipinfo.io/ip'
-alias ipi='ipconfig getifaddr en0'
 alias c='clear'
-alias rk='killall -9 rosmaster'
 alias h='cd ~'
 alias ht='history'
 
-
-#my aliases 
-
-# old 
-# alias tv='/bin/bash /home/kuwajerw/.screenlayout/3vert.sh'
 
 # python environments 
 alias ca='conda activate'
@@ -177,42 +144,63 @@ alias ca='conda activate'
 alias dot='cd ~/repos/dotfiles/'
 alias repos='cd ~/repos'
 
-alias wep='cd ~/repos/alik-git.github.io/; bundle exec jekyll serve --livereload'
+# website stuff
+alias web='cd ~/repos/alik-git.github.io/'
 alias pweb='cd ~/repos/alik-git.github.io/; bundle exec jekyll serve --livereload'
-alias pweblaunch='cd ~/repos/alik-git.github.io/; yes | ./bin/deploy --user; bundle exec jekyll serve --livereload'
+alias pwebl='cd ~/repos/alik-git.github.io/; yes | ./bin/deploy --user; bundle exec jekyll serve --livereload'
 
 # reload bashrc
 alias pop='echo "source ~/.bashrc"; source ~/.bashrc'
 
-
-
-
+# Path related aliases
 # adding stuff to python path
 # export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/hylaa"
-
 # adding stuff to matlab path
-alias mat='/home/kuwajerw/repos/MATLAB/R2020a/bin/matlab'
+#alias mat='/home/kuwajerw/repos/MATLAB/R2020a/bin/matlab'
 
-
+# Others' aliases 
+alias ipe='curl ipinfo.io/ip'
+alias ipi='ipconfig getifaddr en0'
 # This is GOLD for finding out what is taking so much space on your drives!
 alias diskspace="du -BM -S | sort -n -r |more"
 alias dsp="sudo du -aBM -d 1 . | sort -nr | head -20"
 alias dfc="df -h /dev/sda1 --output=source,fstype,size,used,avail,pcent"
 
-# Command line mplayer movie watching for the win.
-alias mp="mplayer -fs"
-
 # Show me the size (sorted) of only the folders in this directory
 alias folders="find . -maxdepth 1 -type d -print | xargs du -sk | sort -rn"
 
-# This will keep you sane when you're about to smash the keyboard again.
-alias frak="fortune"
+alias ras='cd ~/repos/Neighborhood/; ./AirSimNH.sh -windowed -ResX=800 -ResY=600'
+alias eq='cd ~/repos/equivariantRepresentations; conda activate carla'
+
+# Older aliases 
+# alias hu='conda activate rosp2; cd ~/csc477_ws/src/csc477_fall19/'
+# alias air='cd ~/repos/ADRL/ADRL/; ./ADRL.sh -windowed -ResX=800 -ResY=600'
+# alias drone='cd ~/repos/droneNavigationEquivariant/PythonClient/imitation_learning'
+# alias dronem='cd ~/repos/droneNavigationEquivariant/PythonClient/multirotor'
+# alias droneup='cd ~/repos/droneNavigationEquivariant/'
+# alias runcarla='conda activate carla; cd ~/repos/carla/; ./CarlaUE4.sh -carla-server -benchmark -fps=30 -windowed -ResX=800 -ResY=600'
+# alias gtd='ls -d $PWD/*'
+# alias zip='for i in *; do echo '"'$PWD/''$i'/fromImage70.pt",'; done'
+
+###################
+### Other Stuff ###
+###################
 
 # This is where you put your hand rolled scripts (remember to chmod them)
 PATH="$HOME/bin:$PATH"
 
+# Something to make "thefuck" work ?
+# eval "$(thefuck --alias)"
 
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
 
+#################
+### Functions ###
+#################
+
+# Go up x number of directories
 u(){
   local d=""
   limit=$1
@@ -227,46 +215,11 @@ u(){
   cd $d
 }
 	
-eval "$(thefuck --alias)"
-# Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"
 
+
+# Search command line history for x
 hg(){
-
     search_term=$1
-    
     history | grep $search_term
 }
 
-
-alias rweb='cd ~/repos/rvl-lab-utoronto.github.io/; bundle exec jekyll serve --livereload'
-alias rwebl='cd ~/repos/rvl-lab-utoronto.github.io/; yes | ./bin/deploy; bundle exec jekyll serve --livereload'
-
-
-lis(){
-    suffix='fromImage70.pt'
-    for filename in *;
-        do echo \'$PWD/$filename/$suffix\',
-        done
-}
-
-dis(){
-    suffix=''
-    for filename in *;
-        do echo \'$PWD/$filename/$suffix\',
-        done
-}
-
-
-alias ras='cd ~/repos/Neighborhood/; ./AirSimNH.sh -windowed -ResX=800 -ResY=600'
-alias eq='cd ~/repos/equivariantRepresentations; conda activate carla'
-alias pweb='cd ~/repos/alik-git.github.io/'
-alias hu='conda activate rosp2; cd ~/csc477_ws/src/csc477_fall19/'
-alias air='cd ~/repos/ADRL/ADRL/; ./ADRL.sh -windowed -ResX=800 -ResY=600'
-alias drone='cd ~/repos/droneNavigationEquivariant/PythonClient/imitation_learning'
-alias dronem='cd ~/repos/droneNavigationEquivariant/PythonClient/multirotor'
-alias droneup='cd ~/repos/droneNavigationEquivariant/'
-alias runcarla='conda activate carla; cd ~/repos/carla/; ./CarlaUE4.sh -carla-server -benchmark -fps=30 -windowed -ResX=800 -ResY=600'
-alias gtd='ls -d $PWD/*'
-alias zip='for i in *; do echo '"'$PWD/''$i'/fromImage70.pt",'; done'
