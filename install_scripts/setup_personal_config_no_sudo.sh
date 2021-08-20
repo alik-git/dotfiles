@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 # setup git user conifg
 git config --global user.name "Ali K"
 git config --global user.email "ali.kuwajerwala@mail.utoronto.ca"

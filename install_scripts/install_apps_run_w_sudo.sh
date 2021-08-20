@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -x
+
 apt-get update  # To get the latest package lists
 
 # installing apps 
