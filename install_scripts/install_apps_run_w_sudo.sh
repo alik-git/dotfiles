@@ -17,7 +17,7 @@ apt install python3-dev python3-pip python3-setuptools -y
 apt-get install xclip -y
 apt install snapd -y
 apt install cifs-utils -y
-
+apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 -y
 # commented out for now
 # pip3 install thefuck
 # apt install thefuck -y
