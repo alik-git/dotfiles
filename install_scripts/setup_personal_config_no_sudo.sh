@@ -2,6 +2,9 @@
 
 set -x
 
+# set and use local time on motherboard
+timedatectl set-local-rtc 1 --adjust-system-clock
+
 # setup git user conifg
 git config --global user.name "Ali K"
 git config --global user.email "ali.kuwajerwala@mail.utoronto.ca"
