@@ -121,6 +121,9 @@ fi
 ##### My Stuff #######################
 ######################################
 
+### Prompt ###
+. ~/repos/dotfiles/personal_config/bashrc_stuff/custom_prompt.sh
+
 ### Aliases ###
 . ~/repos/dotfiles/personal_config/bashrc_stuff/aliases.sh
 
