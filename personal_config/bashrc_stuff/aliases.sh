@@ -1,3 +1,6 @@
+# temp
+alias lrp='cd /home/kuwajerw/repos/self-play-learning/experiments/dpn-minisim/supervised-model;ca lrp;c'
+
 
 # misc helpful shortcuts
 alias l='ls -aCFlh'
