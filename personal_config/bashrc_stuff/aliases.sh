@@ -1,8 +1,6 @@
 
 # misc helpful shortcuts
-alias ll='ls -alh'
-alias la='ls -A'
-alias l='ls -CFlh'
+alias l='ls -aCFlh'
 
 alias lsd="ls -alF | grep /$"
 
