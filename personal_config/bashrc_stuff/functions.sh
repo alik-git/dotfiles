@@ -18,7 +18,7 @@ u(){
 
 
 # Search command line history for x
-hg(){
+hs(){
     search_term=$1
     history | grep $search_term
 }
