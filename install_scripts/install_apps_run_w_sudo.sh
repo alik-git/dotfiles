@@ -29,7 +29,7 @@ apt install ruby-bundler -y
 
 # snap packages
 snap install vlc
-snap install emacs
+snap install emacs --classic
 snap install slack --classic
 snap install --classic code
 snap install discord # sometimes doesn't update properly
