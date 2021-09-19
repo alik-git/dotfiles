@@ -17,6 +17,7 @@ apt install python3-dev python3-pip python3-setuptools -y
 apt-get install xclip -y
 apt install snapd -y
 apt install cifs-utils -y
+apt install vlc -y
 apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 -y
 # commented out for now
 # pip3 install thefuck
@@ -28,9 +29,9 @@ apt-get install ruby-dev -y
 apt install ruby-bundler -y
 
 # snap packages
-snap install vlc
-snap install emacs --classic
-snap install slack --classic
-snap install --classic code
-snap install discord # sometimes doesn't update properly
+# snap install vlc
+# snap install emacs --classic
+# snap install slack --classic
+# snap install --classic code
+# snap install discord # sometimes doesn't update properly
 
