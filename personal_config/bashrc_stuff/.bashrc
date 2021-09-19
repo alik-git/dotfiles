@@ -121,6 +121,9 @@ fi
 ##### My Stuff #######################
 ######################################
 
+### Add duckietown to path 
+# export PATH='/home/kuwajerw/.local/bin'
+export PATH="$HOME/.local/bin:$PATH"
 ### Prompt ###
 . ~/repos/dotfiles/personal_config/bashrc_stuff/custom_prompt.sh
 
