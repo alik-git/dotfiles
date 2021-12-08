@@ -3,3 +3,4 @@ personal_config/nas_stuff/nas_creds
 scratch.txt
 *.pyc
 install_scripts/temp_s.sh
+rip.py
