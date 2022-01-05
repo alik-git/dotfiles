@@ -151,6 +151,12 @@ PATH="$HOME/bin:$PATH"
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
+# Put stuff in PYTHONPATH
+export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/duckgym_ali_masterb/gym-duckietown"
+
+# Mujoco Stuff
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/home/kuwajerw/.mujoco/mujoco210/bin"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/nvidia"
 #################
 #################
 
@@ -171,3 +177,12 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# export LD_LIBRARY_PATH=/usr/lib/cuda/lib64:$LD_LIBRARY_PATH
+# export LD_LIBRARY_PATH=/usr/lib/cuda/include:$LD_LIBRARY_PATH
+# export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-10.1/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+# set PATH for cuda 10.1 installation
+if [ -d "/usr/local/cuda-10.1/bin/" ]; then
+    export PATH=/usr/local/cuda-10.1/bin${PATH:+:${PATH}}
+    export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+    export LD_LIBRARY_PATH=/usr/local/cuda-10.2${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+fi
