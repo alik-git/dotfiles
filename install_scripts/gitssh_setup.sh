@@ -1,6 +1,6 @@
 set -x 
 
-ssh-keygen -t rsa -b 4096 -C ali.kuwajerwala@mail.utoronto.ca
+ssh-keygen -t rsa -b 4096 -C alihusein.kuwajerwala@umontreal.ca
 
 xclip -sel clip < ~/.ssh/id_rsa.pub
 
