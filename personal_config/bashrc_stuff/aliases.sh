@@ -10,6 +10,7 @@ alias lsd="ls -alF | grep /$"
 alias c='clear'
 alias h='cd ~'
 alias ht='history'
+alias sa='sudo apt install'
 
 
 # python environments 
