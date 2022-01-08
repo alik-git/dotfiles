@@ -22,3 +22,6 @@ hs(){
     search_term=$1
     history | grep $search_term
 }
+
+# Start thefuck
+eval $(thefuck --alias)

@@ -24,6 +24,10 @@ ln -sv ~/repos/dotfiles/personal_config/bashrc_stuff/.bashrc ~
 mv ~/.vimrc ~/repos/dotfiles/personal_config/defaults/.default_vimrc
 ln -sv ~/repos/dotfiles/personal_config/other/.vimrc ~
 
+# install thefuck
+# if this fails you're probably missing the python requirements below (they're in the install apps script)
+# sudo apt install python3-dev python3-pip python3-setuptools -y
+pip3 install thefuck --user -y
 
 
 
