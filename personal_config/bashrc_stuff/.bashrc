@@ -124,9 +124,6 @@ fi
 ### Add to Path ###
 # export PATH='/home/kuwajerw/.local/bin'
 export PATH="$HOME/.local/bin:$PATH"
-export NEPTUNE_API_TOKEN="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiJkNjg2YzQ3ZS0xYjA5LTRmNTMtYjhiMi1jODRmNDA3Yzc2N2UifQ=="
-
-
 
 ### Prompt ###
 . ~/repos/dotfiles/personal_config/bashrc_stuff/custom_prompt.sh
@@ -143,9 +140,6 @@ export NEPTUNE_API_TOKEN="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLC
 
 # This is where you put your hand rolled scripts (remember to chmod them)
 PATH="$HOME/bin:$PATH"
-
-# Something to make "thefuck" work ?
-eval $(thefuck --alias)
 
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
