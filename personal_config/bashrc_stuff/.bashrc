@@ -145,7 +145,7 @@ export NEPTUNE_API_TOKEN="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLC
 PATH="$HOME/bin:$PATH"
 
 # Something to make "thefuck" work ?
-# eval "$(thefuck --alias)"
+eval $(thefuck --alias)
 
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"

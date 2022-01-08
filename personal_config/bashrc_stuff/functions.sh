@@ -15,8 +15,6 @@ u(){
   cd $d
 }
 	
-
-
 # Search command line history for x
 hs(){
     search_term=$1
