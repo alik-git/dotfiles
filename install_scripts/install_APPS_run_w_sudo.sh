@@ -20,6 +20,9 @@ apt install cifs-utils -y
 apt install vlc -y
 apt install ffmpeg -y
 apt install bat -y
+apt install nvtop -y
+apt install htop -y
+apt install tree -y
 apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 -y
 apt install curl git libgl1-mesa-dev libgl1-mesa-glx libglew-dev libosmesa6-dev software-properties-common net-tools unzip vim virtualenv wget xpra xserver-xorg-dev libglfw3-dev patchelf -y
 
