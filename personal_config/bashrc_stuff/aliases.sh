@@ -28,6 +28,9 @@ alias pwebl='cd ~/repos/alik-git.github.io/; yes | ./bin/deploy --user; bundle e
 # reload bashrc
 alias pop='echo "source ~/.bashrc"; source ~/.bashrc'
 
+# fun apps 
+alias cat='batcat'
+
 # Path related aliases
 # adding stuff to python path
 # export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/hylaa"
