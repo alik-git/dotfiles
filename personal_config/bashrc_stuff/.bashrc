@@ -150,6 +150,7 @@ export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/duckgym_ali_masterb/gym-du
 
 # Mujoco Stuff
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/home/kuwajerw/.mujoco/mujoco210/bin"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/kuwajerw/.mujoco/mujoco200/bin"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/nvidia"
 #################
 #################
