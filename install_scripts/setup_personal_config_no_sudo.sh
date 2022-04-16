@@ -15,6 +15,11 @@ do
   echo "The Color is: ${COLOR}"
 done
 
+# profile stuff
+mv ~/.profile ~/repos/dotfiles/personal_config/defaults/.default_profile
+ln -sv ~/repos/dotfiles/personal_config/profile_stuff/.profile ~
+
+
 # bashrc stuff
 mv ~/.bashrc ~/repos/dotfiles/personal_config/defaults/.default_bashrc
 ln -sv ~/repos/dotfiles/personal_config/bashrc_stuff/.bashrc ~
@@ -29,7 +34,6 @@ ln -sv ~/repos/dotfiles/personal_config/other/.vimrc ~
 # sudo apt install python3-dev python3-pip python3-setuptools -y
 pip3 install thefuck --user -y
 pip3 install tldr
-
 
 
 
