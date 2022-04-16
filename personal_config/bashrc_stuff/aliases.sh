@@ -31,6 +31,10 @@ alias pop='echo "source ~/.bashrc"; source ~/.bashrc'
 # fun apps 
 alias cat='batcat'
 
+# DOCKER STUFF 
+alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
+alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
+
 # Path related aliases
 # adding stuff to python path
 # export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/hylaa"
