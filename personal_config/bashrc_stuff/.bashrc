@@ -146,12 +146,16 @@ export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
 # Put stuff in PYTHONPATH
-export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/duckgym_ali_masterb/gym-duckietown"
+export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/gym_duckytown_fork_folder/gym-duckietown"
 
 # Mujoco Stuff
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/home/kuwajerw/.mujoco/mujoco210/bin"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/kuwajerw/.mujoco/mujoco200/bin"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/nvidia"
+
+# libGLEW stuff 
+# export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGLEW.so"
+# export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGLEW.so"
 #################
 #################
 
@@ -181,3 +185,4 @@ if [ -d "/usr/local/cuda-10.1/bin/" ]; then
     export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
     export LD_LIBRARY_PATH=/usr/local/cuda-10.2${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 fi
+
