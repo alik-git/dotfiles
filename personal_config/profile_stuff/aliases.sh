@@ -26,7 +26,14 @@ alias pweb='cd ~/repos/alik-git.github.io/; bundle exec jekyll serve --livereloa
 alias pwebl='cd ~/repos/alik-git.github.io/; yes | ./bin/deploy --user; bundle exec jekyll serve --livereload'
 
 # reload bashrc
-alias pop='echo "source ~/.bashrc"; source ~/.bashrc'
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    alias pop='echo "source ~/.bashrc"; source ~/.bashrc'
+fi
+# if running zsh
+if [ -n "$ZSH_VERSION" ]; then
+    alias pop='echo "source ~/.zshrc"; source ~/.zshrc'
+fi
 
 # fun apps 
 alias cat='batcat'

@@ -8,13 +8,15 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+# uncommenting this causes issues with recursive calling cycles
+# because .bashrc and .profile both call each other
 # if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
-fi
+# if [ -n "$BASH_VERSION" ]; then
+#     # include .bashrc if it exists
+#     if [ -f "$HOME/.bashrc" ]; then
+# 	. "$HOME/.bashrc"
+#     fi
+# fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
@@ -26,6 +28,36 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-##################
-# My Stuff
-##################
+######################################
+##### My Stuff #######################
+######################################
+
+# echo "Running Ali's .profile config"
+
+### Aliases ###
+. ~/repos/dotfiles/personal_config/profile_stuff/aliases.sh
+
+### Functions ###
+.  ~/repos/dotfiles/personal_config/profile_stuff/functions.sh
+
+###################
+### Other Stuff ###
+###################
+
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+
+# Put stuff in PYTHONPATH
+export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/gym_duckytown_fork_folder/gym-duckietown"
+
+# Mujoco Stuff
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/home/kuwajerw/.mujoco/mujoco210/bin"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/kuwajerw/.mujoco/mujoco200/bin"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/nvidia"
+
+# libGLEW stuff 
+# export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGLEW.so"
+# export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGLEW.so"
+#################
+#################

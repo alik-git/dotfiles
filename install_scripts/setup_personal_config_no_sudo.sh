@@ -19,6 +19,13 @@ done
 mv ~/.profile ~/repos/dotfiles/personal_config/defaults/.default_profile
 ln -sv ~/repos/dotfiles/personal_config/profile_stuff/.profile ~
 
+# zshrc stuff
+mv ~/.zshrc ~/repos/dotfiles/personal_config/defaults/.default_zshrc
+ln -sv ~/repos/dotfiles/personal_config/zshrc_stuff/.zshrc ~
+
+# zshrc p10k stuff
+mv ~/.p10k.zsh ~/repos/dotfiles/personal_config/defaults/.default_p10k_zsh
+ln -sv ~/repos/dotfiles/personal_config/zshrc_stuff/.p10k.zsh ~
 
 # bashrc stuff
 mv ~/.bashrc ~/repos/dotfiles/personal_config/defaults/.default_bashrc

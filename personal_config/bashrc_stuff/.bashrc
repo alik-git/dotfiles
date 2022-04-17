@@ -1,3 +1,5 @@
+source ~/.profile
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -121,37 +123,39 @@ fi
 ##### My Stuff #######################
 ######################################
 
-### Add to Path ###
-# export PATH='/home/kuwajerw/.local/bin'
-export PATH="$HOME/.local/bin:$PATH"
+
+
+# ### Add to Path ###
+# # export PATH='/home/kuwajerw/.local/bin'
+# export PATH="$HOME/.local/bin:$PATH"
 
 ### Prompt ###
 . ~/repos/dotfiles/personal_config/bashrc_stuff/custom_prompt.sh
 
 ### Aliases ###
-. ~/repos/dotfiles/personal_config/bashrc_stuff/aliases.sh
+# . ~/repos/dotfiles/personal_config/profile_stuff/aliases.sh
 
-### Functions ###
-.  ~/repos/dotfiles/personal_config/bashrc_stuff/functions.sh
+# ### Functions ###
+# .  ~/repos/dotfiles/personal_config/profile_stuff/functions.sh
 
 ###################
 ### Other Stuff ###
 ###################
 
-# This is where you put your hand rolled scripts (remember to chmod them)
-PATH="$HOME/bin:$PATH"
+# # This is where you put your hand rolled scripts (remember to chmod them)
+# PATH="$HOME/bin:$PATH"
 
 # Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"
+# export GEM_HOME="$HOME/gems"
+# export PATH="$HOME/gems/bin:$PATH"
 
-# Put stuff in PYTHONPATH
-export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/gym_duckytown_fork_folder/gym-duckietown"
+# # Put stuff in PYTHONPATH
+# export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/gym_duckytown_fork_folder/gym-duckietown"
 
-# Mujoco Stuff
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/home/kuwajerw/.mujoco/mujoco210/bin"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/kuwajerw/.mujoco/mujoco200/bin"
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/nvidia"
+# # Mujoco Stuff
+# export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/home/kuwajerw/.mujoco/mujoco210/bin"
+# export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/kuwajerw/.mujoco/mujoco200/bin"
+# export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/nvidia"
 
 # libGLEW stuff 
 # export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGLEW.so"
