@@ -8,6 +8,7 @@ You can then mount the share by doing `sudo mount -t nfs [IP adrr of NAS]:/path/
 
 To find the ip of the NAS, in the quickconnect webUI for the Synology, its in Control Panel, Network, Network Interface, LAN. 
 
-You can also add this to your fstab file so that it mounts on boot. You can do this by doing `sudo nano /etc/fstab` and adding the line `[NFS server IP address]:[mount path] [mount point] nfs defaults 0 0` and then the line `[ip of nas]:/volumeN/[shared folder] /home/[user]/[mount point] nfs defaults 0 0` to the end of the file.
-
+## Mount on boot
+https://linuxize.com/post/how-to-mount-an-nfs-share-in-linux/
+You can also add this to your fstab file so that it mounts on boot. You can do this by doing `sudo nano /etc/fstab` and adding a helper comment line: `# [NFS server IP address]:[mount path] [mount point] nfs defaults 0 0` and then the actual line `[ip of nas]:/volume[N]/[shared folder] /home/[user]/[mount point] nfs defaults 0 0` to the end of the file.
 
