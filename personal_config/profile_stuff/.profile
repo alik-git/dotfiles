@@ -40,6 +40,9 @@ fi
 ### Functions ###
 .  ~/repos/dotfiles/personal_config/profile_stuff/functions.sh
 
+### Logging Stuff ###
+. ~/repos/dotfiles/logging_stuff/start_logging.sh
+
 ###################
 ### Other Stuff ###
 ###################
