@@ -130,7 +130,7 @@ fi
 # export PATH="$HOME/.local/bin:$PATH"
 
 ### Prompt ###
-. ~/repos/dotfiles/personal_config/bashrc_stuff/custom_prompt.sh
+. ~/repos/dotfiles/personal_config/bashrc_stuff/custom_bash_prompt.sh
 
 ### Aliases ###
 # . ~/repos/dotfiles/personal_config/profile_stuff/aliases.sh
