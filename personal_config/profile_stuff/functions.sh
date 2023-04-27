@@ -34,3 +34,7 @@ fopen(){
     nohup gedit "$1" > /dev/null 2>&1 &
 }
 
+
+ff() {
+  sgpt -s "${*}"
+}
