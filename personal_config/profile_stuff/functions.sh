@@ -23,3 +23,14 @@ hs(){
 
 # Start thefuck
 # eval $(thefuck --alias)
+
+
+# Open a text file with gedit in the background, independent of the terminal session
+fopen(){
+    if [ -z "$1" ]; then
+        echo "Usage: fopen /path/to/file.txt"
+        return 1
+    fi
+    nohup gedit "$1" > /dev/null 2>&1 &
+}
+
