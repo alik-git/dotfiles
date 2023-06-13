@@ -3,6 +3,8 @@
 ## Nautilus scripts
 I am using nautilus scripts to do this https://help.ubuntu.com/community/NautilusScriptsHowto
 
+TLDR: Use the scripts in this folder and put them in `~/.local/share/nautilus/scripts/` via symlink, see instructions below.
+
 ## The Scripts
 
 CopyPath
