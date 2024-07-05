@@ -1,0 +1,514 @@
+{
+    "python.pythonPath": "/usr/bin/python3",
+    "editor.minimap.showSlider": "always",
+    "editor.wrappingIndent": "same",
+    "editor.renderWhitespace": "none",
+  
+    // PERSONAL CAVEMAN DEBUGGING STUFF
+    "multiCommand.commands": [
+      {
+        "command": "multiCommand.printVariableSnippet",
+        "interval": 150,
+        "sequence": [
+          "editor.action.clipboardCopyAction",
+          "editor.action.insertLineAfter",
+          {
+            "command": "editor.action.insertSnippet",
+            "args": {
+              // "snippet": "print(f\"Line $TM_LINE_INDEX, $CLIPBOARD: {$CLIPBOARD}\")"
+              "snippet": "print(\"Line $TM_LINE_INDEX, $CLIPBOARD: \", $CLIPBOARD)"
+            }
+          }
+        ]
+      },
+      {
+        "command": "multiCommand.wandbConfigVariableSnippet",
+        "interval": 150,
+        "sequence": [
+          "editor.action.clipboardCopyAction",
+          "editor.action.insertLineAfter",
+          {
+            "command": "editor.action.insertSnippet",
+            "args": {
+              "snippet": "wandb.config[\"$CLIPBOARD\"] = $CLIPBOARD"
+            }
+          }
+        ]
+      },
+      {
+        "command": "multiCommand.wandbLogVariableSnippet",
+        "interval": 150,
+        "sequence": [
+          "editor.action.clipboardCopyAction",
+          "editor.action.insertLineAfter",
+          {
+            "command": "editor.action.insertSnippet",
+            "args": {
+              "snippet": "wandb.log({\"$CLIPBOARD\": $CLIPBOARD})"
+            }
+          }
+        ]
+      },
+      {
+        "command": "multiCommand.pytorchChangeDevice",
+        "interval": 150,
+        "sequence": [
+          "editor.action.clipboardCopyAction",
+          "editor.action.insertLineAfter",
+          {
+            "command": "editor.action.insertSnippet",
+            "args": {
+              "snippet": "$CLIPBOARD = $CLIPBOARD.to(device)"
+            }
+          }
+        ]
+      },
+    ],
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+      "<C-c>": false,
+      "<C-x>": false,
+      "<C-v>": false,
+      "<C-a>": false,
+      "<C-f>": false,
+      "<C-y>": false,
+      "<C-b>": false,
+    },
+    "vim.insertModeKeyBindings": [
+      {
+        "before": [
+          "j",
+          "j"
+        ],
+        "after": [
+          "<Esc>"
+        ]
+      },
+      {
+        "before": [
+          "k",
+          "k"
+        ],
+        "after": [
+          "<Esc>"
+        ]
+      }
+    ],
+    "vim.normalModeKeyBindings": [
+      // {
+      //   "before": [
+      //     "f",
+      //     "f"
+      //   ],
+      //   "commands": [
+      //     "editor.action.commentLine"
+      //   ]
+      // },
+      {
+        "before": [
+          "g",
+          "'"
+        ],
+        "commands": [
+          "workbench.action.navigateBack"
+        ]
+      },
+      {
+        "before": [
+          "g",
+          "l"
+        ],
+        "commands": [
+          "editor.action.referenceSearch.trigger"
+        ]
+      },
+      {
+        "before": [
+          ";"
+        ],
+        "after": [
+          ":"
+        ]
+      },
+      {
+        "before": [
+          "<tab>"
+        ],
+        "commands": [
+          "workbench.action.nextEditor"
+        ]
+      },
+      {
+        "before": [
+          "<S-tab>"
+        ],
+        "commands": [
+          "workbench.action.previousEditor"
+        ]
+      },
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+      {
+        "before": [
+          "<leader>",
+          "w"
+        ],
+        "commands": [
+          "workbench.action.splitEditor"
+        ]
+      },
+      {
+        "before": [
+          "<leader>",
+          "e"
+        ],
+        "commands": [
+          "workbench.action.toggleSidebarVisibility"
+        ]
+      },
+      {
+        "before": [
+          "<leader>",
+          "f"
+        ],
+        "commands": [
+          "revealInExplorer"
+        ]
+      },
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+      {
+        "before": [
+          ">"
+        ],
+        "commands": [
+          "editor.action.indentLines"
+        ]
+      },
+      {
+        "before": [
+          "<"
+        ],
+        "commands": [
+          "editor.action.outdentLines"
+        ]
+      },
+    ],
+    "git.enableSmartCommit": true,
+    "python.linting.pylintArgs": [
+      // "--errors-only",
+      // "--extension-pkg-whitelist=numpy.*, torch.*"
+      // "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*",
+      // "--ignored-modules=torch.*",
+      // "--ignored-classes=torch.*",
+      // "--extension-pkg-whitelist=torch.*"
+    ],
+    "bracket-pair-colorizer-2.showHorizontalScopeLine": true,
+    "bracket-pair-colorizer-2.showVerticalScopeLine": true,
+    "bracket-pair-colorizer-2.colors": [
+      "DodgerBlue ",
+      "Chartreuse ",
+      "HotPink ",
+      "Cornsilk ",
+      "DarkSalmon"
+    ],
+    "editor.tokenColorCustomizations": {
+      "[Monokai]": {
+        "textMateRules": [
+          {
+            "scope": [
+              "meta.function-call.generic.python"
+            ],
+            "settings": {
+              "foreground": "#cbfcff",
+              "fontStyle": "italic"
+            }
+          },
+          {
+            "scope": [
+              "variable.parameter.function.language.python"
+            ],
+            "settings": {
+              "foreground": "#84ffe4"
+            }
+          },
+          {
+            "scope": [
+              "variable.parameter.function.language.special.self.python"
+            ],
+            "settings": {
+              // "foreground": "#11dfb2"
+            }
+          },
+          {
+            "scope": [
+              "support.function.builtin.python"
+            ],
+            "settings": {
+              // "fontStyle": "italic bold"
+            }
+          },
+          {
+            "scope": [
+              "meta.function-call.arguments.python"
+            ],
+            "settings": {
+              "foreground": "#f1d9ff",
+            }
+          },
+          {
+            "scope": [
+              "string.quoted.single.python"
+            ],
+            "settings": {
+              "foreground": "#8af8ccd2",
+            }
+          },
+          {
+            "scope": [
+              "constant.numeric"
+            ],
+            "settings": {
+              "foreground": "#9ff7ff",
+            }
+          },
+          {
+            "scope": [
+              "constant.other.caps.python"
+            ],
+            "settings": {
+              "foreground": "#fff5bc",
+            }
+          },
+          {
+            "scope": [
+              "source.python"
+            ],
+            "settings": {
+              "foreground": "#d7e2ff",
+            }
+          },
+          {
+            "scope": [
+              "comment.line.number-sign.python"
+            ],
+            "settings": {
+              "foreground": "#a6f0bc",
+            }
+          }
+          // {
+          //   "scope": [
+          //       "meta.member.access.python"
+          //   ],
+          //   "settings": {
+          //       "fontStyle": "italic bold"
+          //   }
+          // }
+        ]
+      },
+      "[One Dark Pro]": {
+        "textMateRules": [
+          {
+            "scope": [
+              "comment.line.number-sign.python",
+              "punctuation.definition.comment.python"
+            ],
+            "settings": {
+              "foreground": "#84ffe4"
+            }
+          },
+          {
+            "scope": [
+              "string.quoted.docstring.multi.python"
+            ],
+            "settings": {
+              "foreground": "#98C379",
+            }
+          },
+          // {
+          //   "scope": [
+          //     // "meta.attribute.python", "meta.member.access.python", "source.python", 
+          //     "variable.other.property", 
+          //   ],
+          //   "settings": {
+          //     "foreground": "#8cd1d1",
+          //     // "fontStyle": "bold"
+          //   }
+          // },
+          // {
+          //   "scope": [
+          //     // "meta.attribute.python", "meta.member.access.python", "source.python", 
+          //     "variable.parameter",
+          //   ],
+          //   "settings": {
+          //     "foreground": "#dbb584",
+          //     // "fontStyle": "bold"
+          //   }
+          // },
+          {
+            "scope": [
+              // "meta.attribute.python", "meta.member.access.python", "source.python", 
+              "variable.other.readwrite",
+            ],
+            "settings": {
+              "foreground": "#dfdfdf",
+              // "fontStyle": "bold"
+            }
+          }
+        ]
+      }
+    },
+    "workbench.colorCustomizations": {
+      "[Monokai]": {
+        "statusBar.background": "#8fffe73d",
+        // "sideBar.background": "#347890"
+      },
+      "[One Dark Pro]": {
+        "statusBar.foreground": "#d3d3d3",
+        "statusBar.background": "#303f4d",
+        // "statusBar.background": "#6aa5cc",
+        // "sideBar.background": "#347890"
+      }
+    },
+    
+    "keyboard.dispatch": "keyCode",
+    // "rewrap.autoWrap.enabled": true,
+    "python.autoComplete.addBrackets": true,
+    "window.enableMenuBarMnemonics": false,
+    // "terminal.integrated.inheritEnv": false,
+    "remote.SSH.connectTimeout": 150,
+    "editor.wordWrap": "on",
+    "editor.tabCompletion": "off",
+    "editor.quickSuggestionsDelay": 10,
+    "editor.suggest.localityBonus": true,
+    "editor.suggest.shareSuggestSelections": true,
+    "editor.suggest.statusBar.visible": true,
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    },
+    "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?",
+    "vim.camelCaseMotion.enable": true,
+    "workbench.editorAssociations": {
+      // "*.ipynb": "jupyter.notebook.ipynb",
+      "*.svg": "default"
+    },
+    "terminal.integrated.commandsToSkipShell": [
+      "language-julia.interrupt"
+    ],
+    "python.analysis.completeFunctionParens": true,
+    "jupyter.askForKernelRestart": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "git.confirmSync": false,
+    "notebook.lineNumbers": "on",
+    "terminal.integrated.inheritEnv": false,
+    "bracket-pair-colorizer-2.depreciation-notice": false,
+    "editor.suggest.insertMode": "replace",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.codeLens": true,
+    "gitHistory.showEditorTitleMenuBarIcons": false,
+    "cSpell.userWords": [
+      "conda",
+      "Cuda",
+      "Duckietown",
+      "lrelu",
+      "myreward"
+    ],
+    "workbench.iconTheme": "material-icon-theme",
+    "debug.console.acceptSuggestionOnEnter": "on",
+    "explorer.confirmDragAndDrop": false,
+    "editor.unicodeHighlight.allowedCharacters": {
+      "’": true
+    },
+    "git.ignoreRebaseWarning": true,
+    "terminal.integrated.fontFamily": "monospace",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "editor.rulers": [
+      80
+    ],
+    "editor.fontFamily": "Fira Code, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "cSpell.ignoreWords": [
+      "myensemble"
+    ],
+    "cSpell.enabled": false,
+    "editor.inlineSuggest.enabled": true,
+    // "terminal.integrated.automationShell.windows": "C:\\Users\\Ali\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Anaconda3 (64-bit)\\",
+    "github.copilot.enable": {
+      "*": true,
+      "plaintext": true,
+      "markdown": true,
+      "scminput": false,
+      "yaml": true
+    },
+    "[python]": {
+      "editor.formatOnType": true,
+      "diffEditor.ignoreTrimWhitespace": true
+    },
+    "workbench.editor.pinnedTabSizing": "shrink",
+    "editor.largeFileOptimizations": false,
+    "explorer.enableDragAndDrop": false,
+    "[jsonc]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "workbench.colorTheme": "One Dark Pro",
+    "python.analysis.autoImportUserSymbols": true,
+    "python.analysis.autoImportCompletions": true,
+    // "explorer.decorations.colors": false,
+    // "workbench.editor.decorations.colors": false,
+    // "search.decorations.colors": false,
+    // "python.analysis.typeCheckingMode": "off",
+    // "workbench.colorCustomizations": {
+    //   "editorError.foreground": "#a34c4c59",
+    //   "editorWarning.foreground": "#ccbf4543",
+    //   "editorInfo.foreground": "#5dbb5d34"
+    // },
+    "python.linting.enabled": false,
+    "python.defaultInterpreterPath": "C:\\Program Files\\Python39\\python.exe",
+    "jupyter.interactiveWindow.textEditor.executeSelection": true,
+    "workbench.editor.wrapTabs": true,
+    // "window.cus"
+    "customWindowZoom.zoomLevelChangeValue": 0.1,
+    "scm.alwaysShowRepositories": true,
+    "cmake.showOptionsMovedNotification": false,
+    "window.zoomLevel": 0.1,
+    "mojo.modularHomePath": "/home/kuwajerw/.modular",
+    "github.copilot.editor.enableAutoCompletions": true,
+    "mojo.lldb.disableDefaultRPCServer": true,
+    "terminal.integrated.enablePersistentSessions": false,
+    "python.createEnvironment.trigger": "off",
+    "notebook.cellToolbarLocation": {
+      "default": "right",
+      "jupyter-notebook": "left"
+    },
+    // "python.linting.lintOnSave": false,
+    // "python.linting.pylintArgs": [
+    //   "--init-hook='import sys; sys.path.append(\"/home/kuwajerw/repos/gradslam-foundation\")'"
+    // ]
+    // "python.formatting.provider": "black",
+    // "python.linting.enabled": false,
+    // "python.linting.flake8Enabled": true,
+    // "python.linting.pylintEnabled": true,
+    // "problems.showCurrentInStatus": true,
+    // "terminal.integrated.fontFamily": "Source Code Pro for Powerline",
+    // @vtwang added (deprecated)
+    // "terminal.integrated.shell.osx": "/bin/zsh",
+    // "terminal.integrated.defaultProfile.osx": "zsh",
+    // @Drakal added
+    // I'd also consider adjusting line height if icons are cut off on top too or things look super cramped.
+    // "terminal.integrated.lineHeight": 1.3
+    // @ChongTang, @ramonsantos added
+    // @gaochundong said it works like a charm.
+    // "terminal.integrated.fontFamily": "Hack Nerd Font"
+    // @dalekurt added (belows which gives me the the fonts for the terminal and the icons from Nerd Font.)
+    // "terminal.integrated.fontFamily": "'Source Code Pro for Powerline', 'Hack Nerd Font'
+    // @nickhingston , @olivebay added for powerlevel10k
+    // I use powerline10k - which uses https://github.com/romkatv/powerlevel10k/#recommended-meslo-nerd-font-patched-for-powerlevel10k
+    // so this worked for me:
+    // "terminal.integrated.fontFamily": "MesloLGS NF" ,
+    // @kaustuv added
+    // after the changing the font, still had some issues with the glyph spacing in the integrated terminal - fixed it with 
+    // @ar2zee : fixed the problem for me.
+    // "terminal.integrated.rendererType": "canvas"
+  }
