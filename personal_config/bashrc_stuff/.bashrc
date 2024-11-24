@@ -165,28 +165,42 @@ fi
 
 
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/kuwajerw/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/kuwajerw/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/kuwajerw/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/kuwajerw/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+# # >>> conda initialize >>>
+# # !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/home/kuwajerw/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/home/kuwajerw/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "/home/kuwajerw/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/home/kuwajerw/anaconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# # <<< conda initialize <<<
 
-# export LD_LIBRARY_PATH=/usr/lib/cuda/lib64:$LD_LIBRARY_PATH
-# export LD_LIBRARY_PATH=/usr/lib/cuda/include:$LD_LIBRARY_PATH
-# export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-10.1/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
-# set PATH for cuda 10.1 installation
-if [ -d "/usr/local/cuda-10.1/bin/" ]; then
-    export PATH=/usr/local/cuda-10.1/bin${PATH:+:${PATH}}
-    export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-    export LD_LIBRARY_PATH=/usr/local/cuda-10.2${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-fi
+# # export LD_LIBRARY_PATH=/usr/lib/cuda/lib64:$LD_LIBRARY_PATH
+# # export LD_LIBRARY_PATH=/usr/lib/cuda/include:$LD_LIBRARY_PATH
+# # export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-10.1/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+# # set PATH for cuda 10.1 installation
+# if [ -d "/usr/local/cuda-10.1/bin/" ]; then
+#     export PATH=/usr/local/cuda-10.1/bin${PATH:+:${PATH}}
+#     export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+#     export LD_LIBRARY_PATH=/usr/local/cuda-10.2${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+# fi
 
+# # # CUDA stuff
+# export PATH="/usr/local/cuda-12.2/bin:$PATH"
+# export LD_LIBRARY_PATH="/usr/local/cuda-12.2/lib64:$LD_LIBRARY_PATH"
+
+# export PATH="/usr/local/texlive/2024/bin/x86_64-linux:$PATH"
+# # Interbotix Configurations
+
+# # Interbotix Configurations
+
+# # Interbotix Configurations
+
+# # Interbotix Configurations
+# source /home/kuwajerw/interbotix_ws/devel/setup.bash
+# . "$HOME/.cargo/env"

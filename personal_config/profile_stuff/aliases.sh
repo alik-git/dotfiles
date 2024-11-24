@@ -6,9 +6,9 @@ alias sa='sudo apt install'
 # python environments 
 alias ca='conda activate'
 
-# getting to directories
-alias dot='cd ~/repos/dotfiles/'
-alias repos='cd ~/repos'
+# # getting to directories
+# alias dot='cd ~/repos/dotfiles/'
+# alias repos='cd ~/repos'
 
 # reload bashrc
 # if running bash
@@ -21,20 +21,20 @@ if [ -n "$ZSH_VERSION" ]; then
 fi
 
 # fun apps 
-alias cat='batcat'
+# alias cat='batcat'
 
 # DOCKER STUFF 
 # alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
 # alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
 
 
-# Others' aliases 
-alias ipe='curl ipinfo.io/ip'
-alias ipi='ipconfig getifaddr en0'
-# This is GOLD for finding out what is taking so much space on your drives!
-alias bigfiles2="du -BM -S | sort -n -r |more"
-alias bigfiles="sudo du -aBM -d 1 . | sort -nr | head -20"
-alias dfc="df -h /dev/sda1 --output=source,fstype,size,used,avail,pcent"
+# # Others' aliases 
+# alias ipe='curl ipinfo.io/ip'
+# alias ipi='ipconfig getifaddr en0'
+# # This is GOLD for finding out what is taking so much space on your drives!
+# alias bigfiles2="du -BM -S | sort -n -r |more"
+# alias bigfiles="sudo du -aBM -d 1 . | sort -nr | head -20"
+# alias dfc="df -h /dev/sda1 --output=source,fstype,size,used,avail,pcent"
 
 
 # Older aliases 

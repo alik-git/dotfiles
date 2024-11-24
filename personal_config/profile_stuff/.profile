@@ -47,12 +47,17 @@ fi
 ### Other Stuff ###
 ###################
 
-# Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"
+# # Install Ruby Gems to ~/gems
+# export GEM_HOME="$HOME/gems"
+# export PATH="$HOME/gems/bin:$PATH"
 
 # # Put stuff in PYTHONPATH
-# export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/gym_duckytown_fork_folder/gym-duckietown"
+# export PYTHONPATH="${PYTHONPATH}:/home/kuwajerw/repos/gym_duckytown_fork_folder/gym-duckietown" catkin_make -DPYTHON_EXECUTABLE=/home/kuwajerw/anaconda3/bin/python
+
+# # # ROS stuff
+# source /opt/ros/noetic/setup.bash
+# export ROS_IP=172.19.0.183
+# export ROS_MASTER_URI=http://172.19.0.102:11311
 
 # # Mujoco Stuff
 # export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/home/kuwajerw/.mujoco/mujoco210/bin"
@@ -62,5 +67,9 @@ export PATH="$HOME/gems/bin:$PATH"
 # libGLEW stuff 
 # export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGLEW.so"
 # export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGLEW.so"
-#################
-#################
+
+
+
+# #################
+# #################
+# . "$HOME/.cargo/env"
