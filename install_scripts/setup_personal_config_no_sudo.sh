@@ -2,6 +2,11 @@
 
 set -x
 
+# Get the directory where this script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# Get the repository root (one directory up from the script)
+REPO_ROOT="$( cd "$SCRIPT_DIR/.." && pwd )"
+
 # set and use local time on motherboard
 # timedatectl set-local-rtc 1 --adjust-system-clock
 
@@ -15,26 +20,25 @@ do
   echo "The Color is: ${COLOR}"
 done
 
-# profile stuff
-mv ~/.profile ~/repos/dotfiles/personal_config/defaults/.default_profile
-ln -sv ~/repos/dotfiles/personal_config/profile_stuff/.profile ~
+# # profile stuff
+# mv ~/.profile "$REPO_ROOT/personal_config/defaults/.default_profile"
+# ln -sv "$REPO_ROOT/personal_config/profile_stuff/.profile" ~
 
 # # zshrc stuff
-# mv ~/.zshrc ~/repos/dotfiles/personal_config/defaults/.default_zshrc
-# ln -sv ~/repos/dotfiles/personal_config/zshrc_stuff/.zshrc ~
+# mv ~/.zshrc "$REPO_ROOT/personal_config/defaults/.default_zshrc"
+# ln -sv "$REPO_ROOT/personal_config/zshrc_stuff/.zshrc" ~
 
 # # zshrc p10k stuff
-# mv ~/.p10k.zsh ~/repos/dotfiles/personal_config/defaults/.default_p10k_zsh
-# ln -sv ~/repos/dotfiles/personal_config/zshrc_stuff/.p10k.zsh ~
+# mv ~/.p10k.zsh "$REPO_ROOT/personal_config/defaults/.default_p10k_zsh"
+# ln -sv "$REPO_ROOT/personal_config/zshrc_stuff/.p10k.zsh" ~
 
 # bashrc stuff
-mv ~/.bashrc ~/repos/dotfiles/personal_config/defaults/.default_bashrc
-ln -sv ~/repos/dotfiles/personal_config/bashrc_stuff/.bashrc ~
-
+mv ~/.bashrc "$REPO_ROOT/personal_config/defaults/.default_bashrc"
+ln -sv "$REPO_ROOT/personal_config/bashrc_stuff/.bashrc" ~
 
 # # vim stuff 
-# mv ~/.vimrc ~/repos/dotfiles/personal_config/defaults/.default_vimrc
-# ln -sv ~/repos/dotfiles/personal_config/other/.vimrc ~
+# mv ~/.vimrc "$REPO_ROOT/personal_config/defaults/.default_vimrc"
+# ln -sv "$REPO_ROOT/personal_config/other/.vimrc" ~
 
 # install thefuck
 # if this fails you're probably missing the python requirements below (they're in the install apps script)

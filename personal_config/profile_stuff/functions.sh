@@ -21,6 +21,21 @@ hs(){
     history | grep $search_term
 }
 
+function rmff {
+  CACHE_DIR="$HOME/.cache/jax"
+  if [ -d "$CACHE_DIR" ]; then
+    SIZE=$(du -sh "$CACHE_DIR" | cut -f1)
+    rm -rf "$CACHE_DIR"
+    if [ ! -d "$CACHE_DIR" ]; then
+      echo "JAX cache ($SIZE) successfully cleared."
+    else
+      echo "Warning: Failed to clear JAX cache directory!"
+    fi
+  else
+    echo "JAX cache directory does not exist."
+  fi
+}
+
 # Start thefuck
 # eval $(thefuck --alias)
 
