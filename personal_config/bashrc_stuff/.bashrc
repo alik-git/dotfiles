@@ -1,9 +1,7 @@
 # Get the directory where this script is located
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-# Get the repository root (one directory up from the script)
-REPO_ROOT="$( cd "$SCRIPT_DIR/../.." && pwd )"
+DOTFILES_ROOT="/home/ali/repos/ksim_stuff/dotfiles"
 
-source "$REPO_ROOT/personal_config/defaults/.default_bashrc"
+source "$DOTFILES_ROOT/personal_config/defaults/.default_bashrc"
 
 
 ######################################
@@ -17,22 +15,22 @@ source "$REPO_ROOT/personal_config/defaults/.default_bashrc"
 # export PATH="$HOME/.local/bin:$PATH"
 
 ### Prompt ###
-if [ -f "$REPO_ROOT/personal_config/bashrc_stuff/custom_bash_prompt.sh" ]; then
-    . "$REPO_ROOT/personal_config/bashrc_stuff/custom_bash_prompt.sh"
+if [ -f "$DOTFILES_ROOT/personal_config/bashrc_stuff/custom_bash_prompt.sh" ]; then
+    . "$DOTFILES_ROOT/personal_config/bashrc_stuff/custom_bash_prompt.sh"
 else
     echo "Warning: custom_bash_prompt.sh not found"
 fi
 
 ### Aliases ###
-if [ -f "$REPO_ROOT/personal_config/profile_stuff/aliases.sh" ]; then
-    . "$REPO_ROOT/personal_config/profile_stuff/aliases.sh"
+if [ -f "$DOTFILES_ROOT/personal_config/profile_stuff/aliases.sh" ]; then
+    . "$DOTFILES_ROOT/personal_config/profile_stuff/aliases.sh"
 else
     echo "Warning: aliases.sh not found"
 fi
 
 ### Functions ###
-if [ -f "$REPO_ROOT/personal_config/profile_stuff/functions.sh" ]; then
-    . "$REPO_ROOT/personal_config/profile_stuff/functions.sh"
+if [ -f "$DOTFILES_ROOT/personal_config/profile_stuff/functions.sh" ]; then
+    . "$DOTFILES_ROOT/personal_config/profile_stuff/functions.sh"
 else
     echo "Warning: functions.sh not found"
 fi
