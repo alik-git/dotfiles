@@ -56,7 +56,7 @@ fi
 # export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/kuwajerw/.mujoco/mujoco200/bin"
 # export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/nvidia"
 
-# libGLEW stuff 
+# libGLEW stuff  old
 # export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGLEW.so"
 # export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGLEW.so"
 #################
