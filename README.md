@@ -51,6 +51,8 @@ If a program appends shell init to `.bashrc`, use:
 - `chezmoi-mv-bashrc-diff` to preview what would be moved
 - `chezmoi-mv-bashrc` to move appended content into the tracked machine `auto` file and restore the clean managed `.bashrc`
 
+These helpers are bash-specific. Supporting zsh or other shells would need parallel shell-specific files and helpers.
+
 ## Normal Workflow
 
 On a new machine:
@@ -62,13 +64,6 @@ chezmoi apply
 ```
 
 If needed, then do machine-local follow-up such as `conda init bash`.
-
-If a tool edits `.bashrc`, then run:
-
-```bash
-chezmoi-mv-bashrc-diff
-chezmoi-mv-bashrc
-```
 
 For shared changes:
 
