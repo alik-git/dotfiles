@@ -35,6 +35,17 @@ Right now the local config just selects the machine name, for example:
 machine_name = "white_xps"
 ```
 
+## Shell Config
+
+The main `.bashrc` is intentionally small. It sources:
+
+- shared shell boilerplate
+- the shared prompt
+- a tracked machine-specific `personal` file
+- a tracked machine-specific `auto` file
+
+The `personal` file is for manual machine-specific shell config. The `auto` file is for tool-managed or machine-specific init such as `conda` or `nvm`.
+
 ## Normal Workflow
 
 On a new machine:
