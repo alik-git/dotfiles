@@ -1,0 +1,2 @@
+#!/bin/bash
+echo -n "$(realpath "$1")" | xclip -selection clipboard
