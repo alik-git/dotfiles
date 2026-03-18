@@ -54,7 +54,8 @@ fi
 
 machine_name="$(chezmoi execute-template '{{ .machine_name }}' | tr -d '\n')"
 auto_target="~/.config/bash/machine/${machine_name}.auto.sh"
-auto_source_path="$(chezmoi source-path "$auto_target")"
+source_dir="$(chezmoi source-path)"
+auto_source_path="${source_dir}/dot_config/bash/machine/${machine_name}.auto.sh"
 
 mkdir -p "$(dirname "$auto_source_path")"
 touch "$auto_source_path"
