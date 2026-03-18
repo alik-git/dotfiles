@@ -43,7 +43,6 @@ chezmoi apply
 ## Codex Files
 
 - `dot_codex/` contains the managed global Codex `AGENTS.md`, `config.toml`, and rules.
-- The rules file is intended to stay small and only allow broadly safe commands.
 
 ## Bootstrap Material
 
