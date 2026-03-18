@@ -46,6 +46,11 @@ The main `.bashrc` is intentionally small. It sources:
 
 The `personal` file is for manual machine-specific shell config. The `auto` file is for tool-managed or machine-specific init such as `conda` or `nvm`.
 
+If a program appends shell init to `.bashrc`, use:
+
+- `chezmoi-mv-bashrc-diff` to preview what would be moved
+- `chezmoi-mv-bashrc` to move appended content into the tracked machine `auto` file and restore the clean managed `.bashrc`
+
 ## Normal Workflow
 
 On a new machine:
