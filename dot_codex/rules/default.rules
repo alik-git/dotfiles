@@ -1,0 +1,5 @@
+prefix_rule(pattern=["nvidia-smi"], decision="allow")
+prefix_rule(pattern=["conda", "run", "-n", "dlogs"], decision="allow")
+prefix_rule(pattern=["bundle", "install"], decision="allow")
+prefix_rule(pattern=["docker", "compose"], decision="allow")
+prefix_rule(pattern=["/bin/bash", "-lc", "RBENV_VERSION=3.2.10 rbenv exec bundle install"], decision="allow")
