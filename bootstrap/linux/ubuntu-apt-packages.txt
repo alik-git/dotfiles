@@ -1,0 +1,22 @@
+# Base personal packages for Ubuntu/Debian machines.
+# One package name per line.
+
+git
+vim
+gimp
+gnome-tweaks
+qbittorrent
+ffmpeg
+htop
+tree
+ncdu
+build-essential
+curl
+ca-certificates
+xz-utils
+ripgrep
+fd-find
+jq
+tmux
+unzip
+xclip
