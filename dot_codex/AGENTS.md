@@ -7,6 +7,10 @@ Ali Kuwajerwala's personal global `AGENTS.md`.
 Do not store secrets, credentials, or other sensitive information in this file. This repository is currently private on GitHub, but it may become public in the future, so treat it as if it were public.
 The same applies to every other file in this repository. Never add or commit secrets or other compromising information anywhere in it.
 
+## Command Style
+
+When running Git commands in a repo, prefer `cd /path/to/repo && git ...` over `git -C /path/to/repo ...` wherever possible.
+
 ## Keep This File Minimal
 
 This file is only for general instructions that apply across projects. Project-specific instructions belong in an `AGENTS.md` at the root of the relevant project or repository.
@@ -45,6 +49,7 @@ Details:
 
 ### Git
 
+- Prefer `cd /path/to/repo && git ...` over `git -C /path/to/repo ...` wherever possible.
 - Keep commits small and logically separate.
 - If I say `p`, treat that as shorthand for `push`.
 - If I ask you to push and there are uncommitted changes, treat that as shorthand for commit and push.
