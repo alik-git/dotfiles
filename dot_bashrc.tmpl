@@ -1,0 +1,29 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+. "$HOME/.config/bash/shared.sh"
+. "$HOME/.config/bash/prompt.sh"
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+{{- $machineName := .machine_name | default "" }}
+{{- if $machineName }}
+if [ -f "$HOME/.config/bash/machine/{{ $machineName }}.personal.sh" ]; then
+    . "$HOME/.config/bash/machine/{{ $machineName }}.personal.sh"
+fi
+
+if [ -f "$HOME/.config/bash/machine/{{ $machineName }}.auto.sh" ]; then
+    . "$HOME/.config/bash/machine/{{ $machineName }}.auto.sh"
+fi
+{{- end }}
