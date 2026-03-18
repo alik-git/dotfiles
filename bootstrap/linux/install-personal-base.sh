@@ -136,7 +136,7 @@ install_miniconda() {
 
     rm -f "${installer_path}"
     log "Installed Miniconda to ${MINICONDA_DIR}"
-    log "Next step if desired: ${MINICONDA_DIR}/bin/conda init bash"
+    log "Next step if desired: run '${MINICONDA_DIR}/bin/conda init bash' and then open a new shell."
 }
 
 install_nvm() {
