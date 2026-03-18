@@ -6,18 +6,18 @@ PR_USER="\[\033[01;32m\]\u@\h\[\033[00m\]"
 
 # Time
 PR_TIME="\$(date +%I:%M:%S\%p)"
-PR_TIME="\e[0;36m$PR_TIME\e[0m"
+PR_TIME="\[\e[0;36m\]$PR_TIME\[\e[0m\]"
 
 # Date
 PR_DATE="\$(date +%d/%m/%Y)"
-PR_DATE="\e[2;36m$PR_DATE\e[0m"
+PR_DATE="\[\e[2;36m\]$PR_DATE\[\e[0m\]"
 
 # Datetime
 PR_DATETIME="[$PR_TIME $PR_DATE]"
 
 # Git branch
 PR_GITBRANCH="(\$(git symbolic-ref --short HEAD 2>/dev/null))"
-PR_GITBRANCH="\e[2;37m$PR_GITBRANCH\e[0m"
+PR_GITBRANCH="\[\e[2;37m\]$PR_GITBRANCH\[\e[0m\]"
 
 # Path
 PR_PATH="\[\033[00m\]\[\033[01;34m\]\w/\[\033[00m\]"
