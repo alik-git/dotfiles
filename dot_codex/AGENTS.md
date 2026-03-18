@@ -26,10 +26,14 @@ If some additional access or tools would help you work better, faster, or more e
 
 When working in an existing project, follow the project's or team's established conventions if they conflict with the instructions below.
 
+- For files managed by chezmoi, edit the chezmoi source under `/home/ali/.local/share/chezmoi`, not the live file path. This especially applies to `.codex/AGENTS.md`, `.codex/config.toml`, `.codex/rules/default.rules`, and `.bashrc`.
+- For chezmoi-managed files, always run `chezmoi diff` before `chezmoi apply`.
+
 ### Development Logs
 
 - If a project has a `DEVLOG.md`, use it as a high-level catch-up aid for humans and agents.
 - `DEVLOG.md` is local-only context, not a source of truth. Do not commit it. Add it to `.gitignore` if needed. If it disagrees with the code, trust the code and update the log.
+- If a project has a local `SCRATCH.md`, use it for large temporary command blocks, diffs, tables, or other bulky scratch output that does not belong in `DEVLOG.md`.
 - After a substantial investigation, a major plan, or a topic shift, it is a good time to add a `DEVLOG.md` entry summarizing what was learned or done.
 - Add timestamped entries in the format `## YYYY-MM-DD HH:MM - Title`.
 - Each entry should include a 1-2 sentence summary, then `Details:` with a flat bullet list of the most important context.
