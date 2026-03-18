@@ -35,6 +35,8 @@ Right now the local config just selects the machine name, for example:
 machine_name = "white_xps"
 ```
 
+Machine metadata in `.chezmoidata/machines.yaml` controls per-machine behavior such as whether Nautilus scripts should be applied.
+
 ## Shell Config
 
 The main `.bashrc` is intentionally small. It sources:
