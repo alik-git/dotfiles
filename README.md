@@ -45,8 +45,9 @@ The main `.bashrc` is intentionally small. It sources:
 - the shared prompt
 - a tracked machine-specific `personal` file
 - a tracked machine-specific `auto` file
+- an optional local-only machine-specific `secrets` file
 
-The `personal` file is for manual machine-specific shell config. The `auto` file is for tool-managed or machine-specific init such as `conda` or `nvm`.
+The `personal` file is for manual machine-specific shell config. The `auto` file is for tool-managed or machine-specific init such as `conda` or `nvm`. The `secrets` file is local-only, ignored by Git, and should never be committed.
 
 If a program appends shell init to `.bashrc`, use:
 
