@@ -11,4 +11,3 @@ Notes:
 
 1. These scripts depend on `xclip`.
 2. After applying them, restart Nautilus with `nautilus -q` if the scripts do not appear immediately.
-3. The old manual symlink instructions are no longer relevant because chezmoi now manages the target files directly.
