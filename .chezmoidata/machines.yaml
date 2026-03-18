@@ -1,5 +1,7 @@
 machines:
   white_xps:
     machine_class: personal
+    has_gui: true
   work_mnv1:
     machine_class: work
+    has_gui: false

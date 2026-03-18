@@ -1,6 +1,6 @@
 # Nautilus Copy-Path Scripts
 
-These two Nautilus scripts are managed by chezmoi and will be installed to `~/.local/share/nautilus/scripts/`.
+These two Nautilus scripts are managed by chezmoi and will be installed to `~/.local/share/nautilus/scripts/` only on personal GUI machines where `nautilus` is installed.
 
 Files:
 
