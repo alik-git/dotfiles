@@ -26,6 +26,10 @@ fi
 if [ -f "$HOME/.config/bash/machine/{{ $machineName }}.auto.sh" ]; then
     . "$HOME/.config/bash/machine/{{ $machineName }}.auto.sh"
 fi
+
+if [ -f "$HOME/.config/bash/machine/{{ $machineName }}.secrets.sh" ]; then
+    . "$HOME/.config/bash/machine/{{ $machineName }}.secrets.sh"
+fi
 {{- end }}
 
 # === chezmoi-mv-bashrc boundary ===
