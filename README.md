@@ -6,7 +6,7 @@ Personal dotfiles managed with `chezmoi`.
 
 This repo has two kinds of content:
 
-1. Managed home-directory files, using normal chezmoi naming like `dot_bashrc`, `dot_codex/...`, and `dot_local/...`.
+1. Managed home-directory files, using normal chezmoi naming like `dot_bashrc.tmpl`, `dot_codex/...`, and `dot_local/...`.
 2. Tracked bootstrap/reference material under `bootstrap/`, which is kept in Git but ignored by chezmoi as a target to apply into `$HOME`.
 
 Current managed areas:
@@ -62,6 +62,13 @@ chezmoi apply
 ```
 
 If needed, then do machine-local follow-up such as `conda init bash`.
+
+If a tool edits `.bashrc`, then run:
+
+```bash
+chezmoi-mv-bashrc-diff
+chezmoi-mv-bashrc
+```
 
 For shared changes:
 
