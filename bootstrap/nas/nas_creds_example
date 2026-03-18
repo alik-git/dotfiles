@@ -1,0 +1,3 @@
+# Create a local file named nas_creds outside Git and put the actual credentials in it.
+USERNAME=nas_username
+PASSWORD=nas_password
