@@ -1,0 +1,5 @@
+machines:
+  white_xps:
+    machine_class: personal
+  work_mnv1:
+    machine_class: work
