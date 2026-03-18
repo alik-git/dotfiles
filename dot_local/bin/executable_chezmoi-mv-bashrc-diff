@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+MARKER='# === chezmoi-mv-bashrc boundary ==='
+LIVE_BASHRC="$HOME/.bashrc"
+
+if [[ ! -f "$LIVE_BASHRC" ]]; then
+  echo "Live bashrc not found: $LIVE_BASHRC" >&2
+  exit 1
+fi
+
+CLEAN_BASHRC="$(chezmoi cat ~/.bashrc)"
+
+if ! grep -Fqx "$MARKER" <<<"$CLEAN_BASHRC"; then
+  echo "Marker not found in managed ~/.bashrc: $MARKER" >&2
+  exit 1
+fi
+
+if ! grep -Fqx "$MARKER" "$LIVE_BASHRC"; then
+  echo "Marker not found in live ~/.bashrc: $MARKER" >&2
+  exit 1
+fi
+
+clean_marker_line="$(printf '%s\n' "$CLEAN_BASHRC" | awk -v marker="$MARKER" '$0 == marker { print NR; exit }')"
+live_marker_line="$(awk -v marker="$MARKER" '$0 == marker { print NR; exit }' "$LIVE_BASHRC")"
+
+clean_prefix="$(printf '%s\n' "$CLEAN_BASHRC" | head -n "$clean_marker_line")"
+live_prefix="$(head -n "$live_marker_line" "$LIVE_BASHRC")"
+
+if [[ "$clean_prefix" != "$live_prefix" ]]; then
+  echo "Unexpected edits before the boundary detected." >&2
+  echo "Review ~/.bashrc manually before using chezmoi-mv-bashrc." >&2
+  exit 1
+fi
+
+clean_suffix="$(printf '%s\n' "$CLEAN_BASHRC" | tail -n +"$((clean_marker_line + 1))")"
+live_suffix="$(tail -n +"$((live_marker_line + 1))" "$LIVE_BASHRC")"
+
+if [[ "${live_suffix:0:${#clean_suffix}}" != "$clean_suffix" ]]; then
+  echo "Non-append-only changes detected after the boundary." >&2
+  echo "Review ~/.bashrc manually before using chezmoi-mv-bashrc." >&2
+  exit 1
+fi
+
+appended="${live_suffix:${#clean_suffix}}"
+
+if [[ -z "${appended//[$' \t\r\n']/}" ]]; then
+  echo "No appended bashrc content found after the chezmoi boundary."
+  exit 0
+fi
+
+machine_name="$(chezmoi execute-template '{{ .machine_name }}' | tr -d '\n')"
+echo "Machine: $machine_name"
+echo "Detected appended bashrc content that would be moved into the machine auto file:"
+echo
+printf '%s\n' "$appended"
+echo
+echo "Diff against the clean managed ~/.bashrc:"
+echo
+diff -u <(printf '%s\n' "$CLEAN_BASHRC") "$LIVE_BASHRC" || true
