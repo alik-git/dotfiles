@@ -10,6 +10,7 @@ The same applies to every other file in this repository. Never add or commit sec
 ## Command Style
 
 When running Git commands in a repo, prefer `cd /path/to/repo && git ...` over `git -C /path/to/repo ...` wherever possible.
+When giving commands for the user to run, omit arguments that only restate current defaults unless there is a reason to show them explicitly.
 
 ## Keep This File Minimal
 
