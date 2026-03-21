@@ -30,13 +30,9 @@ if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
-# Small shpool convenience aliases:
-# - `spp` opens the shpool CLI directly
-# - `spa <name>` attaches to a named session
-# - `spl` lists shpool sessions
-alias spp='shpool'
-alias spa='shpool attach'
-alias spl='shpool list'
+if [ -f "$HOME/.config/bash/aliases.sh" ]; then
+    . "$HOME/.config/bash/aliases.sh"
+fi
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
