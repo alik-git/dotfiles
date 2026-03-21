@@ -11,6 +11,7 @@ The same applies to every other file in this repository. Never add or commit sec
 
 When running Git commands in a repo, prefer `cd /path/to/repo && git ...` over `git -C /path/to/repo ...` wherever possible.
 When giving commands for the user to run, omit arguments that only restate current defaults unless there is a reason to show them explicitly.
+When working in a project that has a local `SCRATCH.md`, always also append any substantive command blocks or runnable commands you give the user to `SCRATCH.md` unless the user explicitly says not to. Keep them easy to copy-paste.
 
 ## Keep This File Minimal
 
