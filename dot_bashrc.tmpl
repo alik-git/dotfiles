@@ -19,6 +19,25 @@ if [ -n "$TMUX" ]; then
     fi
 fi
 
+# When running under shpool, tell bash to send SIGHUP to background jobs when
+# the shell exits. This follows shpool's recommendation and helps avoid leaving
+# stray child processes attached under the long-lived shpool daemon.
+shopt -s huponexit
+
+# Load the Rust/Cargo environment if present so user-installed tools like
+# `shpool` from `cargo install` are available in new shells.
+if [ -f "$HOME/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+fi
+
+# Small shpool convenience aliases:
+# - `spp` opens the shpool CLI directly
+# - `spa <name>` attaches to a named session
+# - `spl` lists shpool sessions
+alias spp='shpool'
+alias spa='shpool attach'
+alias spl='shpool list'
+
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
