@@ -2,15 +2,21 @@
 
 This folder keeps reference material for setting up the personal NAS mount on machines where it is wanted. It is tracked in Git, but it is not a chezmoi-managed home-directory target.
 
-The current recommended setup is a CIFS mount via `/etc/fstab` with `x-systemd.automount`. This is simpler than custom mount units and fits the intended workflow:
+## Recommended Approach
+
+Use a CIFS mount via `/etc/fstab` with `x-systemd.automount`.
+
+This keeps the workflow simple:
 
 - mount the NAS like a normal folder
 - auto-mount on first access when the home LAN is available
 - avoid blocking boot when the NAS is unavailable
 
+## Private Details
+
 For more details, including the optional Tailscale mount workflow, see `dotfiles_private/bootstrap/nas/README.private.md`.
 
-Recommended setup on a machine:
+## Setup Outline
 
 1. Install `cifs-utils`.
 2. Create a root-owned `600` credentials file.
