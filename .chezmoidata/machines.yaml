@@ -4,4 +4,5 @@ machines:
     has_gui: true
   work_mnv1:
     machine_class: work
+    workplace: minerva
     has_gui: false
