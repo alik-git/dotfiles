@@ -1,10 +1,10 @@
+{{- $machineName := .machine_name | default "" -}}
+{{- $machine := index (.machines | default dict) $machineName | default dict -}}
+{{- $workplace := index $machine "workplace" | default "" -}}
 [user]
 	name = "alik-git"
-{{ $machineName := .machine_name | default "" -}}
-{{ $machine := index (.machines | default dict) $machineName | default dict -}}
-{{ $workplace := index $machine "workplace" | default "" -}}
-{{ if eq $workplace "minerva" -}}
+{{- if eq $workplace "minerva" }}
 	email = "akuwajerwala@minervahumanoids.com"
-{{- else -}}
+{{- else }}
 	email = "alikgithb@gmail.com"
 {{- end }}
