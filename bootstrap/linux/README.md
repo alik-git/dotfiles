@@ -1,31 +1,86 @@
 # Linux Bootstrap
 
-This folder contains manual bootstrap helpers for setting up a new Linux machine. These files are tracked in the dotfiles repo, but they are not managed into `$HOME` by chezmoi and they are not run automatically by `chezmoi apply`.
+This folder contains manual bootstrap notes for setting up a new Linux machine. These files are tracked in the dotfiles repo, but they are not managed into `$HOME` by chezmoi and they are not run automatically by `chezmoi apply`.
 
 Use this when you want a safe, explicit first-run setup step for a new machine.
 
-Current scope:
+## Ubuntu base packages
 
-- Install a small base set of Ubuntu/Debian packages if they are missing.
-- Install Miniconda from the official latest installer if it is missing.
-- Install `nvm` from the official `nvm-sh/nvm` repository if it is missing.
-
-Usage:
+Install the base packages with:
 
 ```bash
-bash bootstrap/linux/install-personal-base.sh
+sudo apt install -y \
+  git \
+  vim \
+  gimp \
+  gnome-tweaks \
+  qbittorrent \
+  ffmpeg \
+  htop \
+  tree \
+  ncdu \
+  build-essential \
+  curl \
+  ca-certificates \
+  xz-utils \
+  ripgrep \
+  fd-find \
+  jq \
+  tmux \
+  unzip \
+  xclip
 ```
 
-Behavior:
+## Miniconda
 
-- The script checks what is already installed and skips anything already present.
-- System package installation is attempted only when `apt-get` is available.
-- If `sudo` is unavailable or not permitted, the script reports which apt packages are missing and continues with the user-level installs.
-- Miniconda and `nvm` are installed only if they are not already present.
-- The script prints a summary and exits non-zero if any requested step failed.
+Install Miniconda using Anaconda's official Linux installer guide:
 
-Notes:
+- Overview: https://www.anaconda.com/docs/getting-started/miniconda/install/overview
+- Linux installer: https://www.anaconda.com/docs/getting-started/miniconda/install/linux-install
 
-- This is intentionally a manual bootstrap step, not a `chezmoi run_` script.
-- Keeping it manual avoids surprising `sudo` prompts during normal `chezmoi apply`.
-- Shell initialization for `conda` and `nvm` should be managed separately in the dotfiles if you decide you want that.
+Minimal Linux x86 flow:
+
+```bash
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash ~/Miniconda3-latest-Linux-x86_64.sh
+source ~/.bashrc
+conda list
+```
+
+On this setup, the Conda shell hook should live in the managed `chezmoi` Bash config rather than relying on `conda init` rewriting `.bashrc`.
+
+## nvm
+
+Install `nvm` from the official `nvm-sh/nvm` project if needed:
+
+- https://github.com/nvm-sh/nvm
+
+## Rust
+
+Some tools in this setup, such as `shpool`, are installed with Cargo and need a Rust toolchain first.
+
+Install Rust using the official `rustup` installer:
+
+- https://rustup.rs/
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
+```
+
+## shpool
+
+Install `shpool` after Rust is available:
+
+- https://github.com/shell-pool/shpool
+
+```bash
+cargo install shpool
+mkdir -p ~/.config/systemd/user
+curl -fsSL https://raw.githubusercontent.com/shell-pool/shpool/latest/systemd/shpool.service -o ~/.config/systemd/user/shpool.service
+curl -fsSL https://raw.githubusercontent.com/shell-pool/shpool/latest/systemd/shpool.socket -o ~/.config/systemd/user/shpool.socket
+systemctl --user daemon-reload
+systemctl --user enable --now shpool.socket
+```
+
+On this setup, the managed dotfiles should own the final `shpool` systemd units and Bash integration after bootstrap.
