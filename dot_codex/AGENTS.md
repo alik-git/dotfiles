@@ -31,6 +31,7 @@ When working in an existing project, follow the project's or team's established 
 
 - For files managed by chezmoi, edit the chezmoi source under `/home/ali/.local/share/chezmoi`, not the live file path. This especially applies to `.codex/AGENTS.md`, `.codex/config.toml`, `.codex/rules/default.rules`, and `.bashrc`.
 - For chezmoi-managed files, always run `chezmoi diff` before `chezmoi apply`.
+- Use chezmoi encryption only in recoverable ways: losing the private key should never cause permanent loss of data or access. Good example: an encrypted SSH host config that can be recreated manually if needed. Bad example: making the encrypted repo copy the only copy of an irreplaceable credential, key, or recovery secret. If any proposed change would violate this, warn the user clearly and explicitly before doing it.
 
 ### Development Logs
 
