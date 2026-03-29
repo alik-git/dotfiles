@@ -24,6 +24,16 @@ chezmoi diff
 chezmoi apply
 ```
 
+## Encrypted Private Files
+
+- Private chezmoi-managed files use `age`.
+- On a new machine, restore the full age identity file to `~/.config/chezmoi/key.txt` before `chezmoi init --apply` or `chezmoi apply`.
+- Then set:
+
+```bash
+chmod 600 ~/.config/chezmoi/key.txt
+```
+
 ## Machine Data
 
 - Local selector: `~/.config/chezmoi/chezmoi.toml`
