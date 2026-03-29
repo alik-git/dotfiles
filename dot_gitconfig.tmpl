@@ -1,0 +1,9 @@
+[user]
+	name = "alik-git"
+{{ $machine := index .machines .machine_name -}}
+{{ $workplace := (index $machine "workplace") | default "" -}}
+{{ if eq $workplace "work" -}}
+	email = "15948631+alik-git@users.noreply.github.com"
+{{- else -}}
+	email = "15948631+alik-git@users.noreply.github.com"
+{{- end }}
