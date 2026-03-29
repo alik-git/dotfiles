@@ -19,10 +19,10 @@ if [ -n "$TMUX" ]; then
     fi
 fi
 
-# When running under shpool, tell bash to send SIGHUP to background jobs when
-# the shell exits. This follows shpool's recommendation and helps avoid leaving
-# stray child processes attached under the long-lived shpool daemon.
-shopt -s huponexit
+# Only in shpool sessions, hang up background jobs on shell exit.
+if [ -n "${SHPOOL_SESSION_NAME:-}" ]; then
+    shopt -s huponexit
+fi
 
 # Load the Rust/Cargo environment if present so user-installed tools like
 # `shpool` from `cargo install` are available in new shells.
