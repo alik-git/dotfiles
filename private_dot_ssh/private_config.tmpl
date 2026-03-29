@@ -1,1 +1,1 @@
-Include ~/.ssh/config.private
+{{- include (joinPath .chezmoi.sourceDir "dotfiles_private" "private_dot_ssh" "config") -}}
