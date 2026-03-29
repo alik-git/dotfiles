@@ -9,9 +9,13 @@ The canonical working repo is `~/.local/share/chezmoi`.
 
 ```bash
 chezmoi init git@github.com:alik-git/dotfiles.git
+cd ~/.local/share/chezmoi
+git submodule update --init --recursive
 chezmoi diff
 chezmoi apply
 ```
+
+Set up GitHub SSH first. The private companion repo is a Git submodule cloned over SSH.
 
 If needed, do machine-local follow-up after apply, for example `conda init bash`.
 
@@ -20,19 +24,17 @@ For normal updates:
 ```bash
 cd ~/.local/share/chezmoi
 git pull
+git submodule update --init --recursive
 chezmoi diff
 chezmoi apply
 ```
 
-## Encrypted Private Files
+## Private Files
 
-- Private chezmoi-managed files use `age`.
-- On a new machine, restore the full age identity file to `~/.config/chezmoi/key.txt` before `chezmoi init --apply` or `chezmoi apply`.
-- Then set:
-
-```bash
-chmod 600 ~/.config/chezmoi/key.txt
-```
+- Private tracked files currently live in the `dotfiles_private` Git submodule.
+- Private machine-managed targets in the main repo are thin templates that include content from `dotfiles_private`.
+- Non-managed private reference material, such as the NAS private README, lives directly in `dotfiles_private`.
+- `age` remains configured locally for future real secrets, but it is not currently used for tracked files.
 
 ## Machine Data
 
@@ -53,6 +55,7 @@ chmod 600 ~/.config/chezmoi/key.txt
 ## Codex Files
 
 - `dot_codex/` contains the managed global Codex `AGENTS.md`, `config.toml`, and rules.
+- Codex programmatically adds trusted project paths on startup, so one or more machine-specific hardcoded paths are expected there.
 
 ## Bootstrap Material
 
