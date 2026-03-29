@@ -8,7 +8,7 @@ The current recommended setup is a CIFS mount via `/etc/fstab` with `x-systemd.a
 - auto-mount on first access when the home LAN is available
 - avoid blocking boot when the NAS is unavailable
 
-For more details, see `dotfiles_private/bootstrap/nas/README.private.md`.
+For more details, including the optional Tailscale mount workflow, see `dotfiles_private/bootstrap/nas/README.private.md`.
 
 Recommended setup on a machine:
 
