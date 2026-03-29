@@ -17,7 +17,7 @@ chezmoi apply
 
 Set up GitHub SSH first. The private companion repo is a Git submodule cloned over SSH.
 
-If needed, do machine-local follow-up after apply, for example `conda init bash`.
+If needed, do machine-local follow-up after apply for tools not yet represented in the dotfiles.
 
 For normal updates:
 
