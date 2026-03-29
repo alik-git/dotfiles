@@ -1,1 +1,8 @@
-{{- include (joinPath .chezmoi.sourceDir "dotfiles_private" "private_dot_ssh" "config") -}}
+{{- include (joinPath .chezmoi.sourceDir "dotfiles_private" "private_dot_ssh" "config.common") -}}
+{{- $machineName := .machine_name | default "" -}}
+{{- $machine := index (.machines | default dict) $machineName | default dict -}}
+{{- $machineClass := index $machine "machine_class" | default "" -}}
+{{- if eq $machineClass "personal" }}
+
+{{ include (joinPath .chezmoi.sourceDir "dotfiles_private" "private_dot_ssh" "config.personal") }}
+{{- end }}
