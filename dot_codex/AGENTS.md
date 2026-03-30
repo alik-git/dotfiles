@@ -9,6 +9,7 @@ Do not store, commit, or push secrets, credentials, or other sensitive informati
 ## Command Style
 
 When running Git commands in a repo, prefer `cd /path/to/repo && git ...` over `git -C /path/to/repo ...` wherever possible.
+When giving the user a command that is logically one command but spans multiple shell steps, chain the steps with `&&` (for example `cd /path && ls`). For readability, break long commands across lines with trailing `\` while keeping the `&&` chaining.
 When giving commands for the user to run, omit arguments that only restate current defaults unless there is a reason to show them explicitly.
 Never commit or push local-only scratchpad files such as `AGENTS.md`, `DEVLOG.md`, `SCRATCH.md`, `technical_roadmap.md`, or `progress_log.md`. Hide them with a local-only ignore such as `.git/info/exclude`.
 
