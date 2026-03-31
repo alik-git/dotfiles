@@ -18,3 +18,7 @@ dotfiles_private/**
 {{- if or (ne $machineClass "personal") (not $hasGui) (not (lookPath "nautilus")) }}
 .local/share/nautilus/scripts/**
 {{- end }}
+{{/* Keep the Bluetooth audio override only on the white_xps machine. */}}
+{{- if ne $machineName "white_xps" }}
+.config/wireplumber/policy.lua.d/11-bluetooth-no-auto-hfp.lua
+{{- end }}
