@@ -1,0 +1,15 @@
+// Place your key bindings in this file to override the defaults
+[
+    // Use standard GUI copy/paste shortcuts in the integrated terminal.
+    // Ctrl+C only copies when terminal text is selected; otherwise it still interrupts the running process.
+    {
+        "key": "ctrl+c",
+        "command": "workbench.action.terminal.copySelection",
+        "when": "terminalFocus && terminalTextSelected"
+    },
+    {
+        "key": "ctrl+v",
+        "command": "workbench.action.terminal.paste",
+        "when": "terminalFocus"
+    }
+]
