@@ -1,0 +1,133 @@
+{
+"workbench.colorTheme": "One Dark Pro",
+"python.defaultInterpreterPath": "C:\\Program Files\\Python39\\python.exe",
+  //////////////////////////////////
+  // Custom Theme Settings ////////
+  ////////////////////////////////
+  // Changes to theme are 
+  // python comments should be green
+  // python variables should be white
+  // status bar should be slightly brighter
+  "editor.tokenColorCustomizations": {
+    "[*]": {
+      "textMateRules": [
+        {
+          "scope": [
+            "comment.line.number-sign.python",
+            "punctuation.definition.comment.python"
+          ],
+          "settings": {
+            "foreground": "#a1d8b7",
+          }
+        },
+        {
+          "scope": [
+            "variable.other.readwrite",
+          ],
+          "settings": {
+            "foreground": "#dfdfdf",
+          }
+        }
+      ]
+    }
+  },
+  "workbench.colorCustomizations": {
+    "[*]": {
+      "statusBar.foreground": "#d3d3d3",
+      "statusBar.background": "#303f4d",
+    }
+  },
+  //////////////////////////////////
+  // Custom Theme Settings OVER ///
+  ////////////////////////////////
+  //
+  //
+  ////////////////////////////
+  /// VIM Settings //////////
+  //////////////////////////
+  // Use jj and kk to exit insert mode
+  // Preserve ctrl key functionality
+  // Use ; to enter command mode
+  // Use > and < to indent and outdent 
+  // "vim.useCtrlKeys": false, // This makes you lose your selection on ctrl+c
+  "vim.handleKeys": {
+    "<C-c>": false,
+    "<C-x>": false,
+    "<C-v>": false,
+    "<C-a>": false,
+    "<C-f>": false,
+    "<C-y>": false,
+    "<C-b>": false,
+  },
+  "vim.insertModeKeyBindings": [
+    {
+      "before": [
+        "j",
+        "j"
+      ],
+      "after": [
+        "<Esc>"
+      ]
+    },
+    {
+      "before": [
+        "k",
+        "k"
+      ],
+      "after": [
+        "<Esc>"
+      ]
+    }
+  ],
+  "vim.normalModeKeyBindings": [
+    {
+      "before": [
+        ";"
+      ],
+      "after": [
+        ":"
+      ]
+    },
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        ">"
+      ],
+      "commands": [
+        "editor.action.indentLines"
+      ]
+    },
+    {
+      "before": [
+        "<"
+      ],
+      "commands": [
+        "editor.action.outdentLines"
+      ]
+    },
+  ],
+  // Now from this tutorial https://www.youtube.com/watch?v=GST8we5uABo Mastering VIM Motions in VSCode (Mouseless development)
+  "vim.leader": "<Space>",
+
+
+  ////////////////////////////
+  /// VIM Settings OVER /////
+  //////////////////////////
+  //
+  //
+  "editor.wordWrap": "on",
+  // This makes vscode not use the physical key that was pressed
+  // Instead use the keycode, eg capslock will be treated as escape
+  "keyboard.dispatch": "keyCode",
+  "files.autoSave": "afterDelay",
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+  "settingsSync.ignoredSettings": [
+    
+  ],
+  "security.workspace.trust.untrustedFiles": "open",
+  "python.createEnvironment.trigger": "off",
+  "workbench.editor.wrapTabs": true,
+}

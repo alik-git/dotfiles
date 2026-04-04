@@ -1,0 +1,79 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        // This automatically copies the selected text and excutes it in the python debugger console
+        "key": "alt+a",
+        "command": "editor.debug.action.selectionToRepl",
+        "when": "editorTextFocus"
+    },
+    // FOR NOTEBOOKS JUPYTER vv
+    {
+        "key": "enter",
+        "command": "extension.vim_insert",
+        "when": "vim.mode == 'Normal' && notebookEditorFocused"
+    },
+    // These two are because I like to use tab to cycle through suggestions
+    {
+        "key": "tab",
+        "command": "selectNextSuggestion",
+        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+    },
+    {
+        "key": "shift+tab",
+        "command": "selectPrevSuggestion",
+        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+    },
+    // Why not have a keybinding to toggle a boolean? LOL
+    {
+        "key": "alt+i",
+        "command": "extension.toggleBool",
+        "when": "editorTextFocus"
+    },
+    // Just convinient to toggle sidebar vis
+    {
+        "key": "alt+d",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    // PERSONAL CAVEMAN DEBUGGING STUFF
+    {
+        "key": "alt+f",
+        "command": "multiCommand.printVariableSnippet",
+        "when": "editorFocus && editorHasSelection"
+    },
+    {
+        "key": "alt+t",
+        "command": "multiCommand.wandbLogVariableSnippet",
+        // use the following if you wish to limit the command to python files
+        "when": "editorFocus && editorHasSelection"
+    },
+    // {
+    //     "key": "alt+v",
+    //     "command": "multiCommand.wandbConfigVariableSnippet",
+    //     // use the following if you wish to limit the command to python files
+    //     "when": "editorFocus && editorHasSelection"
+    // },
+    // Paste formatter 
+    // {
+    //     "key": "ctrl+v",
+    //     "command": "pasteAndIndent.action",
+    //     "when": "editorTextFocus && !editorReadonly"
+    // },
+    ///////////////////////////////
+    ////// NEW ////////////////////
+    //////////////////////////////
+    // alt+ space does "workbench.action.focusAboveGroup"
+    {
+    "key": "alt+x",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+    }, 
+    {
+        "key": "alt+x",
+        "command": "workbench.action.terminal.focus",
+        "when": "editorTextFocus"
+        },
+            { "key": "ctrl+c", "command": "workbench.action.terminal.copySelection", "when": "terminalFocus && terminalTextSelected" },
+{ "key": "ctrl+v", "command": "workbench.action.terminal.paste", "when": "terminalFocus" }
+
+        
+]
