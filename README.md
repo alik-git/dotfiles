@@ -56,7 +56,8 @@ chezmoi apply
 ## Codex Files
 
 - `dot_codex/` contains the managed global Codex `AGENTS.md`, `config.toml`, and rules.
-- Codex programmatically adds trusted project paths on startup, so one or more machine-specific hardcoded paths are expected there.
+- Keep in mind that Codex programmatically adds some live config on startup.
+- In particular, trusted project paths and `model_reasoning_effort` may appear in the live `~/.codex/config.toml` even when they are not present in the chezmoi source.
 
 ## Bootstrap Material
 
