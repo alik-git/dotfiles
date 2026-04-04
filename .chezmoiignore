@@ -1,2 +1,4 @@
 backups
 backups/**
+.config/Code/User/README.md
+.config/Code/User/extensions-manifest.txt
