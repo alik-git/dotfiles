@@ -1,4 +1,39 @@
+README.md
+DEVLOG.md
+SCRATCH.md
+bootstrap/**
+dotfiles_private/**
+{{/* This template decides whether Nautilus copy scripts should be installed on this machine. */}}
+{{/* Read the selected machine name from ~/.config/chezmoi/chezmoi.toml. */}}
+{{- $machineName := .machine_name | default "" }}
+{{/* Load the tracked machine catalog from .chezmoidata/machines.yaml. */}}
+{{- $machines := .machines | default dict }}
+{{/* Look up the current machine entry. */}}
+{{- $machine := index $machines $machineName | default dict }}
+{{/* Read the machine class, e.g. personal or work. */}}
+{{- $machineClass := index $machine "machine_class" | default "" }}
+{{/* Read whether this machine should be treated as a GUI machine. */}}
+{{- $hasGui := index $machine "has_gui" | default false }}
 backups
 backups/**
 .config/Code/User/README.md
 .config/Code/User/extensions-manifest.txt
+{{/* Ignore Nautilus scripts unless this is a personal GUI machine with nautilus installed. */}}
+{{- if or (ne $machineClass "personal") (not $hasGui) (not (lookPath "nautilus")) }}
+.local/share/nautilus/scripts/**
+{{- end }}
+{{/* Ignore live VS Code user settings on non-personal or non-GUI machines. */}}
+{{- if or (ne $machineClass "personal") (not $hasGui) }}
+.config/Code
+.config/Code/**
+.config/Code/User
+.config/Code/User/**
+.config/Code/User/settings.json
+.config/Code/User/keybindings.json
+{{- end }}
+{{/* Keep the Bluetooth audio override only on the white_xps machine. */}}
+{{- if ne $machineName "white_xps" }}
+.config/wireplumber
+.config/wireplumber/**
+.config/wireplumber/policy.lua.d/11-bluetooth-no-auto-hfp.lua
+{{- end }}
