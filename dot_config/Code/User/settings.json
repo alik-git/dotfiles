@@ -1,0 +1,80 @@
+{
+  "workbench.colorTheme": "One Dark Pro",
+  "workbench.iconTheme": "material-icon-theme",
+
+  // Theme tweaks
+  // Keep Python comments green, variables light, and the status bar slightly brighter.
+  "editor.tokenColorCustomizations": {
+    "[*]": {
+      "textMateRules": [
+        {
+          "scope": [
+            "comment.line.number-sign.python",
+            "punctuation.definition.comment.python"
+          ],
+          "settings": {
+            "foreground": "#a1d8b7",
+          }
+        },
+        {
+          "scope": [
+            "variable.other.readwrite",
+          ],
+          "settings": {
+            "foreground": "#dfdfdf",
+          }
+        }
+      ]
+    }
+  },
+  "workbench.colorCustomizations": {
+    "[*]": {
+      "statusBar.foreground": "#d3d3d3",
+      "statusBar.background": "#303f4d",
+    }
+  },
+
+  // Vim behavior
+  // Use jj and kk to exit insert mode, while preserving core system shortcuts.
+  "vim.handleKeys": {
+    "<C-c>": false, // Preserve system copy behavior
+    "<C-x>": false, // Preserve system cut behavior
+    "<C-v>": false, // Preserve system paste behavior
+    "<C-a>": false, // Preserve select-all behavior
+    "<C-f>": false, // Preserve find behavior
+    "<C-z>": false, // Preserve undo behavior
+    "<C-b>": false, // Preserve sidebar visibility toggle
+  },
+  "vim.insertModeKeyBindings": [
+    {
+      "before": [
+        "j",
+        "j"
+      ],
+      "after": [
+        "<Esc>"
+      ]
+    },
+    {
+      "before": [
+        "k",
+        "k"
+      ],
+      "after": [
+        "<Esc>"
+      ]
+    }
+  ],
+
+  // Editor behavior
+  "editor.wordWrap": "on",
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+
+  // Workspace trust and Python UX
+  "security.workspace.trust.untrustedFiles": "open",
+  "python.createEnvironment.trigger": "off",
+
+  // Workbench behavior
+  "workbench.editor.wrapTabs": true,
+}

@@ -65,6 +65,20 @@ chezmoi apply
 - `bootstrap/nas/` contains NAS setup reference files.
 - `bootstrap/nautilus/` documents the Nautilus copy-path scripts.
 
+## Further Reading
+
+If you need more context, these READMEs cover narrower parts of the setup:
+
+- [`bootstrap/linux/README.md`](bootstrap/linux/README.md)
+- [`bootstrap/nas/README.md`](bootstrap/nas/README.md)
+- [`bootstrap/nautilus/README.md`](bootstrap/nautilus/README.md)
+- [`dot_config/Code/User/README.md`](dot_config/Code/User/README.md)
+- [`dotfiles_private/README.md`](dotfiles_private/README.md)
+- [`dotfiles_private/bootstrap/nas/README.private.md`](dotfiles_private/bootstrap/nas/README.private.md)
+- [`dotfiles_private/dot_codex/README.md`](dotfiles_private/dot_codex/README.md)
+- [`dotfiles_private/private_dot_ssh/README.md`](dotfiles_private/private_dot_ssh/README.md)
+- [`backups/vscode-old/2026-04-04/README.md`](backups/vscode-old/2026-04-04/README.md)
+
 ## Notes
 
 - `DEVLOG.md` is local-only context and is intentionally not committed.
