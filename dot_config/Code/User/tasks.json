@@ -1,0 +1,89 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Work SSH: Codex session",
+      "type": "process",
+      "isBackground": true,
+      "command": "${env:HOME}/.local/bin/vscode-shpool-session",
+      "args": [
+        "codex",
+        "--task-ready-marker"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "work-ssh",
+        "echo": false,
+        "showReuseMessage": false,
+        "clear": false
+      },
+      "problemMatcher": {
+        "base": "$tsc-watch",
+        "background": {
+          "beginsPattern": "^__VSCODE_TASK_BEGIN__:codex$",
+          "endsPattern": "^__VSCODE_TASK_READY__:codex$"
+        }
+      }
+    },
+    {
+      "label": "Work SSH: Side session",
+      "type": "process",
+      "isBackground": true,
+      "command": "${env:HOME}/.local/bin/vscode-shpool-session",
+      "args": [
+        "side",
+        "--task-ready-marker"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "work-ssh",
+        "echo": false,
+        "showReuseMessage": false,
+        "clear": false
+      },
+      "problemMatcher": {
+        "base": "$tsc-watch",
+        "background": {
+          "beginsPattern": "^__VSCODE_TASK_BEGIN__:side$",
+          "endsPattern": "^__VSCODE_TASK_READY__:side$"
+        }
+      }
+    },
+    {
+      "label": "Work SSH: Nvitop",
+      "type": "process",
+      "isBackground": true,
+      "command": "${env:HOME}/.local/bin/vscode-shpool-session",
+      "args": [
+        "nvitop",
+        "--task-ready-marker"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "echo": false,
+        "showReuseMessage": false,
+        "clear": false
+      },
+      "problemMatcher": {
+        "base": "$tsc-watch",
+        "background": {
+          "beginsPattern": "^__VSCODE_TASK_BEGIN__:nvitop$",
+          "endsPattern": "^__VSCODE_TASK_READY__:nvitop$"
+        }
+      }
+    },
+    {
+      "label": "Work SSH: Restore base sessions",
+      "dependsOn": [
+        "Work SSH: Codex session",
+        "Work SSH: Side session",
+        "Work SSH: Nvitop"
+      ],
+      "dependsOrder": "parallel",
+      "problemMatcher": []
+    }
+  ]
+}
