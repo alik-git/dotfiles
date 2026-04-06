@@ -19,6 +19,28 @@ if [ -n "$TMUX" ]; then
     fi
 fi
 
+popssh() {
+    # Repair SSH_AUTH_SOCK by switching to a live forwarded agent socket.
+    local sock
+
+    if [ -n "${SSH_AUTH_SOCK:-}" ] && [ -S "$SSH_AUTH_SOCK" ] && SSH_AUTH_SOCK="$SSH_AUTH_SOCK" ssh-add -l >/dev/null 2>&1; then
+        printf 'SSH_AUTH_SOCK already works: %s\n' "$SSH_AUTH_SOCK"
+        return 0
+    fi
+
+    for sock in /run/user/"$(id -u)"/vscode-ssh-auth-sock-* /tmp/ssh-*/agent.*; do
+        [ -S "$sock" ] || continue
+        if SSH_AUTH_SOCK="$sock" ssh-add -l >/dev/null 2>&1; then
+            export SSH_AUTH_SOCK="$sock"
+            printf 'Updated SSH_AUTH_SOCK to: %s\n' "$SSH_AUTH_SOCK"
+            return 0
+        fi
+    done
+
+    printf 'No working forwarded SSH agent socket found.\n' >&2
+    return 1
+}
+
 # Only in shpool sessions, hang up background jobs on shell exit.
 if [ -n "${SHPOOL_SESSION_NAME:-}" ]; then
     shopt -s huponexit
