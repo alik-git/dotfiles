@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ali Code Review"
+  short_description: "User-defined code review workflow"
+  default_prompt: "Use $ali-code-review for this code review task."
