@@ -10,3 +10,6 @@ alias pop='source ~/.bashrc'
 
 # Conda environment activation shortcut.
 alias ca='conda activate'
+
+# Update the global Codex CLI installed via npm.
+alias updatecodex='npm install -g @openai/codex@latest'
