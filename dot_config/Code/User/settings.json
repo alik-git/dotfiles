@@ -65,6 +65,18 @@
       ]
     }
   ],
+  // Override VSCodeVim's default multi-cursor gb so gd then gb jumps back like Ctrl+O.
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "g",
+        "b"
+      ],
+      "after": [
+        "<C-o>"
+      ]
+    }
+  ],
 
   // Editor behavior
   "editor.wordWrap": "on",
@@ -77,4 +89,15 @@
 
   // Workbench behavior
   "workbench.editor.wrapTabs": true,
+  "editor.rulers": [
+    88,
+    120
+  ],
+  "[python]": {
+    "diffEditor.ignoreTrimWhitespace": false,
+    "gitlens.codeLens.symbolScopes": [
+      "!Module"
+    ]
+  },
+  "python.analysis.typeCheckingMode": "standard",
 }
