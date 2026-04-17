@@ -47,12 +47,5 @@ if [ -f "$HOME/.config/bash/machine/{{ $machineName }}.secrets.sh" ]; then
 fi
 {{- end }}
 
-# In the dedicated shpool nvitop session, start in the base Conda env.
-if [ "${SHPOOL_SESSION_NAME:-}" = "nvitop" ] && [ "${CONDA_DEFAULT_ENV:-}" != "base" ]; then
-    if command -v conda >/dev/null 2>&1; then
-        conda activate base
-    fi
-fi
-
 # === chezmoi-mv-bashrc boundary ===
 # Do not edit below this line. Program-added shell init may appear here temporarily and should be moved with `chezmoi-mv-bashrc`.
