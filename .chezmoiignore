@@ -14,6 +14,10 @@ dotfiles_private/**
 {{- $machineClass := index $machine "machine_class" | default "" }}
 {{/* Read whether this machine should be treated as a GUI machine. */}}
 {{- $hasGui := index $machine "has_gui" | default false }}
+{{/* Manage ~/.profile only on work_mnv1, where sandboxed tools need a writable pre-commit cache. */}}
+{{- if ne $machineName "work_mnv1" }}
+.profile
+{{- end }}
 backups
 backups/**
 .config/Code/User/README.md
