@@ -51,13 +51,19 @@ _work_mnv1_find_forwarded_ssh_auth_sock() {
 }
 
 _work_mnv1_refresh_stable_ssh_auth_sock() {
+    local recovered_sock
+
     if [ -n "${SSH_AUTH_SOCK:-}" ] && \
         _work_mnv1_is_forwarded_ssh_auth_sock "$SSH_AUTH_SOCK" && \
         _work_mnv1_has_ssh_auth_identity "$SSH_AUTH_SOCK"; then
         _work_mnv1_set_stable_ssh_auth_sock "$SSH_AUTH_SOCK" && return 0
     fi
-    _work_mnv1_has_ssh_auth_identity "$HOME/.ssh/ssh_auth_sock" || return 1
-    export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
+    if _work_mnv1_has_ssh_auth_identity "$HOME/.ssh/ssh_auth_sock"; then
+        export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
+        return 0
+    fi
+    recovered_sock="$(_work_mnv1_find_forwarded_ssh_auth_sock)" || return 1
+    _work_mnv1_set_stable_ssh_auth_sock "$recovered_sock"
 }
 
 fixssha() {
@@ -86,10 +92,4 @@ fixssha() {
         "$HOME/.ssh/ssh_auth_sock" "$recovered_sock"
 }
 
-if [ -n "${SSH_AUTH_SOCK:-}" ] && \
-    _work_mnv1_is_forwarded_ssh_auth_sock "$SSH_AUTH_SOCK" && \
-    _work_mnv1_has_ssh_auth_identity "$SSH_AUTH_SOCK"; then
-    _work_mnv1_set_stable_ssh_auth_sock "$SSH_AUTH_SOCK"
-elif _work_mnv1_has_ssh_auth_identity "$HOME/.ssh/ssh_auth_sock"; then
-    export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
-fi
+_work_mnv1_refresh_stable_ssh_auth_sock >/dev/null 2>&1 || true
