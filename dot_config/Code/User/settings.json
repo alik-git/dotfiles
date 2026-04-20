@@ -100,4 +100,7 @@
     ]
   },
   "python.analysis.typeCheckingMode": "standard",
+  "workbench.editorAssociations": {
+    "git-rebase-todo": "default"
+  },
 }
