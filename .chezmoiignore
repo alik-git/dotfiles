@@ -35,6 +35,15 @@ backups/**
 .config/Code/User/settings.json
 .config/Code/User/keybindings.json
 {{- end }}
+{{/* Ignore machine-specific bash files unless they match the selected machine. */}}
+{{- if ne $machineName "personal_linux" }}
+.config/bash/machine/personal_linux.auto.sh
+{{- end }}
+{{- if ne $machineName "work_server" }}
+.config/bash/machine/work_server.auto.sh
+.config/bash/machine/work_server.personal.sh
+.config/bash/machine/work_server.secrets.sh
+{{- end }}
 {{/* Keep the Bluetooth audio override only on the personal_linux machine. */}}
 {{- if ne $machineName "personal_linux" }}
 .config/wireplumber
