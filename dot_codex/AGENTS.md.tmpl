@@ -21,7 +21,7 @@ If a referenced file under `~/.agent_files` is missing or unavailable, say that 
 {{ if eq (.machine_name | default "") "work_mnv1" }}
 ## mnv1 Important Info
 
-If you are on `mnv1` (for example, `hostname` returns `mnv1`), the main work folder is `~/Projects`. It contains the main repos and worktrees used for development, and some worktrees have corresponding conda environments. If you have not already, read `~/.agent_files/work_mnv1/docs/workspace_setup.md` for the important machine-specific workspace details.
+If you are on `mnv1` (for example, `hostname` returns `mnv1`), the main work folder is `~/Projects`. In chezmoi, this machine is identified as `work_mnv1`. It contains the main repos and worktrees used for development, and some worktrees have corresponding conda environments. If you have not already, read `~/.agent_files/work_mnv1/docs/workspace_setup.md` for the important machine-specific workspace details.
 {{ end }}
 
 ## Working Style
@@ -45,7 +45,7 @@ If you are on `mnv1` (for example, `hostname` returns `mnv1`), the main work fol
 - If I say `p` it means `push`.
 - If I ask you to push and there are uncommitted changes, commit and push.
 - For large or complex changes, use a feature branch, split the work into multiple commits, and ask if you should open a draft pull request.
-- For pull request guidance, see `~/.agent_files/common/docs/pull_requests.md`.
+- For pull request guidance, see `~/.agent_files/common/PULL_REQUEST_TEMPLATE.md`.
 - Use Conventional Commits for commit messages: `type(scope): description` when a scope helps, otherwise `type: description`.
 - Common types include `fix`, `feat`, `docs`, `refactor`, `test`, `chore`, `perf`, and `style`.
 - Examples: `fix(auth): handle expired token refresh` and `docs: clarify setup steps`.
@@ -63,7 +63,7 @@ If you are on `mnv1` (for example, `hostname` returns `mnv1`), the main work fol
 
 ## References
 
-- Pull request guidance: `~/.agent_files/common/docs/pull_requests.md`
+- Pull request guidance: `~/.agent_files/common/PULL_REQUEST_TEMPLATE.md`
 - DEVLOG and SCRATCH guidance: `~/.agent_files/common/docs/devlogs.md`
 {{- if eq (.machine_name | default "") "work_mnv1" }}
 - `work_mnv1` workspace layout and machine-specific notes: `~/.agent_files/work_mnv1/docs/workspace_setup.md`
