@@ -56,6 +56,8 @@ chezmoi apply
 ## Codex Files
 
 - `dot_codex/` contains the managed global Codex `AGENTS.md`, `config.toml`, and rules.
+- `dot_agent_files/` contains the managed `~/.agent_files/...` targets used by the global Codex setup.
+- Some `dot_agent_files/` targets are thin templates that include content from `dotfiles_private`.
 - Keep in mind that Codex programmatically adds some live config on startup.
 - In particular, trusted project paths and `model_reasoning_effort` may appear in the live `~/.codex/config.toml` even when they are not present in the chezmoi source.
 
