@@ -43,6 +43,8 @@ backups/**
 .config/bash/machine/work_server.auto.sh
 .config/bash/machine/work_server.personal.sh
 .config/bash/machine/work_server.secrets.sh
+.agent_files/work_server
+.agent_files/work_server/**
 {{- end }}
 {{/* Keep the Bluetooth audio override only on the personal_linux machine. */}}
 {{- if ne $machineName "personal_linux" }}
