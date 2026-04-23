@@ -2,16 +2,15 @@
 
 Ali K's personal global `AGENTS.md`.
 
-## Most Important Instruction
+## Most Important Instructions
 
 Do not store, commit, or push secrets, credentials, or other sensitive information.
 
-## Command Style
+If this file conflicts with the code or repo docs, trust the code and docs,
+then update `AGENTS.md`.
 
-When running Git commands in a repo, prefer `cd /path/to/repo && git ...` over `git -C /path/to/repo ...` wherever possible.
-When giving the user a command that is logically one command but spans multiple shell steps, chain the steps with `&&` (for example `cd /path && ls`). For readability, break long commands across lines with trailing `\` while keeping the `&&` chaining.
-When giving commands for the user to run, omit arguments that only restate current defaults unless there is a reason to show them explicitly.
-Never commit or push local-only scratchpad files such as `AGENTS.md`, `DEVLOG.md`, `SCRATCH.md`, `technical_roadmap.md`, or `progress_log.md`. Hide them with a local-only ignore such as `.git/info/exclude`.
+When unsure, ask a short question or make the smallest reversible change. Do
+not invent local workflow assumptions.
 
 ## Keep This File Minimal
 
@@ -30,11 +29,19 @@ When working in an existing project, follow the project's or team's established 
 
 - For files managed by chezmoi, edit the chezmoi source under `/home/ali/.local/share/chezmoi`, not the live file path. This especially applies to `.codex/AGENTS.md`, `.codex/config.toml`, `.codex/rules/default.rules`, and `.bashrc`.
 - For chezmoi-managed files, always run `chezmoi diff` before `chezmoi apply`.
+- Prefer instructions here to be persistent, cross-project, and non-obvious. Put repo-specific workflow, commands, and environment details in the repo's own `AGENTS.md`.
+
+## Command Style
+
+- When running Git commands in a repo, prefer `cd /path/to/repo && git ...` over `git -C /path/to/repo ...` wherever possible.
+- When giving the user a command that spans multiple shell steps, chain them with `&&`. For readability, break long commands across lines with trailing `\` while keeping the `&&` chaining.
+- When giving commands for the user to run, omit arguments that only restate current defaults unless there is a reason to show them explicitly.
+- Never commit or push local-only scratchpad files such as `DEVLOG.md`, `SCRATCH.md`. If they are in git repos, hide them with a local-only ignore such as `.git/info/exclude`.
 
 ### Development Logs
 
 - If a project has a `DEVLOG.md`, use it as a high-level catch-up aid for humans and agents.
-- `DEVLOG.md` is local-only context, not a source of truth. Do not commit it. Add it to `.gitignore` if needed. If it disagrees with the code, trust the code and update the log.
+- `DEVLOG.md` is local-only context, not a source of truth. If it disagrees with the code, trust the code and update the log.
 - If a project has a local `SCRATCH.md`, use it for large temporary command blocks, diffs, tables, or other bulky scratch output that does not belong in `DEVLOG.md`.
 - When adding to `DEVLOG.md` or `SCRATCH.md`, append to the end of the file by default unless there is a clear reason not to.
 - After a substantial investigation, a major plan, or a topic shift, it is a good time to add a `DEVLOG.md` entry summarizing what was learned or done.
@@ -42,22 +49,13 @@ When working in an existing project, follow the project's or team's established 
 - Each entry should include a 1-2 sentence summary, then optionally `Details:` with the most important context.
 - Do not add commands to `DEVLOG.md`; put substantive command blocks and runnable commands in `SCRATCH.md` instead.
 
-Example:
-```markdown
-## 2026-03-14 20:05 - Temporary fast local preview setup
-Used a temporary local-only fast-preview override while editing the migration branch so previews for changes would rebuild faster.
-Details:
-- Disabled ImageMagick and excluded the notebook-heavy `visuallearn` post only in a temporary override config used for local preview.
-- This was not a committed repo change and was restored to match full site config after edits were finalized.
-```
-
 ### Git
 
-- Prefer `cd /path/to/repo && git ...` over `git -C /path/to/repo ...` wherever possible.
 - Keep commits small and logically separate.
 - If I say `p` it means `push`.
 - If I ask you to push and there are uncommitted changes, commit and push.
-- For large or complex changes, use a feature branch, split the work into multiple commits, and open a PR.
+- For large or complex changes, use a feature branch, split the work into multiple commits, and ask if you should open a draft pull request.
+- For pull request guidelines, see `~/.agent_files/common/docs/pull_requests.md`.
 - Use the Conventional Commits specification for commit messages:
 
 ```
