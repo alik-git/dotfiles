@@ -43,6 +43,8 @@ backups/**
 .config/bash/machine/work_mnv1.auto.sh
 .config/bash/machine/work_mnv1.personal.sh
 .config/bash/machine/work_mnv1.secrets.sh
+.agent_files/work_mnv1
+.agent_files/work_mnv1/**
 {{- end }}
 {{/* Keep the Bluetooth audio override only on the white_xps machine. */}}
 {{- if ne $machineName "white_xps" }}

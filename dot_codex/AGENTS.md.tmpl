@@ -12,6 +12,12 @@ Ali K's personal global `AGENTS.md`.
 
 This file is only for persistent cross-project instructions. Put repo-specific workflow, commands, architecture, and environment details in the repo's own `AGENTS.md`.
 
+{{ if eq (.machine_name | default "") "work_mnv1" }}
+## mnv1 Important Info
+
+If you are on `mnv1` (for example, `hostname` returns `mnv1`), the main work folder is `~/Projects`. It contains the main repos and worktrees used for development, and some worktrees have corresponding conda environments. If you have not already, read `~/.agent_files/work_mnv1/docs/workspace_setup.md` for the important machine-specific workspace details.
+{{ end }}
+
 ## Working Style
 
 - For files managed by chezmoi, edit the chezmoi source under `~/.local/share/chezmoi`, not the live file path. This especially applies to `.codex/AGENTS.md`, `.codex/config.toml`, `.codex/rules/default.rules`, and `.bashrc`.
