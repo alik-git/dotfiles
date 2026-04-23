@@ -82,6 +82,27 @@
   "editor.wordWrap": "on",
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,
+  // Treat common chezmoi templates like their underlying file types.
+  "files.associations": {
+    "*.md.tmpl": "markdown",
+    "*.json.tmpl": "json",
+    "*.jsonc.tmpl": "jsonc",
+    "*.toml.tmpl": "toml",
+    "*.yaml.tmpl": "yaml",
+    "*.yml.tmpl": "yaml",
+    "*.sh.tmpl": "shellscript",
+    "*.bash.tmpl": "shellscript",
+    "*.bashrc.tmpl": "shellscript",
+    "*.zsh.tmpl": "shellscript",
+    "*.py.tmpl": "python",
+    "*.lua.tmpl": "lua",
+    "*.html.tmpl": "html",
+    "*.css.tmpl": "css",
+    "*.js.tmpl": "javascript",
+    "*.ts.tmpl": "typescript",
+    "dot_bashrc.tmpl": "shellscript",
+    "dot_gitconfig.tmpl": "ini",
+  },
 
   // Workspace trust and Python UX
   "security.workspace.trust.untrustedFiles": "open",
