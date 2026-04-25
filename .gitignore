@@ -1,2 +1,7 @@
 DEVLOG.md
 dot_config/bash/machine/*.secrets.sh
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
