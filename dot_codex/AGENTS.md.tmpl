@@ -19,7 +19,7 @@ This file is only for persistent cross-project instructions. Put repo-specific w
 
 ## DEVLOG and SCRATCH
 
-`DEVLOG.md` is for durable local notes and summaries. `SCRATCH.md` is for temporary commands, bulky output, and rough working notes. If the expected location is not already clear from repo docs, machine docs, or existing convention, ask instead of assuming one. For the detailed rules, read `~/.agent_files/common/docs/devlogs.md`.
+`DEVLOG.md` is for durable local notes and summaries. `SCRATCH.md` is for temporary commands, bulky output, and rough working notes. If the expected location is not already clear from repo docs, machine docs, or existing convention, ask instead of assuming one. For the detailed rules, read `~/.agent_files/docs/devlogs.md`.
 - Be extra careful to append new entries to the end of `DEVLOG.md` and `SCRATCH.md` unless the user explicitly asks for a different placement. The user has noticed multiple past cases where entries were accidentally inserted in the middle, so treat append-at-end as a strict requirement.
 
 If a referenced file under `~/.agent_files` is missing or unavailable, say that explicitly instead of assuming its contents.
@@ -36,6 +36,7 @@ If you are on `mnv1` (for example, `hostname` returns `mnv1`), the main work fol
 
 - For files managed by chezmoi, edit the chezmoi source under `~/.local/share/chezmoi`, not the live file path. This especially applies to `.codex/AGENTS.md`, `.codex/config.toml`, `.codex/rules/default.rules`, and `.bashrc`.
 - For chezmoi-managed files, always run `chezmoi diff` before `chezmoi apply`.
+- For small changes, if `chezmoi apply` is being difficult, and it would be easier to manually bring the live files up to date with the chezmoi source, do that and then verify the affected paths with `chezmoi diff`.
 
 ### Commands
 
@@ -43,14 +44,14 @@ If you are on `mnv1` (for example, `hostname` returns `mnv1`), the main work fol
 - When giving the user a command that spans multiple shell steps, chain them with `&&`. For readability, break long commands across lines with trailing `\` while keeping the `&&` chaining.
 - When giving commands for the user to run, omit arguments that only restate current defaults unless there is a reason to show them explicitly.
 - Never commit or push local-only scratchpad files such as `DEVLOG.md` and `SCRATCH.md`. If they live in git repos, hide them with a local-only ignore such as `.git/info/exclude`.
-- For `DEVLOG.md` and `SCRATCH.md` guidance, see `~/.agent_files/common/docs/devlogs.md`.
+- For `DEVLOG.md` and `SCRATCH.md` guidance, see `~/.agent_files/docs/devlogs.md`.
 
 ### Git
 
 - Keep commits small and logically separate.
 - If I ask you to push and there are uncommitted changes, commit and push.
 - For large or complex changes, use a feature branch, split the work into multiple commits, and ask if you should open a draft pull request.
-- For pull request guidance, see `~/.agent_files/common/PULL_REQUEST_TEMPLATE.md`.
+- For pull request guidance, see `~/.agent_files/PULL_REQUEST_TEMPLATE.md`.
 - Use Conventional Commits for commit messages: `type(scope): description` when a scope helps, otherwise `type: description`.
 - Common types include `fix`, `feat`, `docs`, `refactor`, `test`, `chore`, `perf`, and `style`.
 - Examples: `fix(auth): handle expired token refresh` and `docs: clarify setup steps`.
@@ -68,8 +69,8 @@ If you are on `mnv1` (for example, `hostname` returns `mnv1`), the main work fol
 
 ## References
 
-- Pull request guidance: `~/.agent_files/common/PULL_REQUEST_TEMPLATE.md`
-- DEVLOG and SCRATCH guidance: `~/.agent_files/common/docs/devlogs.md`
+- Pull request guidance: `~/.agent_files/PULL_REQUEST_TEMPLATE.md`
+- DEVLOG and SCRATCH guidance: `~/.agent_files/docs/devlogs.md`
 {{- if eq (.machine_name | default "") "work_mnv1" }}
 - `work_mnv1` workspace layout and machine-specific notes: `~/.agent_files/work_mnv1/docs/workspace_setup.md`
 {{- end }}
