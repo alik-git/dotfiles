@@ -107,6 +107,9 @@
   // Workspace trust and Python UX
   "security.workspace.trust.untrustedFiles": "open",
   "python.createEnvironment.trigger": "off",
+  "python-envs.terminal.autoActivationType": "off",
+  "python.terminal.activateEnvironment": false,
+  "python.terminal.activateEnvInCurrentTerminal": false,
 
   // Workbench behavior
   "workbench.editor.wrapTabs": true,
@@ -124,4 +127,6 @@
   "workbench.editorAssociations": {
     "git-rebase-todo": "default"
   },
+  "git.confirmSync": false,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
 }
