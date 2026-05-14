@@ -1,6 +1,6 @@
 ---
 name: ali-code-review
-description: Review code with Ali's senior-engineer standard: identify the problem being solved, judge whether the solution is simple and first-principles, and flag correctness bugs, bad abstractions, stale code, poor readability, docs drift, and unnecessary compatibility scaffolding.
+description: "Review code with Ali's senior-engineer standard: identify the problem being solved, judge whether the solution is simple and first-principles, and flag correctness bugs, bad abstractions, stale code, poor readability, docs drift, and unnecessary compatibility scaffolding."
 ---
 
 # Ali Code Review
