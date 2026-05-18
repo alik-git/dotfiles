@@ -182,10 +182,10 @@ complexity, but precise about evidence. For repeated bug classes, look for the
 deeper pattern causing them. Keep fresh eyes: do not only search for the last
 kind of bug found.
 
-When a fix is obvious, state it plainly. When a fix needs a decision, give
-concise labeled options. Do not recommend a new abstraction unless you can name
-the problem it solves and the rule it owns. Do not preserve backwards
-compatibility by default.
+When a fix is obvious, state it plainly under `Fix (Obvious):`. When a fix
+needs a decision, give concise labeled options under `Fix (Decision Needed):`.
+Do not recommend a new abstraction unless you can name the problem it solves and
+the rule it owns. Do not preserve backwards compatibility by default.
 
 ## Severity Scale
 
@@ -213,9 +213,9 @@ Start with numbered findings ordered by severity. Each finding should include:
 Severity: P1 High: Category
 Evidence: file/line, command, test failure, observed behavior, or Not verified
 Problem: What is wrong and why it matters.
-Fix: Obvious - concrete change.
+Fix (Obvious): Concrete change.
 # or
-Fix: Decision needed
+Fix (Decision Needed):
 Option A: ...
 Option B: ...
 Option C: ...
