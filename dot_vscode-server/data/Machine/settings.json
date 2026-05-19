@@ -1,0 +1,56 @@
+{
+  // Remote-SSH host settings for mnv1.
+  // These keep opening /home/ali usable by excluding generated and high-volume
+  // trees from remote file watching, search, and broad Git repo discovery.
+  "git.autoRepositoryDetection": "openEditors",
+  "git.openRepositoryInParentFolders": "never",
+
+  "files.watcherExclude": {
+    "**/.cache/**": true,
+    "**/.conda/**": true,
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.mypy_cache/**": true,
+    "**/.pytest_cache/**": true,
+    "**/.ruff_cache/**": true,
+    "**/.venv/**": true,
+    "**/.vscode-server/**": true,
+    "**/__pycache__/**": true,
+    "**/checkpoints/**": true,
+    "**/local_data/**": true,
+    "**/logs/**": true,
+    "**/miniconda3/**": true,
+    "**/node_modules/**": true,
+    "**/outputs/**": true,
+    "**/runs/**": true,
+    "**/wandb/**": true
+  },
+
+  "search.exclude": {
+    "**/.cache/**": true,
+    "**/.conda/**": true,
+    "**/.mypy_cache/**": true,
+    "**/.pytest_cache/**": true,
+    "**/.ruff_cache/**": true,
+    "**/.venv/**": true,
+    "**/.vscode-server/**": true,
+    "**/__pycache__/**": true,
+    "**/checkpoints/**": true,
+    "**/local_data/**": true,
+    "**/logs/**": true,
+    "**/miniconda3/**": true,
+    "**/node_modules/**": true,
+    "**/outputs/**": true,
+    "**/runs/**": true,
+    "**/wandb/**": true
+  },
+
+  "files.exclude": {
+    "**/.cache": true,
+    "**/.conda": true,
+    "**/.vscode-server": true,
+    "**/local_data": true,
+    "**/miniconda3": true,
+    "**/node_modules": true
+  }
+}
