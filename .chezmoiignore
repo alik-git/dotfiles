@@ -45,6 +45,8 @@ backups/**
 .config/bash/machine/work_server.secrets.sh
 .agent_files/work_server
 .agent_files/work_server/**
+.vscode-server
+.vscode-server/**
 {{- end }}
 {{/* Keep the Bluetooth audio override only on the personal_linux machine. */}}
 {{- if ne $machineName "personal_linux" }}
