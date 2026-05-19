@@ -45,6 +45,8 @@ backups/**
 .config/bash/machine/work_mnv1.secrets.sh
 .agent_files/work_mnv1
 .agent_files/work_mnv1/**
+.vscode-server
+.vscode-server/**
 {{- end }}
 {{/* Keep the Bluetooth audio override only on the white_xps machine. */}}
 {{- if ne $machineName "white_xps" }}
