@@ -84,6 +84,5 @@ If you need more context, these READMEs cover narrower parts of the setup:
 
 ## Notes
 
-- `DEVLOG.md` is local-only context and is intentionally not committed.
 - The repo must not contain secrets.
 - If `chezmoi status` is dirty but Git is clean, a live home-directory file was modified after apply.
