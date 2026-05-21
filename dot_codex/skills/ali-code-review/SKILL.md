@@ -76,6 +76,26 @@ A good review finding usually comes from one of these questions.
 5. Report high-conviction findings by severity. Be honest about residual risk
    and checks that were not run.
 
+## Worklog Notes
+
+Return reviews in chat by default.
+
+If the user asks to save the review, put it in the worklog, or create a durable
+review note, create a new `kind: codereview` file under `~/worklog` using the
+standard worklog path convention:
+
+```text
+~/worklog/<scope>/YYYY/MM/DD/HHMM--project--codereview--slug.md
+```
+
+Use `~/worklog/_templates/codereview.md` for the frontmatter wrapper. The body
+of the note should be the normal `ali-code-review` output format from this
+skill. Do not duplicate, invent, or follow a separate worklog-specific review
+format.
+
+Do not save a review note unless the user asks for a durable saved note. If the
+correct worklog scope is unclear, ask instead of inventing one.
+
 ## First-Principles Review
 
 For broad redesign or architecture review, do not start by proposing folders.

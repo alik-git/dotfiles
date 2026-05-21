@@ -1,6 +1,7 @@
 README.md
-DEVLOG.md
 SCRATCH.md
+temp
+temp/**
 bootstrap/**
 dotfiles_private/**
 {{/* This template decides whether Nautilus copy scripts should be installed on this machine. */}}
@@ -17,6 +18,10 @@ dotfiles_private/**
 {{/* Manage ~/.profile only on work_mnv1, where sandboxed tools need a writable pre-commit cache. */}}
 {{- if ne $machineName "work_mnv1" }}
 .profile
+{{- end }}
+{{/* Keep the private work Git identity only on work machines. */}}
+{{- if ne $machineClass "work" }}
+.gitconfig.work
 {{- end }}
 backups
 backups/**
