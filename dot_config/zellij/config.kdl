@@ -1,0 +1,21 @@
+// Only Ali's overrides live here. Zellij's built-in defaults fill in the rest.
+keybinds {
+    normal {
+        bind "Ctrl c" { SmartCopy; }
+    }
+    locked {
+        bind "Ctrl Alt g" { SwitchToMode "Normal"; }
+    }
+    scroll {
+        bind "Ctrl Shift c" { Copy; }
+    }
+    shared_except "locked" {
+        bind "Ctrl Alt g" { SwitchToMode "Locked"; }
+    }
+    shared_except "pane" "locked" {
+        bind "Ctrl Alt p" { SwitchToMode "Pane"; }
+    }
+}
+
+mouse_scroll_lines 1
+copy_on_select false
