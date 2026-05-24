@@ -43,6 +43,7 @@ backups/**
 {{/* Ignore machine-specific bash files unless they match the selected machine. */}}
 {{- if ne $machineName "white_xps" }}
 .config/bash/machine/white_xps.auto.sh
+.config/bash/machine/white_xps.personal.sh
 {{- end }}
 {{- if ne $machineName "work_mnv1" }}
 .config/bash/machine/work_mnv1.auto.sh
