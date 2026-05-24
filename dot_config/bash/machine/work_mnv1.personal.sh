@@ -1,5 +1,9 @@
 # Personal shell additions for work_mnv1.
 
+# Keep interactive terminals colorful on mnv1 even if a parent process exported NO_COLOR.
+unset NO_COLOR
+export CLICOLOR=1
+
 _work_mnv1_is_shpool_ssh_auth_sock() {
     case "${1:-}" in
         /run/user/*/shpool/sessions/*/ssh-auth-sock.socket) return 0 ;;
