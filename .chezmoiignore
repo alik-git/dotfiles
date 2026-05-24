@@ -43,6 +43,7 @@ backups/**
 {{/* Ignore machine-specific bash files unless they match the selected machine. */}}
 {{- if ne $machineName "personal_linux" }}
 .config/bash/machine/personal_linux.auto.sh
+.config/bash/machine/personal_linux.personal.sh
 {{- end }}
 {{- if ne $machineName "work_server" }}
 .config/bash/machine/work_server.auto.sh
