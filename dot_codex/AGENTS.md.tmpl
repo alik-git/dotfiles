@@ -17,10 +17,11 @@ This file is only for persistent cross-project instructions. Put repo-specific w
 - `wt` = `worktree`
 - `p` = `push`
 
-{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "worklog.md.tmpl") . }}
-{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "py_runner.md.tmpl") . }}
-{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "work_mnv1.md.tmpl") . -}}
-{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "installs.md.tmpl") . }}
+{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_worklog.md.tmpl") . }}
+{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_codex_history.md.tmpl") . }}
+{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_py_runner.md.tmpl") . }}
+{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_work_mnv1.md.tmpl") . -}}
+{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_installs.md.tmpl") . }}
 ## Working Style
 
 ### Chezmoi
@@ -55,4 +56,4 @@ This file is only for persistent cross-project instructions. Put repo-specific w
 ## References
 
 - Pull request guidance: `~/.agent_files/PULL_REQUEST_TEMPLATE.md`
-{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "references.md.tmpl") . }}
+{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_references.md.tmpl") . }}
