@@ -34,8 +34,29 @@ chezmoi apply
 - Private tracked files currently live in the `dotfiles_private` Git submodule.
 - Private machine-managed targets in the main repo are thin templates that include content from `dotfiles_private`.
 - Non-managed private reference material, such as the NAS private README, lives directly in `dotfiles_private`.
+- Public-repo privacy denylist patterns live in `dotfiles_private/privacy/denylist.tsv`.
 - Machine shell secrets can be tracked in encrypted form with `age`.
 - The local age identity is machine-local and lives outside the repo.
+
+## Privacy Checks
+
+This public repo uses `pre-commit` for two privacy checks:
+
+- `gitleaks-system` catches common secrets in staged content.
+- `scripts/privacy_check.py` catches dotfiles-specific private context using the
+  private denylist in `dotfiles_private/privacy/denylist.tsv`.
+
+Install local hooks after cloning:
+
+```bash
+pre-commit install --hook-type pre-commit --hook-type pre-push
+```
+
+Run the full local check manually:
+
+```bash
+python3 scripts/privacy_check.py --history
+```
 
 ## Machine Data
 
