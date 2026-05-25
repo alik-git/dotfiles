@@ -3,9 +3,8 @@
 `~/worklog` is the default home for durable plans, investigations, code reviews,
 general notes, and scratch output.
 
-When asked to make a note, create a `kind: note` file here. Use the more
-specific `plan`, `investigation`, or `codereview` kind when the request clearly
-asks for one of those.
+Durable entries use one of four kinds: `note`, `plan`, `investigation`, or
+`codereview`.
 
 Use `~/worklog/SCRATCH.md` for temporary commands, bulky output, and rough
 working notes. `SCRATCH.md` is local-only and is intentionally not managed by
@@ -28,6 +27,9 @@ chezmoi.
       MM/
         DD/
           HHMM--project--kind--slug.md
+
+  evergreen/
+    qstatus--overview.md
 ```
 
 ## Note Paths
@@ -86,6 +88,13 @@ Allowed `status` values:
 
 Use simple `links` and `folders` lists. Do not create typed fields such as
 `pr`, `pr2`, `issue`, `wandb`, or `wandb2`.
+
+## Evergreen
+
+Use `~/worklog/evergreen` only for short index notes. Keep it flat: no topic
+subfolders and no detailed plans, investigations, reviews, artifacts, or scratch
+files. Each evergreen note should be a brief overview file named like
+`project--overview.md` with a short paragraph and links to dated worklog notes.
 
 ## Git
 
