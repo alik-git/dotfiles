@@ -1,13 +1,20 @@
 {
   // Remote-SSH host settings for mnv1.
   // These keep opening /home/ali usable by excluding generated and high-volume
-  // trees from remote file watching, search, and broad Git repo discovery.
+  // paths from remote file watching, search, and broad Git repo discovery.
+  // Keep local_data/ and archive/ visible; exclude their bulky descendants.
   "git.autoRepositoryDetection": "openEditors",
   "git.openRepositoryInParentFolders": "never",
 
   "files.watcherExclude": {
     "**/.cache/**": true,
     "**/.conda/**": true,
+    "**/.codex/cache/**": true,
+    "**/.codex/log/**": true,
+    "**/.codex/memories/**": true,
+    "**/.codex/sessions/**": true,
+    "**/.codex/shell_snapshots/**": true,
+    "**/.codex/tmp/**": true,
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/.mypy_cache/**": true,
@@ -17,8 +24,17 @@
     "**/.vscode-server/**": true,
     "**/__pycache__/**": true,
     "**/checkpoints/**": true,
-    "**/local_data/**": true,
     "**/logs/**": true,
+    "**/local_data/**/cache/**": true,
+    "**/local_data/**/checkpoints/**": true,
+    "**/local_data/**/clips/**": true,
+    "**/local_data/**/logs/**": true,
+    "**/local_data/**/tmp/**": true,
+    "**/local_data/**/wandb/**": true,
+    "**/local_data/**/*.mp4": true,
+    "**/local_data/**/*.npz": true,
+    "**/local_data/**/*.pkl": true,
+    "**/local_data/**/*.pt": true,
     "**/miniconda3/**": true,
     "**/node_modules/**": true,
     "**/outputs/**": true,
@@ -29,6 +45,13 @@
   "search.exclude": {
     "**/.cache/**": true,
     "**/.conda/**": true,
+    "**/.codex/cache/**": true,
+    "**/.codex/history.jsonl": true,
+    "**/.codex/log/**": true,
+    "**/.codex/memories/**": true,
+    "**/.codex/sessions/**": true,
+    "**/.codex/shell_snapshots/**": true,
+    "**/.codex/tmp/**": true,
     "**/.mypy_cache/**": true,
     "**/.pytest_cache/**": true,
     "**/.ruff_cache/**": true,
@@ -36,8 +59,17 @@
     "**/.vscode-server/**": true,
     "**/__pycache__/**": true,
     "**/checkpoints/**": true,
-    "**/local_data/**": true,
     "**/logs/**": true,
+    "**/local_data/**/cache/**": true,
+    "**/local_data/**/checkpoints/**": true,
+    "**/local_data/**/clips/**": true,
+    "**/local_data/**/logs/**": true,
+    "**/local_data/**/tmp/**": true,
+    "**/local_data/**/wandb/**": true,
+    "**/local_data/**/*.mp4": true,
+    "**/local_data/**/*.npz": true,
+    "**/local_data/**/*.pkl": true,
+    "**/local_data/**/*.pt": true,
     "**/miniconda3/**": true,
     "**/node_modules/**": true,
     "**/outputs/**": true,
@@ -49,7 +81,6 @@
     "**/.cache": true,
     "**/.conda": true,
     "**/.vscode-server": true,
-    "**/local_data": true,
     "**/miniconda3": true,
     "**/node_modules": true
   }
