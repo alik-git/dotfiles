@@ -17,6 +17,7 @@ This file is only for persistent cross-project instructions. Put repo-specific w
 - `wt` = `worktree`
 - `p` = `push`
 
+{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_user_control.md.tmpl") . }}
 {{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_worklog.md.tmpl") . }}
 {{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_codex_history.md.tmpl") . }}
 {{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_py_runner.md.tmpl") . }}
