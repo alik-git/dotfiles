@@ -19,6 +19,11 @@ dotfiles_private/**
 {{- if ne $machineName "work_mnv1" }}
 .profile
 {{- end }}
+{{/* Ubuntu packages fd and bat as fdfind and batcat; expose upstream names only on work_mnv1. */}}
+{{- if ne $machineName "work_mnv1" }}
+.local/bin/bat
+.local/bin/fd
+{{- end }}
 {{/* Keep the private work Git identity only on work machines. */}}
 {{- if ne $machineClass "work" }}
 .gitconfig.work
