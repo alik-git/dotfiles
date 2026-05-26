@@ -29,7 +29,7 @@ chezmoi.
           HHMM--project--kind--slug.md
 
   evergreen/
-    qstatus--overview.md
+    quick-status--overview.md
 ```
 
 ## Note Paths

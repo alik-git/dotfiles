@@ -12,6 +12,12 @@ Ali K's personal global `AGENTS.md`.
 
 This file is only for persistent cross-project instructions. Put repo-specific workflow, commands, architecture, and environment details in the repo's own `AGENTS.md`.
 
+## quick-status
+
+Use the `quick-status` CLI command whenever it would help quickly understand repo,
+worktree, GitHub CI, or Python environment state. Prefer it over reconstructing
+those facts with multiple ad hoc commands when its snapshot fits the question.
+
 ## Shorthand
 
 - `wt` = `worktree`
@@ -43,6 +49,8 @@ This file is only for persistent cross-project instructions. Put repo-specific w
 - If I ask you to push and there are uncommitted changes, commit and push.
 - For large or complex changes, use a feature branch, split the work into multiple commits, and ask if you should open a draft pull request.
 - For pull request guidance, see `~/.agent_files/PULL_REQUEST_TEMPLATE.md`.
+- Before creating or materially editing a pull request body, read the repo's `.github/PULL_REQUEST_TEMPLATE.md` if present; otherwise read `~/.agent_files/PULL_REQUEST_TEMPLATE.md`.
+- Use the template structure unless there is a clear reason not to, and verify the final PR body describes the final state without stale or deferred features.
 - Use Conventional Commits for commit messages: `type(scope): description` when a scope helps, otherwise `type: description`.
 - Common types include `fix`, `feat`, `docs`, `refactor`, `test`, `chore`, `perf`, and `style`.
 - Examples: `fix(auth): handle expired token refresh` and `docs: clarify setup steps`.
