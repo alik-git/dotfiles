@@ -7,6 +7,9 @@ alias spl='shpool list'
 # Pueue queue status shortcut.
 alias pqst='pueue status columns=id,status,label,start,end'
 
+# Quick workspace status shortcut.
+alias qs='quick-status'
+
 spa() {
     if declare -F _work_mnv1_refresh_stable_ssh_auth_sock >/dev/null 2>&1; then
         _work_mnv1_refresh_stable_ssh_auth_sock >/dev/null 2>&1 || true
