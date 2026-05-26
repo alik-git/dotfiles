@@ -47,5 +47,12 @@ if [ -f "$HOME/.config/bash/machine/{{ $machineName }}.secrets.sh" ]; then
 fi
 {{- end }}
 
+if command -v quick-status >/dev/null 2>&1; then
+    if __quick_status_reminders_init_source="$(quick-status reminders init bash 2>/dev/null)"; then
+        eval "$__quick_status_reminders_init_source"
+    fi
+    unset __quick_status_reminders_init_source
+fi
+
 # === chezmoi-mv-bashrc boundary ===
 # Do not edit below this line. Program-added shell init may appear here temporarily and should be moved with `chezmoi-mv-bashrc`.
