@@ -18,7 +18,15 @@ spa() {
 }
 
 # Reload the current interactive shell config.
-alias pop='source ~/.bashrc'
+pop() {
+    if source "$HOME/.bashrc"; then
+        printf 'Ran source ~/.bashrc successfully.\n'
+    else
+        local status=$?
+        printf 'source ~/.bashrc failed with status %d.\n' "$status" >&2
+        return "$status"
+    fi
+}
 
 # Conda environment activation shortcut.
 alias ca='conda activate'
