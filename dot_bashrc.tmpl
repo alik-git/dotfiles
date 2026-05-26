@@ -54,9 +54,5 @@ if command -v quick-status >/dev/null 2>&1; then
     unset __quick_status_reminders_init_source
 fi
 
-if [ -z "${BASH_ENV:-}" ] && [ -f "$HOME/.config/bash/codex_bash_env.sh" ]; then
-    export BASH_ENV="$HOME/.config/bash/codex_bash_env.sh"
-fi
-
 # === chezmoi-mv-bashrc boundary ===
 # Do not edit below this line. Program-added shell init may appear here temporarily and should be moved with `chezmoi-mv-bashrc`.
