@@ -1,0 +1,5 @@
+# ~/.zprofile: executed by zsh(1) for login shells.
+
+if [ -f "$HOME/.profile" ]; then
+    . "$HOME/.profile"
+fi
