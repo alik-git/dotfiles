@@ -86,6 +86,7 @@ python3 scripts/privacy_check.py --history
 
 - `bootstrap/` is tracked reference material, not home-directory state applied by chezmoi.
 - `bootstrap/linux/` contains Linux bootstrap helpers.
+- `bootstrap/macos/` contains macOS bootstrap helpers.
 - `bootstrap/nas/` contains NAS setup reference files.
 - `bootstrap/nautilus/` documents the Nautilus copy-path scripts.
 
@@ -94,6 +95,7 @@ python3 scripts/privacy_check.py --history
 If you need more context, these READMEs cover narrower parts of the setup:
 
 - [`bootstrap/linux/README.md`](bootstrap/linux/README.md)
+- [`bootstrap/macos/README.md`](bootstrap/macos/README.md)
 - [`bootstrap/nas/README.md`](bootstrap/nas/README.md)
 - [`bootstrap/nautilus/README.md`](bootstrap/nautilus/README.md)
 - [`dot_config/Code/User/README.md`](dot_config/Code/User/README.md)

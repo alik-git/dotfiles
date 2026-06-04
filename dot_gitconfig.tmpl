@@ -4,6 +4,11 @@
 [user]
 	name = "alik-git"
 	email = "alikgithb@gmail.com"
+{{ if eq $machineName "macbook" }}
+
+[include]
+	path = ~/.gitconfig.private
+{{- end }}
 {{ if eq $machineClass "work" }}
 
 [include]
