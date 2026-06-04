@@ -11,13 +11,32 @@ dotfiles_private/**
 {{- $machines := .machines | default dict }}
 {{/* Look up the current machine entry. */}}
 {{- $machine := index $machines $machineName | default dict }}
+{{/* Read the machine OS, falling back to chezmoi's detected OS. */}}
+{{- $machineOs := index $machine "os" | default .chezmoi.os }}
 {{/* Read the machine class, e.g. personal or work. */}}
 {{- $machineClass := index $machine "machine_class" | default "" }}
 {{/* Read whether this machine should be treated as a GUI machine. */}}
 {{- $hasGui := index $machine "has_gui" | default false }}
-{{/* Manage ~/.profile only on work_mnv1, where sandboxed tools need a writable pre-commit cache. */}}
-{{- if ne $machineName "work_mnv1" }}
+{{/* Manage ~/.profile on work machines and macOS machines for login-shell environment. */}}
+{{- if and (ne $machineClass "work") (ne $machineOs "darwin") }}
 .profile
+{{- end }}
+{{/* zsh is currently only managed on macOS. */}}
+{{- if ne $machineOs "darwin" }}
+.zprofile
+.zshrc
+.config/zsh
+.config/zsh/**
+{{- end }}
+{{/* Linux-only service and desktop integration. */}}
+{{- if ne $machineOs "linux" }}
+.config/systemd
+.config/systemd/**
+.config/wireplumber
+.config/wireplumber/**
+.local/share/nautilus
+.local/share/nautilus/**
+.local/share/nautilus/scripts/**
 {{- end }}
 {{/* Ubuntu packages fd and bat as fdfind and batcat; expose upstream names only on work_mnv1. */}}
 {{- if ne $machineName "work_mnv1" }}
@@ -36,14 +55,19 @@ backups/**
 {{- if or (ne $machineClass "personal") (not $hasGui) (not (lookPath "nautilus")) }}
 .local/share/nautilus/scripts/**
 {{- end }}
-{{/* Ignore live VS Code user settings on non-personal or non-GUI machines. */}}
-{{- if or (ne $machineClass "personal") (not $hasGui) }}
+{{/* Ignore Linux VS Code user settings on non-Linux, non-personal, or non-GUI machines. */}}
+{{- if or (ne $machineOs "linux") (ne $machineClass "personal") (not $hasGui) }}
 .config/Code
 .config/Code/**
 .config/Code/User
 .config/Code/User/**
 .config/Code/User/settings.json
 .config/Code/User/keybindings.json
+{{- end }}
+{{/* Ignore macOS VS Code user settings on non-macOS or non-GUI machines. */}}
+{{- if or (ne $machineOs "darwin") (not $hasGui) }}
+Library/Application Support/Code
+Library/Application Support/Code/**
 {{- end }}
 {{/* Ignore machine-specific bash files unless they match the selected machine. */}}
 {{- if ne $machineName "white_xps" }}
@@ -54,10 +78,14 @@ backups/**
 .config/bash/machine/work_mnv1.auto.sh
 .config/bash/machine/work_mnv1.personal.sh
 .config/bash/machine/work_mnv1.secrets.sh
+.config/bash/machine/work_mnv1.secrets.sh.age
 .agent_files/work_mnv1
 .agent_files/work_mnv1/**
 .vscode-server
 .vscode-server/**
+{{- end }}
+{{- if ne $machineName "work_macbook" }}
+.config/shell/machine/work_macbook.sh
 {{- end }}
 {{/* Keep the Bluetooth audio override only on the white_xps machine. */}}
 {{- if ne $machineName "white_xps" }}
