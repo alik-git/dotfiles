@@ -1,0 +1,25 @@
+# ~/.zshrc: executed by zsh(1) for interactive shells.
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+if [ -f "$HOME/.config/shell/shared.sh" ]; then
+    . "$HOME/.config/shell/shared.sh"
+fi
+
+if [ -f "$HOME/.config/shell/aliases.sh" ]; then
+    ALI_SHELL_RC="$HOME/.zshrc"
+    . "$HOME/.config/shell/aliases.sh"
+fi
+
+if [ -f "$HOME/.config/zsh/prompt.zsh" ]; then
+    . "$HOME/.config/zsh/prompt.zsh"
+fi
+
+{{- $machineName := .machine_name | default "" }}
+{{- if $machineName }}
+if [ -f "$HOME/.config/shell/machine/{{ $machineName }}.sh" ]; then
+    . "$HOME/.config/shell/machine/{{ $machineName }}.sh"
+fi
+{{- end }}
