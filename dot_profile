@@ -12,6 +12,10 @@
 # tools can run hooks without escalating for ~/.cache access.
 export PRE_COMMIT_HOME="${PRE_COMMIT_HOME:-$HOME/Projects/.cache/pre-commit}"
 
+if [ -d /opt/homebrew/bin ]; then
+    PATH="/opt/homebrew/bin:$PATH"
+fi
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists

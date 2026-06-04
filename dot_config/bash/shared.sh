@@ -1,8 +1,7 @@
 # Shared interactive bash setup used across machines.
 
-# Add the standard user-local bin directory if it exists.
-if [ -d "$HOME/.local/bin" ]; then
-    export PATH="$HOME/.local/bin:$PATH"
+if [ -f "$HOME/.config/shell/shared.sh" ]; then
+    . "$HOME/.config/shell/shared.sh"
 fi
 
 # don't put duplicate lines or lines starting with space in the history.

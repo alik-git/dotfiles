@@ -2,6 +2,12 @@ machines:
   white_xps:
     machine_class: personal
     has_gui: true
+    os: linux
   work_mnv1:
     machine_class: work
     has_gui: false
+    os: linux
+  minerva_macbook:
+    machine_class: work
+    has_gui: true
+    os: darwin
