@@ -8,6 +8,10 @@ if [ -d /opt/homebrew/bin ]; then
     export PATH="/opt/homebrew/bin:$PATH"
 fi
 
+if [ -d /opt/homebrew/sbin ]; then
+    export PATH="/opt/homebrew/sbin:$PATH"
+fi
+
 export CLICOLOR="${CLICOLOR:-1}"
 
 ali_git_branch() {
