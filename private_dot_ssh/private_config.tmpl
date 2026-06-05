@@ -1,7 +1,20 @@
-{{- include (joinPath .chezmoi.sourceDir "dotfiles_private" "private_dot_ssh" "config.common") -}}
 {{- $machineName := .machine_name | default "" -}}
 {{- $machine := index (.machines | default dict) $machineName | default dict -}}
 {{- $machineClass := index $machine "machine_class" | default "" -}}
+Host github.com
+    HostName github.com
+    User git
+{{- if eq $machineName "work_macbook" }}
+    AddKeysToAgent yes
+    UseKeychain yes
+    IdentityFile ~/.ssh/id_ed25519_github
+{{- end }}
+{{- if eq $machineName "work_mnv1" }}
+    # On work_mnv1, GitHub auth comes from a forwarded agent. Point SSH at a
+    # stable symlink so shells and tools do not depend on transient
+    # vscode-ssh-auth-sock-* paths.
+    IdentityAgent ~/.ssh/ssh_auth_sock
+{{- end }}
 {{- if eq $machineClass "personal" }}
 
 {{ include (joinPath .chezmoi.sourceDir "dotfiles_private" "private_dot_ssh" "config.personal") }}
