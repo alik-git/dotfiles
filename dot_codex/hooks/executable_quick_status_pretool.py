@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Remind Codex to use quick-status for redundant status commands."""
+"""Append quick-status context to redundant status commands."""
 
 from __future__ import annotations
 
@@ -118,6 +118,10 @@ def _suggestion_for(command: str) -> str | None:
     return _TRIGGERS.get(tuple(tokens))
 
 
+def _command_with_snapshot(command: str, suggestion: str) -> str:
+    return f"{command.strip()} ; {suggestion}"
+
+
 def main() -> int:
     payload = _load_payload()
     if payload.get("hook_event_name") != "PreToolUse":
@@ -136,16 +140,15 @@ def main() -> int:
     if suggestion is None:
         return 0
 
-    reason = (
-        f"Use `{suggestion}` first for this status snapshot. "
-        "If raw output is still needed afterward, rerun the command with "
-        "`QUICK_STATUS_BYPASS=1`."
-    )
+    updated_command = _command_with_snapshot(command, suggestion)
     print(json.dumps({
         "hookSpecificOutput": {
             "hookEventName": "PreToolUse",
-            "permissionDecision": "deny",
-            "permissionDecisionReason": reason,
+            "permissionDecision": "allow",
+            "updatedInput": {
+                "command": updated_command,
+            },
+            "additionalContext": f"Added `{suggestion}`. Bypass: `QUICK_STATUS_BYPASS=1`.",
         }
     }))
     return 0
