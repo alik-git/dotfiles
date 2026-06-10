@@ -96,6 +96,14 @@ subfolders and no detailed plans, investigations, reviews, artifacts, or scratch
 files. Each evergreen note should be a brief overview file named like
 `project--overview.md` with a short paragraph and links to dated worklog notes.
 
+## Artifacts
+
+Put anything that should not be tracked in git (videos, model weights, large
+data outputs, eval run directories) inside a folder named
+`gitignored_artifacts/`. Any directory with that name is excluded by
+`.gitignore` at any depth, so it can live right next to the notes that
+reference it.
+
 ## Git
 
 Do not make `~/worklog` a Git repo by default. If a scope later needs version
