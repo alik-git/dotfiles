@@ -22,3 +22,7 @@ frontmatter and points back to that skill.
 
 Do not store secrets, credentials, API keys, private tokens, or sensitive data in
 the worklog.
+
+Put anything not suitable for git (binaries, videos, model weights, large data
+outputs) inside a folder named `gitignored_artifacts/`. It is excluded by
+`.gitignore` at any depth and can live next to the notes that reference it.
