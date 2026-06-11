@@ -106,5 +106,6 @@ reference it.
 
 ## Git
 
-Do not make `~/worklog` a Git repo by default. If a scope later needs version
-control, make that scope its own private repo.
+Each scope under `~/worklog/` has its own private git repo. The parent
+`~/worklog/` directory is not itself a git repo. Commit to the repo for
+whichever scope the note belongs to.

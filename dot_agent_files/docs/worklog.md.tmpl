@@ -13,8 +13,16 @@ a plan, investigation, or code review note, use the corresponding `plan`,
 `investigation`, or `codereview` kind. Use the templates in
 `~/worklog/_templates` when creating those files.
 
+In `~/worklog/SCRATCH.md`, make local-file Markdown links relative to the
+scratch file when possible, and also include a copyable terminal path in
+backticks using `~` or `$HOME`. VS Code Remote can fail to open absolute
+home-directory Markdown links.
+
 If the correct scope, project, or slug is unclear, ask a short question instead
 of inventing one. Do not create worklog notes proactively.
+
+Never commit or push local-only worklog or scratch files unless the user
+explicitly asks.
 
 For code reviews, the `ali-code-review` skill is the source of truth for the
 review body format; the worklog `codereview.md` template only provides
@@ -26,3 +34,11 @@ the worklog.
 Put anything not suitable for git (binaries, videos, model weights, large data
 outputs) inside a folder named `gitignored_artifacts/`. It is excluded by
 `.gitignore` at any depth and can live next to the notes that reference it.
+
+## Git repos
+
+Each scope under `~/worklog/` has its own private git repo. The parent
+`~/worklog/` directory is not itself a git repo. Commit to the repo for
+whichever scope the note belongs to.
+
+{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_worklog_repos.md.tmpl") . -}}
