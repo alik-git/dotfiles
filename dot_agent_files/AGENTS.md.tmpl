@@ -1,0 +1,83 @@
+# AGENTS.md
+
+Ali K's personal global `AGENTS.md`.
+
+## Core Rules
+
+- Do not store, commit, or push secrets, credentials, or other sensitive information.
+- If this file conflicts with the code or repo docs, trust the code and docs, then update `AGENTS.md`.
+- When unsure, ask a short question or make the smallest reversible change. Do not invent local workflow assumptions.
+
+## Scope
+
+This file is only for persistent cross-project instructions. Put repo-specific workflow, commands, architecture, and environment details in the repo's own `AGENTS.md`.
+
+## quick-status
+
+Use the `quick-status` CLI command whenever it would help quickly understand repo,
+worktree, GitHub CI, or Python environment state. Prefer it over reconstructing
+those facts with multiple ad hoc commands when its snapshot fits the question.
+
+## Worksets
+
+On `mnv1`, do not do active task work in canonical repos under
+`~/Projects/repos`. Those checkouts are stable/reference copies and tool install
+sources only. For code edits, branches, investigations, and review work, use an
+existing free workset under `~/Projects/worksets/` or create a new workset for
+the task.
+
+## Shorthand
+
+- `wt` = `worktree`
+- `p` = `push`
+
+{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_user_control.md.tmpl") . }}
+{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_worklog.md.tmpl") . }}
+{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_codex_history.md.tmpl") . }}
+{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_work_mnv1.md.tmpl") . -}}
+{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_installs.md.tmpl") . }}
+## Working Style
+
+### Chezmoi
+
+- For files managed by chezmoi, edit the chezmoi source under `~/.local/share/chezmoi`, not the live file path.
+- For chezmoi-managed files, always run `chezmoi diff` before `chezmoi apply`.
+- For small changes, if `chezmoi apply` is being difficult, and it would be easier to manually bring the live files up to date with the chezmoi source, do that and then verify the affected paths with `chezmoi diff`.
+
+### Commands
+
+- When running Git commands in a repo, prefer `cd /path/to/repo && git ...` over `git -C /path/to/repo ...` wherever possible.
+- When giving the user a command that spans multiple shell steps, chain them with `&&`. For readability, break long commands across lines with trailing `\` while keeping the `&&` chaining.
+- When giving commands for the user to run, omit arguments that only restate current defaults unless there is a reason to show them explicitly.
+
+### Media
+
+- When creating or converting videos, use H.264 by default unless repo-specific docs or the user explicitly asks for another codec.
+
+### Git
+
+- Keep commits small and logically separate.
+- If I ask you to push and there are uncommitted changes, commit and push.
+- For large or complex changes, use a feature branch, split the work into multiple commits, and ask if you should open a draft pull request.
+- For pull request guidance, see `~/.agent_files/PULL_REQUEST_TEMPLATE.md`.
+- Before creating or materially editing a pull request body, read the repo's `.github/PULL_REQUEST_TEMPLATE.md` if present; otherwise read `~/.agent_files/PULL_REQUEST_TEMPLATE.md`.
+- Use the template structure unless there is a clear reason not to, and verify the final PR body describes the final state without stale or deferred features.
+- Use Conventional Commits for commit messages: `type(scope): description` when a scope helps, otherwise `type: description`.
+- Common types include `fix`, `feat`, `docs`, `refactor`, `test`, `chore`, `perf`, and `style`.
+- Examples: `fix(auth): handle expired token refresh` and `docs: clarify setup steps`.
+
+### Python
+
+- Use Miniconda for Python environments.
+- On `mnv1`, prefer `notuv` for repo/workset Python commands. Configure
+  `notuv.toml`, run `notuv update-editables`, then use commands like
+  `notuv python -m pytest`. If a workset has `devpy.toml`, replace it with an
+  equivalent `notuv.toml` instead of falling back to `devpy`.
+- Prefer `pathlib` over `os` for path-related code.
+- Use `tqdm` for long-running loops or processes.
+- Organize code as a proper Python package unless there is a good reason not to.
+
+## References
+
+- Pull request guidance: `~/.agent_files/PULL_REQUEST_TEMPLATE.md`
+{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_codex" "AGENTS.md.d" "section_references.md.tmpl") . -}}
