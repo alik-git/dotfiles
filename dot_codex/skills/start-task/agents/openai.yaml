@@ -1,0 +1,4 @@
+interface:
+  display_name: "Start Task"
+  short_description: "Set up the right worklog + workset for any coding task"
+  default_prompt: "Use $start-task to begin this task."
