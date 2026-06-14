@@ -29,7 +29,7 @@ and the three-bucket model from that doc:
 
 Before running any command, collect what's missing:
 
-1. **Task name slug** — short, lowercase, hyphenated (e.g. `leansim2sim-cleanup`)
+1. **Task name slug** — short, lowercase, hyphenated (e.g. `fix-login-bug`)
 2. **Scope** — `work` for work, `personal` for tools/personal projects
 3. **Project** — short project label (e.g. `my-sim-project`, `my-lab`)
 4. **Repos + branches** — only if creating a workset now
