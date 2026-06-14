@@ -69,15 +69,22 @@ the task.
 ### Python
 
 - Use Miniconda for Python environments.
-- On `mnv1`, prefer `notuv` for repo/workset Python commands. Configure
-  `notuv.toml`, run `notuv update-editables`, then use commands like
-  `notuv python -m pytest`. If a workset has `devpy.toml`, replace it with an
-  equivalent `notuv.toml` instead of falling back to `devpy`.
+- On `mnv1`, use `veneer` for repo/workset Python commands. Run
+  `veneer update-editables`, then `veneer python -m pytest`. Repos have a
+  committed self-contained `veneer.toml`; do not create extends/stack configs.
 - Prefer `pathlib` over `os` for path-related code.
 - Use `tqdm` for long-running loops or processes.
 - Organize code as a proper Python package unless there is a good reason not to.
 
+## Dev Workflow
+
+Before starting any task, read `~/.agent_files/docs/dev-workflow.md`. It covers
+the three task buckets (read-only, discuss-first, upfront-workset), how to use
+`worklogs` and `workset`, veneer setup, and companion note discipline. Do not
+create a workset for read-only tasks like code reviews or investigations.
+
 ## References
 
 - Pull request guidance: `~/.agent_files/PULL_REQUEST_TEMPLATE.md`
+- Dev workflow reference: `~/.agent_files/docs/dev-workflow.md`
 {{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "AGENTS.md.d" "section_references.md.tmpl") . -}}
