@@ -29,7 +29,11 @@ Scope is `work` for work tasks, `personal` for tools and personal notes.
 
 ## Companion note discipline
 
-Update `HHMM--name--note.md` during execution — not just at the end:
+Files land at `YYYY/MM-month/DD-dayname/HHMM-Xa--name--kind.md`
+(e.g. `2026/06-june/14-sunday/0143-1a--improve-viewer--plan.md`).
+`worklogs workset <slug>` finds the plan by slug and mirrors the workset path.
+
+Update the companion note (`...-note.md`) during execution — not just at the end:
 - After each significant decision or finding
 - When a phase completes or is skipped
 - Before opening a PR (include the PR link)
