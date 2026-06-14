@@ -24,9 +24,9 @@ chezmoi.
 
   personal/
     YYYY/
-      MM/
-        DD/
-          HHMM--project--kind--slug.md
+      MM-month/
+        DD-dayname/
+          HHMM-Xa--name--kind.md
 
   evergreen/
     quick-status--overview.md
@@ -59,11 +59,10 @@ Keep frontmatter simple:
 kind: plan
 status: open
 created: "Thu, May 21, 2026, 2:10 PM ET"
-project: devpy
 links:
-  - https://github.com/alik-git/devpy-runner
+  -
 folders:
-  - ~/Projects/devpy-runner
+  -
 ---
 ```
 
