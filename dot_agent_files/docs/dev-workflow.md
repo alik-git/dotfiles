@@ -8,19 +8,19 @@ Pick the right bucket — do NOT create a workset for read-only tasks:
 
 **Read-only** (code review, investigation, PR check — most common):
 ```bash
-worklogs new pr82-review--codereview --scope work --project my-project
+worklogs new pr82-review--codereview --scope work
 ```
 
 **Implement, discuss first** (dominant impl path — refine plan before coding):
 ```bash
-worklogs new leansim2sim--plan --scope work --project my-project
+worklogs new leansim2sim--plan --scope work
 # ... discuss and refine the plan ...
 worklogs workset leansim2sim my-repo:feat/my-feature my-other-repo:main
 ```
 
 **Implement, repos known upfront** (shortcut when scope is clear):
 ```bash
-worklogs new improve-viewer--plan --scope work --project my-project \
+worklogs new improve-viewer--plan --scope work \
   --workset my-repo:feat/my-feature
 ```
 

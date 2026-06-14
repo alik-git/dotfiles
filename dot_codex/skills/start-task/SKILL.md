@@ -31,29 +31,27 @@ Before running any command, collect what's missing:
 
 1. **Task name slug** — short, lowercase, hyphenated (e.g. `fix-login-bug`)
 2. **Scope** — `work` for work, `personal` for tools/personal projects
-3. **Project** — short project label (e.g. `my-sim-project`, `my-lab`)
-4. **Repos + branches** — only if creating a workset now
+3. **Repos + branches** — only if creating a workset now
    (e.g. `my-repo:feat/my-feature my-other-repo:main`)
 
-If the task description makes scope/project obvious, infer them and confirm
-rather than asking. If it is clearly a read-only task, do not ask about repos.
+If the task description makes scope obvious, infer it and confirm rather than asking. If it is clearly a read-only task, do not ask about repos.
 
 ## Commands to Run
 
 Read-only:
 ```bash
-worklogs new <slug>--<kind> --scope <scope> --project <project>
+worklogs new <slug>--<kind> --scope <scope>
 ```
 
 Implement (discuss first):
 ```bash
-worklogs new <slug>--plan --scope <scope> --project <project>
+worklogs new <slug>--plan --scope <scope>
 # stop here — discuss the plan before attaching a workset
 ```
 
 Implement (upfront):
 ```bash
-worklogs new <slug>--plan --scope <scope> --project <project> \
+worklogs new <slug>--plan --scope <scope> \
   --workset <repo>:<branch> [--workset <repo>:<branch> ...]
 ```
 
