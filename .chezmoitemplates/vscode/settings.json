@@ -128,5 +128,6 @@
     "git-rebase-todo": "default"
   },
   "git.confirmSync": false,
+  "terminal.integrated.macOptionIsMeta": true,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
 }
