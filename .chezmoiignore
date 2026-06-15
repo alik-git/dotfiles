@@ -2,6 +2,8 @@ README.md
 SCRATCH.md
 temp
 temp/**
+scripts
+scripts/**
 bootstrap/**
 dotfiles_private/**
 {{/* This template decides whether Nautilus copy scripts should be installed on this machine. */}}
