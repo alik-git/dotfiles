@@ -25,7 +25,7 @@ chezmoi.
   personal/
     YYYY/
       MM-month/
-        DD-dayname/
+        DD-ddd/
           HHMM-Xa--name--kind.md
 
   evergreen/
@@ -35,13 +35,13 @@ chezmoi.
 ## Note Paths
 
 ```text
-~/worklog/<scope>/YYYY/MM-month/DD-dayname/HHMM-Xa--name--kind.md
+~/worklog/<scope>/YYYY/MM-month/DD-ddd/HHMM-Xa--name--kind.md
 ```
 
 Example:
 
 ```text
-~/worklog/personal/2026/06-june/14-sunday/0143-1a--improve-viewer--plan.md
+~/worklog/personal/2026/06-june/15-mon/0143-1a--improve-viewer--plan.md
 ```
 
 - `scope`: `personal` or a project-specific scope

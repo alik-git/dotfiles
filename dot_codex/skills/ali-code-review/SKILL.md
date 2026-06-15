@@ -85,7 +85,7 @@ review note, create a new `kind: codereview` file under `~/worklog` using the
 standard worklog path convention:
 
 ```text
-~/worklog/<scope>/YYYY/MM-month/DD-dayname/HHMM-Xa--name--codereview.md
+~/worklog/<scope>/YYYY/MM-month/DD-ddd/HHMM-Xa--name--codereview.md
 ```
 
 Use `~/worklog/_templates/codereview.md` for the frontmatter wrapper. The body
