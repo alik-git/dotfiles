@@ -10,15 +10,33 @@ dotfiles_private/**
 {{/* Read the selected machine name from ~/.config/chezmoi/chezmoi.toml. */}}
 {{- $machineName := .machine_name | default "" }}
 {{/* Load the tracked machine catalog from .chezmoidata/machines.yaml. */}}
-{{- $machines := .machines | default dict }}
+{{- $machines := index . "machines" | default dict }}
 {{/* Look up the current machine entry. */}}
 {{- $machine := index $machines $machineName | default dict }}
 {{/* Read the machine OS, falling back to chezmoi's detected OS. */}}
-{{- $machineOs := index $machine "os" | default .chezmoi.os }}
+{{- $machineOs := index . "machine_os" | default (index $machine "os" | default .chezmoi.os) }}
 {{/* Read the machine class, e.g. personal or work. */}}
-{{- $machineClass := index $machine "machine_class" | default "" }}
+{{- $machineClass := index . "machine_class" | default (index $machine "machine_class" | default "") }}
+{{/* Read the reusable shell profile, e.g. personal_linux or work_linux. */}}
+{{- $machineShellProfile := index . "machine_shell_profile" | default (index $machine "machine_shell_profile" | default "") }}
 {{/* Read whether this machine should be treated as a GUI machine. */}}
-{{- $hasGui := index $machine "has_gui" | default false }}
+{{- $hasGui := index . "has_gui" | default (index $machine "has_gui" | default false) }}
+{{/* Public-only clones do not have the private companion submodule. */}}
+{{- $hasPrivateRepo := stat (joinPath .chezmoi.sourceDir "dotfiles_private" "privacy" "denylist.tsv") }}
+{{- if not $hasPrivateRepo }}
+.codex/config.toml
+.config/worklogs/config.toml
+.gitconfig.work
+.local/bin/jira-rest
+.local/bin/jira-web-link
+.local/lib/jira_rest.py
+.local/lib/jira_web_link.py
+.ssh/config
+.config/bash/machine/work_linux.secrets.sh
+.config/bash/machine/work_linux.secrets.sh.age
+.agent_files/work_linux
+.agent_files/work_linux/**
+{{- end }}
 {{/* Manage ~/.profile on work machines and macOS machines for login-shell environment. */}}
 {{- if and (ne $machineClass "work") (ne $machineOs "darwin") }}
 .profile
@@ -40,8 +58,8 @@ dotfiles_private/**
 .local/share/nautilus/**
 .local/share/nautilus/scripts/**
 {{- end }}
-{{/* Ubuntu packages fd and bat as fdfind and batcat; expose upstream names only on work_mnv1. */}}
-{{- if ne $machineName "work_mnv1" }}
+{{/* Ubuntu packages fd and bat as fdfind and batcat; expose upstream names only on work machines. */}}
+{{- if ne $machineClass "work" }}
 .local/bin/bat
 .local/bin/fd
 {{- end }}
@@ -71,26 +89,26 @@ backups/**
 Library/Application Support/Code
 Library/Application Support/Code/**
 {{- end }}
-{{/* Ignore machine-specific bash files unless they match the selected machine. */}}
-{{- if ne $machineName "white_xps" }}
-.config/bash/machine/white_xps.auto.sh
-.config/bash/machine/white_xps.personal.sh
+{{/* Ignore shell profile files unless they match the selected profile. */}}
+{{- if ne $machineShellProfile "personal_linux" }}
+.config/bash/machine/personal_linux.auto.sh
+.config/bash/machine/personal_linux.personal.sh
 {{- end }}
-{{- if ne $machineName "work_mnv1" }}
-.config/bash/machine/work_mnv1.auto.sh
-.config/bash/machine/work_mnv1.personal.sh
-.config/bash/machine/work_mnv1.secrets.sh
-.config/bash/machine/work_mnv1.secrets.sh.age
-.agent_files/work_mnv1
-.agent_files/work_mnv1/**
+{{- if ne $machineShellProfile "work_linux" }}
+.config/bash/machine/work_linux.auto.sh
+.config/bash/machine/work_linux.personal.sh
+.config/bash/machine/work_linux.secrets.sh
+.config/bash/machine/work_linux.secrets.sh.age
+.agent_files/work_linux
+.agent_files/work_linux/**
 .vscode-server
 .vscode-server/**
 {{- end }}
-{{- if ne $machineName "work_macbook" }}
-.config/shell/machine/work_macbook.sh
+{{- if ne $machineShellProfile "work_macos" }}
+.config/shell/machine/work_macos.sh
 {{- end }}
-{{/* Keep the Bluetooth audio override only on the white_xps machine. */}}
-{{- if ne $machineName "white_xps" }}
+{{/* Keep the Bluetooth audio override only on the personal Linux profile. */}}
+{{- if ne $machineShellProfile "personal_linux" }}
 .config/wireplumber
 .config/wireplumber/**
 .config/wireplumber/policy.lua.d/11-bluetooth-no-auto-hfp.lua
