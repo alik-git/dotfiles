@@ -52,10 +52,17 @@ if [[ -z "${appended//[$' \t\r\n']/}" ]]; then
   exit 0
 fi
 
-machine_name="$(chezmoi execute-template '{{ .machine_name }}' | tr -d '\n')"
-auto_target="~/.config/bash/machine/${machine_name}.auto.sh"
+machine_shell_profile="$(chezmoi execute-template '{{ index . "machine_shell_profile" | default "" }}' | tr -d '\n')"
+if [[ -z "$machine_shell_profile" ]]; then
+  echo "machine_shell_profile is not configured in chezmoi data." >&2
+  exit 1
+fi
+auto_target="~/.config/bash/machine/${machine_shell_profile}.auto.sh"
 source_dir="$(chezmoi source-path)"
-auto_source_path="${source_dir}/dot_config/bash/machine/${machine_name}.auto.sh"
+auto_source_path="${source_dir}/dot_config/bash/machine/${machine_shell_profile}.auto.sh"
+if [[ -f "${auto_source_path}.tmpl" ]]; then
+  auto_source_path="${auto_source_path}.tmpl"
+fi
 
 mkdir -p "$(dirname "$auto_source_path")"
 touch "$auto_source_path"

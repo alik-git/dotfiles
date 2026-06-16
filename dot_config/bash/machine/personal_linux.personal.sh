@@ -1,4 +1,4 @@
-# Personal shell additions for white_xps.
+# Personal shell additions for personal Linux machines.
 
 repairdiscord() {
     local config_home discord_dir latest_app

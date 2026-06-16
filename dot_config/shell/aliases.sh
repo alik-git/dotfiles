@@ -9,8 +9,8 @@ alias ca='conda activate'
 alias updatecodex='npm install -g @openai/codex@latest'
 
 spa() {
-    if type _work_mnv1_refresh_stable_ssh_auth_sock >/dev/null 2>&1; then
-        _work_mnv1_refresh_stable_ssh_auth_sock >/dev/null 2>&1 || true
+    if type _work_machine_refresh_stable_ssh_auth_sock >/dev/null 2>&1; then
+        _work_machine_refresh_stable_ssh_auth_sock >/dev/null 2>&1 || true
     fi
     command shpool attach "$@"
 }

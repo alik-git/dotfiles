@@ -50,8 +50,8 @@ if [[ -z "${appended//[$' \t\r\n']/}" ]]; then
   exit 0
 fi
 
-machine_name="$(chezmoi execute-template '{{ .machine_name }}' | tr -d '\n')"
-echo "Machine: $machine_name"
+machine_shell_profile="$(chezmoi execute-template '{{ index . "machine_shell_profile" | default "" }}' | tr -d '\n')"
+echo "Shell profile: ${machine_shell_profile:-not configured}"
 echo "Detected appended bashrc content that would be moved into the machine auto file:"
 echo
 printf '%s\n' "$appended"
