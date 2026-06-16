@@ -10,12 +10,21 @@ The canonical working repo is `~/.local/share/chezmoi`.
 ```bash
 chezmoi init git@github.com:alik-git/dotfiles.git
 cd ~/.local/share/chezmoi
-git submodule update --init --recursive
 chezmoi diff
 chezmoi apply
 ```
 
-Set up GitHub SSH first. The private companion repo is a Git submodule cloned over SSH.
+If you do not have access to the private repo because you are not Ali, that is
+fine; this repo should still work without it. If you do have access, initialize
+the private companion repo before applying:
+
+```bash
+git submodule update --init --recursive
+```
+
+Without the private repo, skip the submodule step and use the public subset.
+Private-backed templates or reference docs will be unavailable until you add
+your own local equivalents.
 
 If needed, do machine-local follow-up after apply for tools not yet represented in the dotfiles.
 
@@ -24,10 +33,49 @@ For normal updates:
 ```bash
 cd ~/.local/share/chezmoi
 git pull
+# Optional, only if the private companion repo is available to you:
 git submodule update --init --recursive
 chezmoi diff
 chezmoi apply
 ```
+
+## Workflow Tools
+
+Install the shared workflow CLIs:
+
+```bash
+uv tool install worklogs workset quick-status veneer-py
+```
+
+Plain pip also works:
+
+```bash
+python -m pip install worklogs workset quick-status veneer-py
+```
+
+Configure repo aliases for worksets in `~/.config/workset/repos.toml`:
+
+```toml
+[workset]
+root = "~/worksets"
+date_prefix = true
+timezone = "America/New_York"
+
+[repos]
+api = "~/repos/api"
+web = "~/repos/web"
+```
+
+First successful example:
+
+```bash
+git clone git@github.com:your-org/api.git ~/repos/api
+worklogs new api-refactor--plan --scope work
+worklogs workset api-refactor api:feat/refactor
+```
+
+See `~/.agent_files/docs/dev-workflow.md` after applying chezmoi for the compact
+day-to-day workflow.
 
 ## Private Files
 
