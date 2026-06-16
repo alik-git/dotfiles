@@ -37,12 +37,8 @@ esac
 {{- $machine := index $machines $machineName | default dict -}}
 {{- $machineShellProfile := index . "machine_shell_profile" | default (index $machine "machine_shell_profile" | default "") -}}
 {{- if $machineShellProfile }}
-if [ -f "$HOME/.config/bash/machine/{{ $machineShellProfile }}.personal.sh" ]; then
-    . "$HOME/.config/bash/machine/{{ $machineShellProfile }}.personal.sh"
-fi
-
-if [ -f "$HOME/.config/bash/machine/{{ $machineShellProfile }}.auto.sh" ]; then
-    . "$HOME/.config/bash/machine/{{ $machineShellProfile }}.auto.sh"
+if [ -f "$HOME/.config/bash/machine/{{ $machineShellProfile }}.sh" ]; then
+    . "$HOME/.config/bash/machine/{{ $machineShellProfile }}.sh"
 fi
 
 if [ -f "$HOME/.config/bash/machine/{{ $machineShellProfile }}.secrets.sh" ]; then
@@ -57,5 +53,6 @@ if command -v quick-status >/dev/null 2>&1; then
     unset __quick_status_reminders_init_source
 fi
 
-# === chezmoi-mv-bashrc boundary ===
-# Do not edit below this line. Program-added shell init may appear here temporarily and should be moved with `chezmoi-mv-bashrc`.
+# Installers (conda, nvm, rustup, ...) may append shell init below this line.
+# Move any such lines into ~/.config/bash/machine/<profile>.sh, then run
+# `chezmoi apply ~/.bashrc` to restore this managed file.
