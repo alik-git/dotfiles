@@ -37,8 +37,9 @@ outputs) inside a folder named `gitignored_artifacts/`. It is excluded by
 
 ## Git repos
 
-Each scope under `~/worklog/` has its own private git repo. The parent
+Each scope under `~/worklog/` may have its own git repo. The parent
 `~/worklog/` directory is not itself a git repo. Commit to the repo for
-whichever scope the note belongs to.
+whichever scope the note belongs to when that scope is git-managed.
 
-{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "AGENTS.md.d" "section_worklog_repos.md.tmpl") . -}}
+Keep personal or work-specific worklog repo remotes in local/private config or
+docs, not in the public dotfiles defaults.
