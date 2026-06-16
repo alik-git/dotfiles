@@ -1,6 +1,6 @@
 {{- $machineName := .machine_name | default "" -}}
-{{- $machine := index (.machines | default dict) $machineName | default dict -}}
-{{- $machineClass := index $machine "machine_class" | default "" -}}
+{{- $machine := index (index . "machines" | default dict) $machineName | default dict -}}
+{{- $machineClass := index . "machine_class" | default (index $machine "machine_class" | default "") -}}
 [user]
 	name = "alik-git"
 	email = "alikgithb@gmail.com"

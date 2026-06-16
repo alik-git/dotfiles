@@ -1,6 +1,6 @@
 {
-  // Remote-SSH host settings for mnv1.
-  // These keep opening /home/ali usable by excluding generated and high-volume
+  // Remote-SSH host settings.
+  // These keep opening the home directory usable by excluding generated and high-volume
   // paths from remote file watching, search, and broad Git repo discovery.
   // Keep local_data/ and archive/ visible; exclude their bulky descendants.
   "git.autoRepositoryDetection": "openEditors",
