@@ -32,18 +32,21 @@ xterm*|rxvt*)
     ;;
 esac
 
-{{- $machineName := .machine_name | default "" }}
-{{- if $machineName }}
-if [ -f "$HOME/.config/bash/machine/{{ $machineName }}.personal.sh" ]; then
-    . "$HOME/.config/bash/machine/{{ $machineName }}.personal.sh"
+{{- $machineName := .machine_name | default "" -}}
+{{- $machines := index . "machines" | default dict -}}
+{{- $machine := index $machines $machineName | default dict -}}
+{{- $machineShellProfile := index . "machine_shell_profile" | default (index $machine "machine_shell_profile" | default "") -}}
+{{- if $machineShellProfile }}
+if [ -f "$HOME/.config/bash/machine/{{ $machineShellProfile }}.personal.sh" ]; then
+    . "$HOME/.config/bash/machine/{{ $machineShellProfile }}.personal.sh"
 fi
 
-if [ -f "$HOME/.config/bash/machine/{{ $machineName }}.auto.sh" ]; then
-    . "$HOME/.config/bash/machine/{{ $machineName }}.auto.sh"
+if [ -f "$HOME/.config/bash/machine/{{ $machineShellProfile }}.auto.sh" ]; then
+    . "$HOME/.config/bash/machine/{{ $machineShellProfile }}.auto.sh"
 fi
 
-if [ -f "$HOME/.config/bash/machine/{{ $machineName }}.secrets.sh" ]; then
-    . "$HOME/.config/bash/machine/{{ $machineName }}.secrets.sh"
+if [ -f "$HOME/.config/bash/machine/{{ $machineShellProfile }}.secrets.sh" ]; then
+    . "$HOME/.config/bash/machine/{{ $machineShellProfile }}.secrets.sh"
 fi
 {{- end }}
 
