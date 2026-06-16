@@ -2,7 +2,7 @@
 
 Personal dotfiles managed with `chezmoi`.
 
-This repo keeps the shared home-directory state small, explicit, and machine-aware. Most files are applied into `$HOME`; machine differences come from `~/.config/chezmoi/chezmoi.toml`, tracked machine metadata in `.chezmoidata/`, and a small number of machine-local files such as encryption identities.
+This repo keeps the shared home-directory state small, explicit, and machine-aware. Most files are applied into `$HOME`; machine differences come from local chezmoi data in `~/.config/chezmoi/chezmoi.toml`, reusable public profiles, and a small number of machine-local files such as encryption identities.
 The canonical working repo is `~/.local/share/chezmoi`.
 
 ## Installation
@@ -108,18 +108,18 @@ python3 scripts/privacy_check.py --history
 
 ## Machine Data
 
-- Local selector: `~/.config/chezmoi/chezmoi.toml`
-- Tracked machine catalog: `.chezmoidata/machines.yaml`
-- Machine metadata controls per-machine behavior such as whether Nautilus scripts should be applied.
+- Local machine data lives in `~/.config/chezmoi/chezmoi.toml`.
+- Actual machine inventory can live in private or local config; the public repo uses reusable profiles such as `personal_linux`, `work_linux`, and `work_macos`.
+- Machine metadata controls per-machine behavior such as which shell profile is loaded and whether GUI-only targets should be applied.
 
 ## Shell Config
 
 - The main `.bashrc` is intentionally small.
-- It sources shared shell setup, the shared prompt, a tracked machine `personal` file, a tracked machine `auto` file, and an optional machine `secrets` file.
-- `personal` is for manual machine-specific shell config.
-- `auto` is for tool-managed or machine-specific init such as `conda` or `nvm`.
+- It sources shared shell setup, the shared prompt, a selected profile `personal` file, a selected profile `auto` file, and an optional profile `secrets` file.
+- `personal` is for manual profile-specific shell config.
+- `auto` is for tool-managed or profile-specific init such as `conda` or `nvm`.
 - `secrets` may be tracked in encrypted form with `age`; the live plaintext target remains local in `$HOME`.
-- If a program appends shell init to `.bashrc`, use `chezmoi-mv-bashrc-diff` to preview it and `chezmoi-mv-bashrc` to move it into the tracked machine `auto` file and restore the clean managed `.bashrc`.
+- If a program appends shell init to `.bashrc`, use `chezmoi-mv-bashrc-diff` to preview it and `chezmoi-mv-bashrc` to move it into the selected profile `auto` file and restore the clean managed `.bashrc`.
 - These helpers are bash-specific. Supporting zsh or other shells would need parallel shell-specific files and helpers.
 
 ## Codex Files
