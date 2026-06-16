@@ -115,12 +115,10 @@ python3 scripts/privacy_check.py --history
 ## Shell Config
 
 - The main `.bashrc` is intentionally small.
-- It sources shared shell setup, the shared prompt, a selected profile `personal` file, a selected profile `auto` file, and an optional profile `secrets` file.
-- `personal` is for manual profile-specific shell config.
-- `auto` is for tool-managed or profile-specific init such as `conda` or `nvm`.
+- It sources shared shell setup, the shared prompt, a selected profile shell file, and an optional profile `secrets` file.
+- The profile shell file (`~/.config/bash/machine/<profile>.sh`) holds both manual profile-specific config and tool-managed init such as `conda` or `nvm`. `bash` and `zsh` follow the same single-file-per-profile pattern.
 - `secrets` may be tracked in encrypted form with `age`; the live plaintext target remains local in `$HOME`.
-- If a program appends shell init to `.bashrc`, use `chezmoi-mv-bashrc-diff` to preview it and `chezmoi-mv-bashrc` to move it into the selected profile `auto` file and restore the clean managed `.bashrc`.
-- These helpers are bash-specific. Supporting zsh or other shells would need parallel shell-specific files and helpers.
+- If an installer appends shell init to `.bashrc`, move those lines into the profile shell file and run `chezmoi apply ~/.bashrc` to restore the managed file.
 
 ## Codex Files
 

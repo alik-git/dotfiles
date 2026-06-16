@@ -91,12 +91,10 @@ Library/Application Support/Code/**
 {{- end }}
 {{/* Ignore shell profile files unless they match the selected profile. */}}
 {{- if ne $machineShellProfile "personal_linux" }}
-.config/bash/machine/personal_linux.auto.sh
-.config/bash/machine/personal_linux.personal.sh
+.config/bash/machine/personal_linux.sh
 {{- end }}
 {{- if ne $machineShellProfile "work_linux" }}
-.config/bash/machine/work_linux.auto.sh
-.config/bash/machine/work_linux.personal.sh
+.config/bash/machine/work_linux.sh
 .config/bash/machine/work_linux.secrets.sh
 .config/bash/machine/work_linux.secrets.sh.age
 .agent_files/work_linux
