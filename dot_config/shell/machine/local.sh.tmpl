@@ -1,0 +1,12 @@
+{{- /* Machine layer: this machine's own shell additions.
+       Content comes from the private repo, selected by machine_name. The public
+       source never names a machine; it only references the variable. Renders to
+       a harmless comment when the private repo (or this machine's file) is
+       absent, e.g. for someone using only the public repo. */ -}}
+{{- $name := .machine_name | default "" -}}
+{{- $f := joinPath .chezmoi.sourceDir "dotfiles_private" "machine_shell" (printf "%s.sh" $name) -}}
+{{- if and (ne $name "") (stat $f) -}}
+{{ include $f }}
+{{- else -}}
+# No machine-specific shell layer for this machine.
+{{ end -}}

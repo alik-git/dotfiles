@@ -6,22 +6,15 @@ scripts
 scripts/**
 bootstrap/**
 dotfiles_private/**
-{{/* This template decides whether Nautilus copy scripts should be installed on this machine. */}}
-{{/* Read the selected machine name from ~/.config/chezmoi/chezmoi.toml. */}}
+{{/* Resolve this machine from the private catalog — the single source of truth.
+     The local config declares only machine_name; everything else is looked up
+     here. Kernel-level checks use chezmoi's built-in .chezmoi.os. */}}
 {{- $machineName := .machine_name | default "" }}
-{{/* Load the tracked machine catalog from .chezmoidata/machines.yaml. */}}
-{{- $machines := index . "machines" | default dict }}
-{{/* Look up the current machine entry. */}}
-{{- $machine := index $machines $machineName | default dict }}
-{{/* Read the machine OS, falling back to chezmoi's detected OS. */}}
-{{- $machineOs := index . "machine_os" | default (index $machine "os" | default .chezmoi.os) }}
-{{/* Read the machine class, e.g. personal or work. */}}
-{{- $machineClass := index . "machine_class" | default (index $machine "machine_class" | default "") }}
-{{/* Read the reusable shell profile, e.g. personal_linux or work_linux. */}}
-{{- $machineShellProfile := index . "machine_shell_profile" | default (index $machine "machine_shell_profile" | default "") }}
-{{/* Read whether this machine should be treated as a GUI machine. */}}
-{{- $hasGui := index . "has_gui" | default (index $machine "has_gui" | default false) }}
-{{/* Public-only clones do not have the private companion submodule. */}}
+{{- $machine := index (index . "machines" | default dict) $machineName | default dict }}
+{{- $machineClass := index $machine "machine_class" | default "" }}
+{{- $osType := index $machine "os_type" | default "" }}
+{{- $hasGui := index $machine "has_gui" | default false }}
+{{/* Public-only clones have no private companion submodule. */}}
 {{- $hasPrivateRepo := stat (joinPath .chezmoi.sourceDir "dotfiles_private" "privacy" "denylist.tsv") }}
 {{- if not $hasPrivateRepo }}
 .codex/config.toml
@@ -32,28 +25,30 @@ dotfiles_private/**
 .local/lib/jira_rest.py
 .local/lib/jira_web_link.py
 .ssh/config
-.config/bash/machine/work_linux.secrets.sh
-.config/bash/machine/work_linux.secrets.sh.age
-.agent_files/work_linux
-.agent_files/work_linux/**
+.config/bash/machine/local.sh
+.config/bash/machine/local.secrets.sh
+.config/shell/machine/local.sh
+.config/shell/machine/local.secrets.sh
+.agent_files/local
+.agent_files/local/**
 {{- end }}
 {{/* Manage ~/.profile on work machines and macOS machines for login-shell environment. */}}
-{{- if and (ne $machineClass "work") (ne $machineOs "darwin") }}
+{{- if and (ne $machineClass "work") (ne .chezmoi.os "darwin") }}
 .profile
 {{- end }}
-{{/* zsh is currently only managed on macOS. */}}
-{{- if ne $machineOs "darwin" }}
+{{/* zsh and the zsh-side shell layer are only managed on macOS. */}}
+{{- if ne .chezmoi.os "darwin" }}
 .zprofile
 .zshrc
 .config/zsh
 .config/zsh/**
+.config/shell
+.config/shell/**
 {{- end }}
 {{/* Linux-only service and desktop integration. */}}
-{{- if ne $machineOs "linux" }}
+{{- if ne .chezmoi.os "linux" }}
 .config/systemd
 .config/systemd/**
-.config/wireplumber
-.config/wireplumber/**
 .local/share/nautilus
 .local/share/nautilus/**
 .local/share/nautilus/scripts/**
@@ -67,6 +62,21 @@ dotfiles_private/**
 {{- if ne $machineClass "work" }}
 .gitconfig.work
 {{- end }}
+{{/* The work task shell layer is only for work machines. */}}
+{{- if ne $machineClass "work" }}
+.config/bash/task/work.sh
+.config/shell/task/work.sh
+{{- end }}
+{{/* Per-machine agent docs are pulled from the private repo for work machines. */}}
+{{- if ne $machineClass "work" }}
+.agent_files/local
+.agent_files/local/**
+{{- end }}
+{{/* The VS Code remote server dir is only relevant on the remote Linux work machine. */}}
+{{- if not (and (eq $machineClass "work") (eq .chezmoi.os "linux")) }}
+.vscode-server
+.vscode-server/**
+{{- end }}
 backups
 backups/**
 .config/Code/User/README.md
@@ -76,7 +86,7 @@ backups/**
 .local/share/nautilus/scripts/**
 {{- end }}
 {{/* Ignore Linux VS Code user settings on non-Linux, non-personal, or non-GUI machines. */}}
-{{- if or (ne $machineOs "linux") (ne $machineClass "personal") (not $hasGui) }}
+{{- if or (ne .chezmoi.os "linux") (ne $machineClass "personal") (not $hasGui) }}
 .config/Code
 .config/Code/**
 .config/Code/User
@@ -85,28 +95,12 @@ backups/**
 .config/Code/User/keybindings.json
 {{- end }}
 {{/* Ignore macOS VS Code user settings on non-macOS or non-GUI machines. */}}
-{{- if or (ne $machineOs "darwin") (not $hasGui) }}
+{{- if or (ne .chezmoi.os "darwin") (not $hasGui) }}
 Library/Application Support/Code
 Library/Application Support/Code/**
 {{- end }}
-{{/* Ignore shell profile files unless they match the selected profile. */}}
-{{- if ne $machineShellProfile "personal_linux" }}
-.config/bash/machine/personal_linux.sh
-{{- end }}
-{{- if ne $machineShellProfile "work_linux" }}
-.config/bash/machine/work_linux.sh
-.config/bash/machine/work_linux.secrets.sh
-.config/bash/machine/work_linux.secrets.sh.age
-.agent_files/work_linux
-.agent_files/work_linux/**
-.vscode-server
-.vscode-server/**
-{{- end }}
-{{- if ne $machineShellProfile "work_macos" }}
-.config/shell/machine/work_macos.sh
-{{- end }}
-{{/* Keep the Bluetooth audio override only on the personal Linux profile. */}}
-{{- if ne $machineShellProfile "personal_linux" }}
+{{/* Keep WirePlumber (incl. the Bluetooth audio override) only on personal Linux machines. */}}
+{{- if or (ne $machineClass "personal") (ne .chezmoi.os "linux") }}
 .config/wireplumber
 .config/wireplumber/**
 .config/wireplumber/policy.lua.d/11-bluetooth-no-auto-hfp.lua

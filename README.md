@@ -108,17 +108,53 @@ python3 scripts/privacy_check.py --history
 
 ## Machine Data
 
-- Local machine data lives in `~/.config/chezmoi/chezmoi.toml`.
-- Actual machine inventory can live in private or local config; the public repo uses reusable profiles such as `personal_linux`, `work_linux`, and `work_macos`.
-- Machine metadata controls per-machine behavior such as which shell profile is loaded and whether GUI-only targets should be applied.
+- The only fact a machine declares about itself is `machine_name`, set in the
+  local `~/.config/chezmoi/chezmoi.toml`.
+- The machine inventory (`machines.yaml`, in the private repo) is the single
+  source of truth for every other attribute (`machine_class`, `os_type`,
+  `has_gui`, ...). Templates look up the current machine by `machine_name` and
+  derive everything from its catalog entry.
+- To set up a machine (done once, by hand — there is intentionally no
+  auto-generator):
+  1. Add an entry for it to `machines.yaml` (private).
+  2. Put `machine_name` in its local config and ensure the age key is present:
+     ```toml
+     # ~/.config/chezmoi/chezmoi.toml
+     [data]
+     machine_name = "your-machine-name"
+     ```
+  Nothing else needs per-machine wiring.
 
 ## Shell Config
 
-- The main `.bashrc` is intentionally small.
-- It sources shared shell setup, the shared prompt, a selected profile shell file, and an optional profile `secrets` file.
-- The profile shell file (`~/.config/bash/machine/<profile>.sh`) holds both manual profile-specific config and tool-managed init such as `conda` or `nvm`. `bash` and `zsh` follow the same single-file-per-profile pattern.
-- `secrets` may be tracked in encrypted form with `age`; the live plaintext target remains local in `$HOME`.
-- If an installer appends shell init to `.bashrc`, move those lines into the profile shell file and run `chezmoi apply ~/.bashrc` to restore the managed file.
+The shell config is built in layers, loaded most-general to most-specific so a
+machine only creates the layers it needs:
+
+```text
+base      -> every machine            (public)
+os        -> os_type, e.g. ubuntu     (public)
+task      -> machine_class, e.g. work (public)
+machine   -> this machine's additions (private, pulled in by machine_name)
+secrets   -> this machine's secrets   (private, age-encrypted)
+```
+
+- `.bashrc`/`.zshrc` stay small: they source `base`, then the matching `os` and
+  `task` layers, then the machine and secrets layers, each only if present.
+- `base`/`os`/`task` use generic names and are public — safe to share. The
+  `machine` and `secrets` layers live in the private repo, keyed by real
+  `machine_name`, and are pulled into name-free `local.sh` / `local.secrets.sh`
+  targets. No machine name appears in the public repo.
+- Put new config in the machine layer first; promote it to `task`/`os`/`base`
+  only once it's clearly a shared pattern.
+- When an installer appends shell init to `~/.bashrc` (conda, nvm, rustup, ...),
+  move those lines by hand into the right layer — shared init into
+  `base.sh`, machine-only init into the private machine layer — then
+  `chezmoi apply ~/.bashrc`. This is a once-per-tool manual step on purpose;
+  there is no machinery that tries to relocate it automatically.
+- `secrets` is tracked age-encrypted in the private repo; the live plaintext
+  target is local-only with restrictive permissions. To change a secret,
+  decrypt → edit → re-encrypt the private age file (see `jira-rest`'s error
+  output for the exact command).
 
 ## Codex Files
 

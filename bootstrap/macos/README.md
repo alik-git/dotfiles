@@ -6,17 +6,17 @@ These files are tracked in the dotfiles repo, but they are not managed into
 
 ## Machine Identity
 
-Use a local or private machine name, then select the reusable macOS work
-profile:
+The local chezmoi config declares only the machine name. Everything else
+(`machine_class`, `os_type`, `has_gui`, ...) comes from that machine's entry in
+the private `machines.yaml` inventory.
 
 ```toml
 [data]
-machine_class = "work"
-machine_os = "darwin"
-machine_shell_profile = "work_macos"
+machine_name = "<your-macos-machine-name>"
 ```
 
-Keep the actual `machine_name` in local or private config.
+Add a matching entry (with `os_type: macos`) for that machine name to the
+private `machines.yaml` before applying.
 
 ## Package Plan
 
@@ -67,6 +67,6 @@ This machine uses a local GitHub key at:
 ~/.ssh/id_ed25519_github
 ```
 
-The managed SSH config includes the macOS Keychain settings only for the
-`work_macos` shell profile, so other machines can continue using their own SSH
-authentication strategy.
+The managed SSH config includes the macOS Keychain settings only on macOS
+machines (`.chezmoi.os == "darwin"`), so other machines can continue using their
+own SSH authentication strategy.
