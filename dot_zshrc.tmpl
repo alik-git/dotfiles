@@ -17,9 +17,19 @@ if [ -f "$HOME/.config/zsh/prompt.zsh" ]; then
     . "$HOME/.config/zsh/prompt.zsh"
 fi
 
-{{- $machineName := .machine_name | default "" }}
-{{- if $machineName }}
-if [ -f "$HOME/.config/shell/machine/{{ $machineName }}.sh" ]; then
-    . "$HOME/.config/shell/machine/{{ $machineName }}.sh"
-fi
+{{ $taskType := index . "machine_class" | default "" -}}
+{{ $osType := index (index .chezmoi "osRelease" | default dict) "id" | default .chezmoi.os -}}
+{{ if eq .chezmoi.os "darwin" }}{{ $osType = "macos" }}{{ end -}}
+# Layered shell config, loaded most-general to most-specific:
+#   base -> os -> task -> machine -> secrets (each loads only if present).
+_load_layer() { [ -f "$1" ] && . "$1"; }
+_load_layer "$HOME/.config/shell/base.sh"
+{{- if $osType }}
+_load_layer "$HOME/.config/shell/os/{{ $osType }}.sh"
 {{- end }}
+{{- if $taskType }}
+_load_layer "$HOME/.config/shell/task/{{ $taskType }}.sh"
+{{- end }}
+_load_layer "$HOME/.config/shell/machine/local.sh"
+_load_layer "$HOME/.config/shell/machine/local.secrets.sh"
+unset -f _load_layer

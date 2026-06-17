@@ -20,22 +20,51 @@ those facts with multiple ad hoc commands when its snapshot fits the question.
 
 ## Worksets
 
-On `mnv1`, do not do active task work in canonical repos under
-`~/Projects/repos`. Those checkouts are stable/reference copies and tool install
-sources only. For code edits, branches, investigations, and review work, use an
-existing free workset under `~/Projects/worksets/` or create a new workset for
-the task.
+When a machine has a configured workset workflow, do active task work in an
+isolated workset or worktree rather than editing stable/reference checkouts
+directly. Prefer local machine docs for the exact roots and commands.
 
 ## Shorthand
 
 - `wt` = `worktree`
 - `p` = `push`
 
-{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "AGENTS.md.d" "section_user_control.md.tmpl") . }}
-{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "AGENTS.md.d" "section_worklog.md.tmpl") . }}
-{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "AGENTS.md.d" "section_codex_history.md.tmpl") . }}
-{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "AGENTS.md.d" "section_work_mnv1.md.tmpl") . -}}
-{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "AGENTS.md.d" "section_installs.md.tmpl") . }}
+## User Control and Pushback
+
+If the user's request appears to rest on a clearly false premise or important
+misunderstanding, especially about software or workflow design, pause, push back
+directly, and ask a concise clarification instead of doing it; the user's main
+goal is good work, not agreement, so do not let sloppy or harmful design
+patterns pass silently.
+
+If the user understands the tradeoff and is making an intentional design or
+workflow decision, trust that decision and implement it; the user is ultimately
+responsible for the work.
+
+## Worklog and Scratch
+
+Use `~/worklog` for durable notes, plans, investigations, and code reviews.
+Use `~/worklog/SCRATCH.md` for temporary commands, bulky output, and rough
+working notes. For all rules, layouts, git repos, and artifact conventions,
+read `~/.agent_files/docs/worklog.md`.
+
+If a referenced file under `~/.agent_files` is missing or unavailable, say that explicitly instead of assuming its contents.
+
+## Codex Chat History
+
+When local Codex or Claude chat/session history would help with the current
+task, investigation, or debugging problem, use `agent-chat-reader` first unless
+explicitly told not to. Prefer the installed command directly, or run it through
+uv:
+
+- `agent-chat-reader --list`
+- `agent-chat-reader --find <keyword>`
+- `uv run agent-chat-reader --list`
+
+If `agent-chat-reader` is unavailable or cannot answer the question for some
+reason, fall back to manually reading local history files. Codex chat/session
+history is under `~/.codex/sessions`.
+
 ## Working Style
 
 ### Chezmoi
@@ -68,10 +97,8 @@ the task.
 
 ### Python
 
-- Use Miniconda for Python environments.
-- On `mnv1`, use `veneer` for repo/workset Python commands. Run
-  `veneer update-editables` then `veneer python <anything>`. Repos have a
-  committed self-contained `veneer.toml`; do not create extends/stack configs.
+- Use the Python environment tooling documented by the repo or local machine
+  docs.
 - Prefer `pathlib` over `os` for path-related code.
 - Use `tqdm` for long-running loops or processes.
 - Organize code as a proper Python package unless there is a good reason not to.
@@ -79,12 +106,12 @@ the task.
 ## Dev Workflow
 
 Before starting any task, read `~/.agent_files/docs/dev-workflow.md`. It covers
-the three task buckets (read-only, discuss-first, upfront-workset), how to use
-`worklogs` and `workset`, veneer setup, and companion note discipline. Do not
-create a workset for read-only tasks like code reviews or investigations.
+the three task buckets (read-only, discuss-first, upfront-workset), task notes,
+worksets, and companion note discipline. Do not create a workset for read-only
+tasks like code reviews or investigations.
 
 ## References
 
 - Pull request guidance: `~/.agent_files/PULL_REQUEST_TEMPLATE.md`
 - Dev workflow reference: `~/.agent_files/docs/dev-workflow.md`
-{{ includeTemplate (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "AGENTS.md.d" "section_references.md.tmpl") . -}}
+- Worklog guidance: `~/.agent_files/docs/worklog.md`

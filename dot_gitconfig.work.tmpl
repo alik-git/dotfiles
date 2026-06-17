@@ -1,6 +1,4 @@
-{{- $machineName := .machine_name | default "" -}}
-{{- $machine := index (.machines | default dict) $machineName | default dict -}}
-{{- $machineClass := index $machine "machine_class" | default "" -}}
+{{- $machineClass := index . "machine_class" | default "" -}}
 {{- if eq $machineClass "work" -}}
 {{- include (joinPath .chezmoi.sourceDir "dotfiles_private" "gitconfig.work") -}}
 {{- end -}}
