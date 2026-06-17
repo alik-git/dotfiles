@@ -12,7 +12,6 @@
       "Bash(cut*)",
       "Bash(date*)",
       "Bash(df*)",
-      "Bash(devpy*)",
       "Bash(diff*)",
       "Bash(dirname*)",
       "Bash(du*)",
@@ -69,7 +68,6 @@
       "Bash(lsof*)",
       "Bash(mkdir*)",
       "Bash(nl*)",
-      "Bash(notuv*)",
       "Bash(nvidia-smi*)",
       "Bash(pgrep*)",
       "Bash(printenv*)",
@@ -89,6 +87,7 @@
       "Bash(tree*)",
       "Bash(uname*)",
       "Bash(uniq*)",
+      "Bash(veneer*)",
       "Bash(wc*)",
       "Bash(which*)",
       "Bash(whoami*)"
