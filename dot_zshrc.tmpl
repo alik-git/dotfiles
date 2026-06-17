@@ -17,9 +17,9 @@ if [ -f "$HOME/.config/zsh/prompt.zsh" ]; then
     . "$HOME/.config/zsh/prompt.zsh"
 fi
 
-{{- $machine := index (index . "machines" | default dict) (.machine_name | default "") | default dict -}}
-{{- $taskType := index $machine "machine_class" | default "" -}}
-{{- $osType := index $machine "os_type" | default "" -}}
+{{- $taskType := index . "machine_class" | default "" -}}
+{{- $osType := index (index .chezmoi "osRelease" | default dict) "id" | default .chezmoi.os -}}
+{{- if eq .chezmoi.os "darwin" }}{{- $osType = "macos" -}}{{- end -}}
 # Layered shell config, loaded most-general to most-specific:
 #   base -> os -> task -> machine -> secrets (each loads only if present).
 _load_layer() { [ -f "$1" ] && . "$1"; }
