@@ -52,6 +52,7 @@ Core tools (installed via `uv tool install`):
 - `worklogs` — create worklog plans, companion notes, and worksets
 - `quick-status` (alias `qs`) — fast snapshot of repo, worktree, CI, and env
   state
+- `agent-chat-reader` — read and search past Codex & Claude CLI chat history
 
 ## Python workflow
 

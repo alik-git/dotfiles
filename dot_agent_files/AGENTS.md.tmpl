@@ -47,6 +47,13 @@ Use `~/worklog` for durable notes, plans, investigations, and code reviews.
 Use `~/worklog/SCRATCH.md` for temporary commands, bulky output, and rough
 working notes. For all rules, layouts, git repos, and artifact conventions,
 read `~/.agent_files/docs/worklog.md`.
+{{- $wlr := joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "AGENTS.md.d" "section_worklog_repos.md.tmpl" -}}
+{{- if stat $wlr }}
+
+Worklog scope → git remote mapping (private):
+
+{{ include $wlr -}}
+{{- end }}
 
 If a referenced file under `~/.agent_files` is missing or unavailable, say that explicitly instead of assuming its contents.
 
@@ -115,3 +122,8 @@ tasks like code reviews or investigations.
 - Pull request guidance: `~/.agent_files/PULL_REQUEST_TEMPLATE.md`
 - Dev workflow reference: `~/.agent_files/docs/dev-workflow.md`
 - Worklog guidance: `~/.agent_files/docs/worklog.md`
+{{ $mn := index . "machine_name" | default "" -}}
+{{- $msec := joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "AGENTS.md.d" (printf "section_%s.md.tmpl" $mn) -}}
+{{- if and (ne $mn "") (stat $msec) }}
+{{ include $msec -}}
+{{- end -}}

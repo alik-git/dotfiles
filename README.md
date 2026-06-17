@@ -5,6 +5,24 @@ Personal dotfiles managed with `chezmoi`.
 This repo keeps the shared home-directory state small, explicit, and machine-aware. Most files are applied into `$HOME`; machine differences come from local chezmoi data in `~/.config/chezmoi/chezmoi.toml`, reusable public profiles, and a small number of machine-local files such as encryption identities.
 The canonical working repo is `~/.local/share/chezmoi`.
 
+## Getting Started
+
+New here? The short path:
+
+1. Install chezmoi and apply this repo — [Installation](#installation).
+2. Install the workflow CLIs — [Workflow Tools](#workflow-tools).
+3. Declare this machine's config — [Machine Setup](#machine-setup).
+4. Read `~/.agent_files/docs/dev-workflow.md` (applied by chezmoi) for the
+   day-to-day task flow, then run the first-task example below.
+
+The workflow CLIs (all public, installable via `uv tool install`):
+
+- **`veneer`** (`veneer-py`) — per-worktree Python env manager for conda-based repos.
+- **`workset`** — create isolated git-worktree worksets for a task.
+- **`worklogs`** — create worklog plans/notes and worksets with mirrored paths.
+- **`quick-status`** (`qs`) — fast snapshot of repo, worktree, CI, and env state.
+- **`agent-chat-reader`** — read and search past Codex & Claude CLI chat history.
+
 ## Installation
 
 ```bash
@@ -44,13 +62,13 @@ chezmoi apply
 Install the shared workflow CLIs:
 
 ```bash
-uv tool install worklogs workset quick-status veneer-py
+uv tool install worklogs workset quick-status veneer-py agent-chat-reader
 ```
 
 Plain pip also works:
 
 ```bash
-python -m pip install worklogs workset quick-status veneer-py
+python -m pip install worklogs workset quick-status veneer-py agent-chat-reader
 ```
 
 Configure repo aliases for worksets in `~/.config/workset/repos.toml`:
@@ -197,9 +215,7 @@ If you need more context, these READMEs cover narrower parts of the setup:
 - [`dot_config/Code/User/README.md`](dot_config/Code/User/README.md)
 - [`dotfiles_private/README.md`](dotfiles_private/README.md)
 - [`dotfiles_private/bootstrap/nas/README.private.md`](dotfiles_private/bootstrap/nas/README.private.md)
-- [`dotfiles_private/dot_codex/README.md`](dotfiles_private/dot_codex/README.md)
 - [`dotfiles_private/private_dot_ssh/README.md`](dotfiles_private/private_dot_ssh/README.md)
-- [`backups/vscode-old/2026-04-04/README.md`](backups/vscode-old/2026-04-04/README.md)
 
 ## Notes
 
