@@ -6,6 +6,12 @@ scripts
 scripts/**
 bootstrap/**
 dotfiles_private/**
+{{/* Codex rewrites ~/.codex/config.toml programmatically (project trust levels,
+     MCP servers, service tier), so it is intentionally left unmanaged. */}}
+.codex/config.toml
+{{/* ~/.gitconfig carries machine-local gh credential helpers that `gh auth
+     setup-git` re-adds; leave it unmanaged so apply never strips them. */}}
+.gitconfig
 {{/* Machine facts come from the local config ([data] in chezmoi.toml): the one
      place chezmoi reliably loads at apply time. machine_class and has_gui are
      declared there; os_type is derived from chezmoi's built-in OS detection. */}}
