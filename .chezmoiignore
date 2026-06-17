@@ -94,8 +94,13 @@ backups/**
 .config/Code/User/settings.json
 .config/Code/User/keybindings.json
 {{- end }}
-{{/* Ignore macOS VS Code user settings on non-macOS or non-GUI machines. */}}
-{{- if or (ne .chezmoi.os "darwin") (not $hasGui) }}
+{{/* The ~/Library tree is macOS-only; never manage it on other OSes (avoids
+     creating empty ~/Library/Application Support on Linux). On macOS, still gate
+     the VS Code settings on GUI machines. */}}
+{{- if ne .chezmoi.os "darwin" }}
+Library
+Library/**
+{{- else if not $hasGui }}
 Library/Application Support/Code
 Library/Application Support/Code/**
 {{- end }}
