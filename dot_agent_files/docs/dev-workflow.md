@@ -1,6 +1,8 @@
 # Dev Workflow
 
-Tools: `worklogs`, `workset`, `veneer`. All installed via `uv tool install`.
+Tools: `worklogs`, `workset`, `quick-status`, `veneer`.
+
+See `~/.local/share/chezmoi/README.md` for install instructions.
 
 ## Starting a task
 
@@ -8,20 +10,21 @@ Pick the right bucket — do NOT create a workset for read-only tasks:
 
 **Read-only** (code review, investigation, PR check — most common):
 ```bash
-worklogs new pr82-review--codereview --scope work
+worklogs new api-review--codereview --scope work
 ```
 
 **Implement, discuss first** (dominant impl path — refine plan before coding):
 ```bash
-worklogs new leansim2sim--plan --scope work
+worklogs new api-refactor--plan --scope work
 # ... discuss and refine the plan ...
-worklogs workset leansim2sim my-repo:feat/my-feature my-other-repo:main
+worklogs workset api-refactor api:feat/refactor web:main
 ```
 
 **Implement, repos known upfront** (shortcut when scope is clear):
 ```bash
-worklogs new improve-viewer--plan --scope work \
-  --workset my-repo:feat/my-feature
+worklogs new checkout-flow--plan --scope work \
+  --workset api:feat/checkout-flow \
+  --workset web:main
 ```
 
 Scope is `work` for work tasks, `personal` for tools and personal notes.
@@ -30,7 +33,7 @@ Scope is `work` for work tasks, `personal` for tools and personal notes.
 ## Companion note discipline
 
 Files land at `YYYY/MM-month/DD-ddd/HHMM-Xa--name--kind.md`
-(e.g. `2026/06-june/15-mon/0143-1a--improve-viewer--plan.md`).
+(e.g. `2026/06-june/15-mon/0143-1a--api-refactor--plan.md`).
 `worklogs workset <slug>` finds the plan by slug and mirrors the workset path.
 
 Update the companion note (`...-note.md`) during execution — not just at the end:
@@ -58,7 +61,7 @@ packages = ["source/my_package"]
 install_deps = false
 ```
 
-The conda env name comes from your machine setup. Check `~/.config/workset/repos.toml` or the repo`s veneer.toml comment for the right name.
+The conda env name comes from your machine setup. Check `~/.config/workset/repos.toml` or the repo's `veneer.toml` comment for the right name.
 
 In a worktree: `veneer update-editables` sets up the venv.
 Then: `veneer python <anything>`.
@@ -76,8 +79,29 @@ them and their source is cross-installed into veneer venvs by workset.
 ~/.config/worklogs/config.toml  # default scope, worksets_root, timezone
 ```
 
+Minimal `~/.config/workset/repos.toml`:
+
+```toml
+[workset]
+root = "~/worksets"
+date_prefix = true
+timezone = "America/New_York"
+
+[repos]
+api = "~/repos/api"
+web = "~/repos/web"
+```
+
+First successful setup:
+
+```bash
+git clone git@github.com:your-org/api.git ~/repos/api
+worklogs new api-refactor--plan --scope work
+worklogs workset api-refactor api:feat/refactor
+```
+
 ## Search
 
 ```bash
-worklogs find "sim2sim"   # full-text search across all worklog files
+worklogs find "api-refactor"   # full-text search across all worklog files
 ```

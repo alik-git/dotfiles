@@ -2,7 +2,7 @@
 
 Personal dotfiles managed with `chezmoi`.
 
-This repo keeps the shared home-directory state small, explicit, and machine-aware. Most files are applied into `$HOME`; machine differences come from `~/.config/chezmoi/chezmoi.toml`, tracked machine metadata in `.chezmoidata/`, and a small number of machine-local files such as encryption identities.
+This repo keeps the shared home-directory state small, explicit, and machine-aware. Most files are applied into `$HOME`; machine differences come from local chezmoi data in `~/.config/chezmoi/chezmoi.toml`, reusable public profiles, and a small number of machine-local files such as encryption identities.
 The canonical working repo is `~/.local/share/chezmoi`.
 
 ## Installation
@@ -10,12 +10,21 @@ The canonical working repo is `~/.local/share/chezmoi`.
 ```bash
 chezmoi init git@github.com:alik-git/dotfiles.git
 cd ~/.local/share/chezmoi
-git submodule update --init --recursive
 chezmoi diff
 chezmoi apply
 ```
 
-Set up GitHub SSH first. The private companion repo is a Git submodule cloned over SSH.
+If you do not have access to the private repo because you are not Ali, that is
+fine; this repo should still work without it. If you do have access, initialize
+the private companion repo before applying:
+
+```bash
+git submodule update --init --recursive
+```
+
+Without the private repo, skip the submodule step and use the public subset.
+Private-backed templates or reference docs will be unavailable until you add
+your own local equivalents.
 
 If needed, do machine-local follow-up after apply for tools not yet represented in the dotfiles.
 
@@ -24,10 +33,49 @@ For normal updates:
 ```bash
 cd ~/.local/share/chezmoi
 git pull
+# Optional, only if the private companion repo is available to you:
 git submodule update --init --recursive
 chezmoi diff
 chezmoi apply
 ```
+
+## Workflow Tools
+
+Install the shared workflow CLIs:
+
+```bash
+uv tool install worklogs workset quick-status veneer-py
+```
+
+Plain pip also works:
+
+```bash
+python -m pip install worklogs workset quick-status veneer-py
+```
+
+Configure repo aliases for worksets in `~/.config/workset/repos.toml`:
+
+```toml
+[workset]
+root = "~/worksets"
+date_prefix = true
+timezone = "America/New_York"
+
+[repos]
+api = "~/repos/api"
+web = "~/repos/web"
+```
+
+First successful example:
+
+```bash
+git clone git@github.com:your-org/api.git ~/repos/api
+worklogs new api-refactor--plan --scope work
+worklogs workset api-refactor api:feat/refactor
+```
+
+See `~/.agent_files/docs/dev-workflow.md` after applying chezmoi for the compact
+day-to-day workflow.
 
 ## Private Files
 
@@ -58,21 +106,69 @@ Run the full local check manually:
 python3 scripts/privacy_check.py --history
 ```
 
-## Machine Data
+## Machine Setup
 
-- Local selector: `~/.config/chezmoi/chezmoi.toml`
-- Tracked machine catalog: `.chezmoidata/machines.yaml`
-- Machine metadata controls per-machine behavior such as whether Nautilus scripts should be applied.
+Each machine identifies itself through its local chezmoi config
+(`~/.config/chezmoi/chezmoi.toml`) — the one place chezmoi reliably loads at
+apply time. It declares the few facts that can't be auto-detected:
+
+```toml
+[data]
+machine_name  = "workstation"   # identity; selects this machine's private layer
+machine_class = "work"          # work | personal  -> task shell layer
+has_gui       = false           # gate GUI-only targets (VS Code, Nautilus)
+```
+
+`os_type` (ubuntu/macos) is derived automatically from chezmoi's OS detection,
+so it is not declared.
+
+- **(a) Automatic (recommended):** `chezmoi init` prompts for these once and
+  writes the config for you. If your age key (`~/.config/chezmoi/key.txt`) is
+  present, it also configures age encryption. Your answers are remembered.
+- **(b) Manual / fallback:** if the prompts aren't what you want, just write the
+  block above into `~/.config/chezmoi/chezmoi.toml` by hand. With the private
+  repo and encrypted secrets, also add:
+  ```toml
+  encryption = "age"
+  [age]
+      identity = "~/.config/chezmoi/key.txt"
+      recipient = "<your age recipient>"
+  ```
+
+`dotfiles_private/machines.reference.yaml` is only a human inventory of machines
+— chezmoi does **not** load it (it can't load a private catalog at apply time),
+so the local config is the real source of truth.
 
 ## Shell Config
 
-- The main `.bashrc` is intentionally small.
-- It sources shared shell setup, the shared prompt, a tracked machine `personal` file, a tracked machine `auto` file, and an optional machine `secrets` file.
-- `personal` is for manual machine-specific shell config.
-- `auto` is for tool-managed or machine-specific init such as `conda` or `nvm`.
-- `secrets` may be tracked in encrypted form with `age`; the live plaintext target remains local in `$HOME`.
-- If a program appends shell init to `.bashrc`, use `chezmoi-mv-bashrc-diff` to preview it and `chezmoi-mv-bashrc` to move it into the tracked machine `auto` file and restore the clean managed `.bashrc`.
-- These helpers are bash-specific. Supporting zsh or other shells would need parallel shell-specific files and helpers.
+The shell config is built in layers, loaded most-general to most-specific so a
+machine only creates the layers it needs:
+
+```text
+base      -> every machine                  (public)
+os        -> detected os_type (ubuntu/macos) (public)
+task      -> machine_class (work/personal)   (public)
+machine   -> this machine's additions        (private, pulled in by machine_name)
+secrets   -> this machine's secrets          (private, age-encrypted)
+```
+
+- `.bashrc`/`.zshrc` stay small: they source `base`, then the matching `os` and
+  `task` layers, then the machine and secrets layers, each only if present.
+- `base`/`os`/`task` use generic names and are public — safe to share. The
+  `machine` and `secrets` layers live in the private repo, keyed by real
+  `machine_name`, and are pulled into name-free `local.sh` / `local.secrets.sh`
+  targets. No machine name appears in the public repo.
+- Put new config in the machine layer first; promote it to `task`/`os`/`base`
+  only once it's clearly a shared pattern.
+- When an installer appends shell init to `~/.bashrc` (conda, nvm, rustup, ...),
+  move those lines by hand into the right layer — shared init into
+  `base.sh`, machine-only init into the private machine layer — then
+  `chezmoi apply ~/.bashrc`. This is a once-per-tool manual step on purpose;
+  there is no machinery that tries to relocate it automatically.
+- `secrets` is tracked age-encrypted in the private repo; the live plaintext
+  target is local-only with restrictive permissions. To change a secret,
+  decrypt → edit → re-encrypt the private age file (see `jira-rest`'s error
+  output for the exact command).
 
 ## Codex Files
 

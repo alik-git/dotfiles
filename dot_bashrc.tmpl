@@ -32,20 +32,25 @@ xterm*|rxvt*)
     ;;
 esac
 
-{{- $machineName := .machine_name | default "" }}
-{{- if $machineName }}
-if [ -f "$HOME/.config/bash/machine/{{ $machineName }}.personal.sh" ]; then
-    . "$HOME/.config/bash/machine/{{ $machineName }}.personal.sh"
-fi
-
-if [ -f "$HOME/.config/bash/machine/{{ $machineName }}.auto.sh" ]; then
-    . "$HOME/.config/bash/machine/{{ $machineName }}.auto.sh"
-fi
-
-if [ -f "$HOME/.config/bash/machine/{{ $machineName }}.secrets.sh" ]; then
-    . "$HOME/.config/bash/machine/{{ $machineName }}.secrets.sh"
-fi
+{{ $taskType := index . "machine_class" | default "" -}}
+{{ $osType := index (index .chezmoi "osRelease" | default dict) "id" | default .chezmoi.os -}}
+{{ if eq .chezmoi.os "darwin" }}{{ $osType = "macos" }}{{ end -}}
+# Layered shell config, loaded most-general to most-specific:
+#   base -> os -> task -> machine -> secrets
+# Each layer loads only if present, so a machine only creates the layers it
+# needs. base/os/task are generic and public; the machine and secrets layers
+# are rendered from the private repo for this machine.
+_load_layer() { [ -f "$1" ] && . "$1"; }
+_load_layer "$HOME/.config/bash/base.sh"
+{{- if $osType }}
+_load_layer "$HOME/.config/bash/os/{{ $osType }}.sh"
 {{- end }}
+{{- if $taskType }}
+_load_layer "$HOME/.config/bash/task/{{ $taskType }}.sh"
+{{- end }}
+_load_layer "$HOME/.config/bash/machine/local.sh"
+_load_layer "$HOME/.config/bash/machine/local.secrets.sh"
+unset -f _load_layer
 
 if command -v quick-status >/dev/null 2>&1; then
     if __quick_status_reminders_init_source="$(quick-status reminders init bash 2>/dev/null)"; then
@@ -54,5 +59,6 @@ if command -v quick-status >/dev/null 2>&1; then
     unset __quick_status_reminders_init_source
 fi
 
-# === chezmoi-mv-bashrc boundary ===
-# Do not edit below this line. Program-added shell init may appear here temporarily and should be moved with `chezmoi-mv-bashrc`.
+# Installers (conda, nvm, rustup, ...) may append shell init below this line.
+# Move shared init into ~/.config/bash/base.sh and machine-only init into the
+# private machine layer, then run `chezmoi apply ~/.bashrc` to restore this file.
