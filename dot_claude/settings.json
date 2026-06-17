@@ -1,8 +1,5 @@
 {
-  "model": "sonnet[1m]",
-  "theme": "dark",
   "permissions": {
-    "defaultMode": "auto",
     "allow": [
       "Bash(awk*)",
       "Bash(basename*)",
@@ -95,6 +92,10 @@
       "Bash(wc*)",
       "Bash(which*)",
       "Bash(whoami*)"
-    ]
-  }
+    ],
+    "defaultMode": "auto"
+  },
+  "effortLevel": "xhigh",
+  "advisorModel": "opus",
+  "theme": "dark"
 }
