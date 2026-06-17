@@ -1,13 +1,10 @@
-{{- $machineName := .machine_name | default "" -}}
-{{- $machine := index (index . "machines" | default dict) $machineName | default dict -}}
-{{- $machineClass := index . "machine_class" | default (index $machine "machine_class" | default "") -}}
-{{- $machineOs := index . "machine_os" | default (index $machine "os" | default .chezmoi.os) -}}
-{{- $machineShellProfile := index . "machine_shell_profile" | default (index $machine "machine_shell_profile" | default "") -}}
-{{- $usesForwardedSshAgent := index . "uses_forwarded_ssh_agent" | default (and (eq $machineClass "work") (eq $machineOs "linux")) -}}
+{{- $machine := index (index . "machines" | default dict) (.machine_name | default "") | default dict -}}
+{{- $machineClass := index $machine "machine_class" | default "" -}}
+{{- $usesForwardedSshAgent := index $machine "uses_forwarded_ssh_agent" | default (and (eq $machineClass "work") (eq .chezmoi.os "linux")) -}}
 Host github.com
     HostName github.com
     User git
-{{- if eq $machineShellProfile "work_macos" }}
+{{- if eq .chezmoi.os "darwin" }}
     AddKeysToAgent yes
     UseKeychain yes
     IdentityFile ~/.ssh/id_ed25519_github
@@ -21,7 +18,7 @@ Host github.com
 
 {{ include (joinPath .chezmoi.sourceDir "dotfiles_private" "private_dot_ssh" "config.personal") }}
 {{- end }}
-{{- if eq $machineShellProfile "work_macos" }}
+{{- if eq .chezmoi.os "darwin" }}
 
-{{ include (joinPath .chezmoi.sourceDir "dotfiles_private" "private_dot_ssh" "config.work_macos") }}
+{{ include (joinPath .chezmoi.sourceDir "dotfiles_private" "private_dot_ssh" "config.macos") }}
 {{- end }}
