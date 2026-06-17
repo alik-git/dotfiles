@@ -1,6 +1,5 @@
-{{- $machine := index (index . "machines" | default dict) (.machine_name | default "") | default dict -}}
-{{- $machineClass := index $machine "machine_class" | default "" -}}
-{{- $usesForwardedSshAgent := index $machine "uses_forwarded_ssh_agent" | default (and (eq $machineClass "work") (eq .chezmoi.os "linux")) -}}
+{{- $machineClass := index . "machine_class" | default "" -}}
+{{- $usesForwardedSshAgent := and (eq $machineClass "work") (eq .chezmoi.os "linux") -}}
 Host github.com
     HostName github.com
     User git

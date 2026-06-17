@@ -106,24 +106,38 @@ Run the full local check manually:
 python3 scripts/privacy_check.py --history
 ```
 
-## Machine Data
+## Machine Setup
 
-- The only fact a machine declares about itself is `machine_name`, set in the
-  local `~/.config/chezmoi/chezmoi.toml`.
-- The machine inventory (`machines.yaml`, in the private repo) is the single
-  source of truth for every other attribute (`machine_class`, `os_type`,
-  `has_gui`, ...). Templates look up the current machine by `machine_name` and
-  derive everything from its catalog entry.
-- To set up a machine (done once, by hand — there is intentionally no
-  auto-generator):
-  1. Add an entry for it to `machines.yaml` (private).
-  2. Put `machine_name` in its local config and ensure the age key is present:
-     ```toml
-     # ~/.config/chezmoi/chezmoi.toml
-     [data]
-     machine_name = "your-machine-name"
-     ```
-  Nothing else needs per-machine wiring.
+Each machine identifies itself through its local chezmoi config
+(`~/.config/chezmoi/chezmoi.toml`) — the one place chezmoi reliably loads at
+apply time. It declares the few facts that can't be auto-detected:
+
+```toml
+[data]
+machine_name  = "workstation"   # identity; selects this machine's private layer
+machine_class = "work"          # work | personal  -> task shell layer
+has_gui       = false           # gate GUI-only targets (VS Code, Nautilus)
+```
+
+`os_type` (ubuntu/macos) is derived automatically from chezmoi's OS detection,
+so it is not declared.
+
+- **(a) Automatic (recommended):** `chezmoi init` prompts for these once and
+  writes the config for you. If your age key (`~/.config/chezmoi/key.txt`) is
+  present, it also configures age encryption. Your answers are remembered.
+- **(b) Manual / fallback:** if the prompts aren't what you want, just write the
+  block above into `~/.config/chezmoi/chezmoi.toml` by hand. With the private
+  repo and encrypted secrets, also add:
+  ```toml
+  encryption = "age"
+  [age]
+      identity = "~/.config/chezmoi/key.txt"
+      recipient = "<your age recipient>"
+  ```
+
+`dotfiles_private/machines.reference.yaml` is only a human inventory of machines
+— chezmoi does **not** load it (it can't load a private catalog at apply time),
+so the local config is the real source of truth.
 
 ## Shell Config
 
@@ -131,11 +145,11 @@ The shell config is built in layers, loaded most-general to most-specific so a
 machine only creates the layers it needs:
 
 ```text
-base      -> every machine            (public)
-os        -> os_type, e.g. ubuntu     (public)
-task      -> machine_class, e.g. work (public)
-machine   -> this machine's additions (private, pulled in by machine_name)
-secrets   -> this machine's secrets   (private, age-encrypted)
+base      -> every machine                  (public)
+os        -> detected os_type (ubuntu/macos) (public)
+task      -> machine_class (work/personal)   (public)
+machine   -> this machine's additions        (private, pulled in by machine_name)
+secrets   -> this machine's secrets          (private, age-encrypted)
 ```
 
 - `.bashrc`/`.zshrc` stay small: they source `base`, then the matching `os` and

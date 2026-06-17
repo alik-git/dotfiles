@@ -6,14 +6,14 @@ scripts
 scripts/**
 bootstrap/**
 dotfiles_private/**
-{{/* Resolve this machine from the private catalog — the single source of truth.
-     The local config declares only machine_name; everything else is looked up
-     here. Kernel-level checks use chezmoi's built-in .chezmoi.os. */}}
-{{- $machineName := .machine_name | default "" }}
-{{- $machine := index (index . "machines" | default dict) $machineName | default dict }}
-{{- $machineClass := index $machine "machine_class" | default "" }}
-{{- $osType := index $machine "os_type" | default "" }}
-{{- $hasGui := index $machine "has_gui" | default false }}
+{{/* Machine facts come from the local config ([data] in chezmoi.toml): the one
+     place chezmoi reliably loads at apply time. machine_class and has_gui are
+     declared there; os_type is derived from chezmoi's built-in OS detection. */}}
+{{- $machineName := index . "machine_name" | default "" }}
+{{- $machineClass := index . "machine_class" | default "" }}
+{{- $hasGui := index . "has_gui" | default false }}
+{{- $osType := index (index .chezmoi "osRelease" | default dict) "id" | default .chezmoi.os }}
+{{- if eq .chezmoi.os "darwin" }}{{- $osType = "macos" }}{{- end }}
 {{/* Public-only clones have no private companion submodule. */}}
 {{- $hasPrivateRepo := stat (joinPath .chezmoi.sourceDir "dotfiles_private" "privacy" "denylist.tsv") }}
 {{- if not $hasPrivateRepo }}
