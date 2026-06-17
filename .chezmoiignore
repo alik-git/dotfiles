@@ -6,9 +6,6 @@ scripts
 scripts/**
 bootstrap/**
 dotfiles_private/**
-{{/* Codex rewrites ~/.codex/config.toml programmatically (project trust levels,
-     MCP servers, service tier), so it is intentionally left unmanaged. */}}
-.codex/config.toml
 {{/* ~/.gitconfig carries machine-local gh credential helpers that `gh auth
      setup-git` re-adds; leave it unmanaged so apply never strips them. */}}
 .gitconfig
