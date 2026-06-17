@@ -32,9 +32,9 @@ xterm*|rxvt*)
     ;;
 esac
 
-{{- $taskType := index . "machine_class" | default "" -}}
-{{- $osType := index (index .chezmoi "osRelease" | default dict) "id" | default .chezmoi.os -}}
-{{- if eq .chezmoi.os "darwin" }}{{- $osType = "macos" -}}{{- end -}}
+{{ $taskType := index . "machine_class" | default "" -}}
+{{ $osType := index (index .chezmoi "osRelease" | default dict) "id" | default .chezmoi.os -}}
+{{ if eq .chezmoi.os "darwin" }}{{ $osType = "macos" }}{{ end -}}
 # Layered shell config, loaded most-general to most-specific:
 #   base -> os -> task -> machine -> secrets
 # Each layer loads only if present, so a machine only creates the layers it
