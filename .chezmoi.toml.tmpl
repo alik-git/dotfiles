@@ -3,9 +3,9 @@
        If this is wrong for your setup, just set ~/.config/chezmoi/chezmoi.toml
        by hand instead — see README "Machine setup". os_type is auto-detected,
        so it is not asked here. */ -}}
-{{- $machineName := promptStringOnce . "machine_name" "machine_name (short identity for this machine, e.g. workstation)" -}}
-{{- $machineClass := promptStringOnce . "machine_class" "machine_class (work or personal)" "personal" -}}
-{{- $hasGui := promptBoolOnce . "has_gui" "has_gui (does this machine have a desktop GUI?)" true -}}
+{{- $machineName := promptStringOnce . "machine_name" "machine_name - short identity for this machine, type a name (e.g. workstation, laptop)" -}}
+{{- $machineClass := promptStringOnce . "machine_class" "machine_class - type exactly: work  OR  personal" "personal" -}}
+{{- $hasGui := promptBoolOnce . "has_gui" "has_gui - does this machine have a desktop GUI? type: true  OR  false" true -}}
 {{- $ageKey := joinPath .chezmoi.homeDir ".config" "chezmoi" "key.txt" -}}
 {{ if stat $ageKey -}}
 encryption = "age"
