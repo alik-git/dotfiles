@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/python3 /home/ali/.codex/hooks/quick_status_pretool.py",
+            "command": "python3 ~/.codex/hooks/quick_status_pretool.py",
             "timeout": 5,
             "statusMessage": "Checking quick-status reminder"
           }

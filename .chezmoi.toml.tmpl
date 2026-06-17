@@ -1,0 +1,19 @@
+{{- /* Onboarding: chezmoi init prompts for this machine's facts and writes the
+       local config. Each value is asked once; re-running keeps your answers.
+       If this is wrong for your setup, just set ~/.config/chezmoi/chezmoi.toml
+       by hand instead — see README "Machine setup". os_type is auto-detected,
+       so it is not asked here. */ -}}
+{{- $machineName := promptStringOnce . "machine_name" "machine_name - short identity for this machine, type a name (e.g. workstation, laptop)" -}}
+{{- $machineClass := promptStringOnce . "machine_class" "machine_class - type exactly: work  OR  personal" "personal" -}}
+{{- $hasGui := promptBoolOnce . "has_gui" "has_gui - does this machine have a desktop GUI? type: true  OR  false" true -}}
+{{- $ageKey := joinPath .chezmoi.homeDir ".config" "chezmoi" "key.txt" -}}
+{{ if stat $ageKey -}}
+encryption = "age"
+[age]
+    identity = {{ $ageKey | quote }}
+    recipient = "age14xtr62xkg63dp6rphv5q86nf3egxcq98smqmssk3uhm7thm36q9sgsfltw"
+{{ end -}}
+[data]
+    machine_name = {{ $machineName | quote }}
+    machine_class = {{ $machineClass | quote }}
+    has_gui = {{ $hasGui }}

@@ -1,0 +1,7 @@
+{{- /* This machine's GCP-setup doc, pulled from the private repo by
+       machine_name. Public source names no machine; renders empty without the
+       private repo. */ -}}
+{{- $f := joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" (index . "machine_name" | default "") "docs" "google_cloud_services_setup.md" -}}
+{{- if and (ne (index . "machine_name" | default "") "") (stat $f) -}}
+{{ include $f }}
+{{- end -}}

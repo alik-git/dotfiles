@@ -1,4 +1,14 @@
-# Auto-managed or machine-specific tool initialization for white_xps.
+# Base shell layer: loaded on every machine.
+#
+# Holds universal, non-sensitive setup and tool-managed init (conda, nvm, ...)
+# that is identical everywhere. Machine- or task-specific config belongs in the
+# os/task/machine layers, not here.
+
+# Keep interactive terminals colorful even if a parent process exported NO_COLOR.
+unset NO_COLOR
+export CLICOLOR=1
+
+# --- Tool-managed init (installers may append shared init here) ---
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
