@@ -1,12 +1,15 @@
 # Dev Workflow
 
-Tools: `worklogs`, `workset`, `quick-status`, `veneer`.
-
-See `~/.local/share/chezmoi/README.md` for install instructions.
+The day-to-day loop with `worklogs`, `workset`, `quick-status`, and `veneer`.
+These are public tools, so this works with or without the private companion repo.
+One-time install and config (`~/.config/workset/repos.toml`, worklogs config)
+live in the repo README; this doc is just the loop.
 
 ## Starting a task
 
-Pick the right bucket — do NOT create a workset for read-only tasks:
+Pick the right bucket — do NOT create a workset for read-only tasks. A worklog's
+**scope** is its top-level bucket: `work` for work tasks, `personal` for tools
+and personal notes.
 
 **Read-only** (code review, investigation, PR check — most common):
 ```bash
@@ -27,14 +30,13 @@ worklogs new checkout-flow--plan --scope work \
   --workset web:main
 ```
 
-Scope is `work` for work tasks, `personal` for tools and personal notes.
-`worklogs workset` finds the existing plan by slug and mirrors the path.
+`worklogs workset` finds the existing plan by slug and mirrors its path into a
+workset (a directory of git worktrees, one per repo).
 
 ## Companion note discipline
 
 Files land at `YYYY/MM-month/DD-ddd/HHMM-Xa--name--kind.md`
 (e.g. `2026/06-june/15-mon/0143-1a--api-refactor--plan.md`).
-`worklogs workset <slug>` finds the plan by slug and mirrors the workset path.
 
 Update the companion note (`...-note.md`) during execution — not just at the end:
 - After each significant decision or finding
@@ -42,15 +44,15 @@ Update the companion note (`...-note.md`) during execution — not just at the e
 - Before opening a PR (include the PR link)
 
 The plan file IS updated during execution, but only for structural state:
-- Mark phases done (✅), update `status: open` → `done` when finished
+- Mark phases done (✅), flip `status: open` → `done` when finished
 - Record major direction changes or decisions that affect the plan itself
 
-Do NOT use the plan as an execution log. Running notes, commands, failures,
-and findings go in the companion note — not the plan.
+Do NOT use the plan as an execution log. Running notes, commands, failures, and
+findings go in the companion note — not the plan.
 
 ## veneer — Python env for conda repos
 
-Repos with conda deps have a committed self-contained `veneer.toml`:
+Repos with conda deps carry a committed, self-contained `veneer.toml`:
 ```toml
 [python]
 base_conda_env = "my-conda-env"
@@ -61,48 +63,12 @@ packages = ["source/my_package"]
 install_deps = false
 ```
 
-The conda env name comes from your machine setup. Check `~/.config/workset/repos.toml` or the repo's `veneer.toml` comment for the right name.
-
-In a worktree: `veneer update-editables` sets up the venv.
-Then: `veneer python <anything>`.
-
-`workset` cross-installs all repos' editables into each veneer venv automatically
-so every repo in the workset is importable from any veneer venv.
-
-Pure-Python repos (e.g. `my-pure-python-repo`) have no veneer.toml — uv handles
-them and their source is cross-installed into veneer venvs by workset.
-
-## Config files
-
-```
-~/.config/workset/repos.toml    # short name → canonical repo path mapping
-~/.config/worklogs/config.toml  # default scope, worksets_root, timezone
-```
-
-Minimal `~/.config/workset/repos.toml` (`api`/`web`/`your-org` are placeholders;
-`[repos]` maps a short name to a local clone you've already made):
-
-```toml
-[workset]
-root = "~/worksets"
-date_prefix = true
-timezone = "America/New_York"
-
-[repos]
-api = "~/repos/api"
-web = "~/repos/web"
-```
-
-`worklogs` reads `~/.config/worklogs/config.toml` (`root`, `default_scope`,
-`timezone`, `worksets_root`); use a `--scope` that matches `default_scope`.
-
-First successful setup:
-
-```bash
-git clone git@github.com:your-org/api.git ~/repos/api
-worklogs new api-refactor--plan --scope personal
-worklogs workset api-refactor api:feat/refactor
-```
+The conda env name comes from your machine setup (see the repo's `veneer.toml`
+comment). In a worktree, `veneer update-editables` sets up the venv, then
+`veneer python <anything>` runs in it. `workset` cross-installs every repo's
+editables into each veneer venv, so any repo in the workset is importable from
+any of its venvs. Pure-Python repos have no `veneer.toml` — uv handles them and
+`workset` cross-installs their source too.
 
 ## Search
 

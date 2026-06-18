@@ -1,160 +1,44 @@
 # dotfiles
 
-Personal dotfiles managed with `chezmoi`.
+My personal dotfiles, managed with [chezmoi](https://www.chezmoi.io/) — shell,
+editor, git, and Codex/Claude agent setup — plus a few small public workflow
+CLIs. This page is how to adopt them. The canonical working copy lives at
+`~/.local/share/chezmoi`.
 
-This repo keeps the shared home-directory state small, explicit, and machine-aware. Most files are applied into `$HOME`; machine differences come from local chezmoi data in `~/.config/chezmoi/chezmoi.toml`, reusable public profiles, and a small number of machine-local files such as encryption identities.
-The canonical working repo is `~/.local/share/chezmoi`.
+## Quick start
 
-## Getting Started
-
-New here? The short path:
-
-1. Install chezmoi and apply this repo — [Installation](#installation).
-2. Install the workflow CLIs — [Workflow Tools](#workflow-tools).
-3. Declare this machine's config — [Machine Setup](#machine-setup).
-4. Read `~/.agent_files/docs/dev-workflow.md` (applied by chezmoi) for the
-   day-to-day task flow, then run the first-task example below.
-
-The workflow CLIs (all public, installable via `uv tool install`):
-
-- **`veneer`** (`veneer-py`) — per-worktree Python env manager for conda-based repos.
-- **`workset`** — create isolated git-worktree worksets for a task.
-- **`worklogs`** — create worklog plans/notes and worksets with mirrored paths.
-- **`quick-status`** (`qs`) — fast snapshot of repo, worktree, CI, and env state.
-- **`agent-chat-reader`** — read and search past Codex & Claude CLI chat history.
-
-## Prerequisites
-
-- **[chezmoi](https://www.chezmoi.io/install/)** — applies these dotfiles.
-- **[uv](https://docs.astral.sh/uv/)** — installs the workflow CLIs:
-  `curl -LsSf https://astral.sh/uv/install.sh | sh` (plain `pip` also works).
-- **Miniconda/conda** — only needed if you use `veneer`, which overlays editable
-  Python packages on a conda base env. Install Miniconda, then create your own
-  env(s); each repo's `veneer.toml` names the env to use. `worklogs`, `workset`,
-  `quick-status`, and `agent-chat-reader` need no conda.
-
-## Installation
+Prerequisites: **chezmoi** (applies the dotfiles) and **[uv](https://docs.astral.sh/uv/)**
+(installs the CLIs — `curl -LsSf https://astral.sh/uv/install.sh | sh`, or use
+`pip`). `veneer` additionally needs Miniconda/conda; the other CLIs don't.
 
 ```bash
 chezmoi init git@github.com:alik-git/dotfiles.git
 cd ~/.local/share/chezmoi
-chezmoi diff
+chezmoi diff      # preview before applying
 chezmoi apply
 ```
 
-If you do not have access to the private repo because you are not Ali, that is
-fine; this repo should still work without it. If you do have access, initialize
-the private companion repo before applying:
+Not Ali / no access to the private companion repo? Fine — skip
+`git submodule update` and you get the working public subset (private-backed
+targets are simply omitted). With access, run
+`git submodule update --init --recursive` before `apply`.
 
-```bash
-git submodule update --init --recursive
-```
-
-Without the private repo, skip the submodule step and use the public subset.
-Private-backed templates or reference docs will be unavailable until you add
-your own local equivalents.
-
-If needed, do machine-local follow-up after apply for tools not yet represented in the dotfiles.
-
-chezmoi does not manage `~/.gitconfig` (it carries machine-local `gh` credential
-helpers), so set your own git identity once:
+chezmoi does **not** manage `~/.gitconfig` (it carries machine-local `gh`
+credential helpers), so set your git identity once:
 
 ```bash
 git config --global user.name "Your Name"
 git config --global user.email "you@example.com"
 ```
 
-For normal updates:
+Update later with `git pull && chezmoi diff && chezmoi apply` (prefix
+`git submodule update --init --recursive &&` if you have the private repo).
 
-```bash
-cd ~/.local/share/chezmoi
-git pull
-# Optional, only if the private companion repo is available to you:
-git submodule update --init --recursive
-chezmoi diff
-chezmoi apply
-```
+## Machine setup
 
-## Workflow Tools
-
-Install the shared workflow CLIs:
-
-```bash
-uv tool install worklogs workset quick-status veneer-py agent-chat-reader
-```
-
-Plain pip also works:
-
-```bash
-python -m pip install worklogs workset quick-status veneer-py agent-chat-reader
-```
-
-Configure repo aliases for worksets in `~/.config/workset/repos.toml`. This file
-isn't shipped (it points at your own local clones), so create it yourself. The
-`[repos]` entries map a short name to a **local clone you've already made** —
-`api`/`web` below are placeholders, replace them with your own:
-
-```toml
-[workset]
-root = "~/worksets"
-date_prefix = true
-timezone = "America/New_York"
-
-[repos]
-api = "~/repos/api"   # placeholder: your real short-name = local clone path
-web = "~/repos/web"
-```
-
-`worklogs` reads `~/.config/worklogs/config.toml` (chezmoi applies a generic
-default — `root`, `default_scope`, `timezone`, `worksets_root` — edit it to
-taste). With the private companion repo, your own config is used instead.
-
-First successful example (replace the `your-org`/`api` placeholders with real
-values; the `--scope` should match your config's `default_scope`):
-
-```bash
-git clone git@github.com:your-org/api.git ~/repos/api
-worklogs new api-refactor--plan --scope personal
-worklogs workset api-refactor api:feat/refactor
-```
-
-See `~/.agent_files/docs/dev-workflow.md` after applying chezmoi for the compact
-day-to-day workflow.
-
-## Private Files
-
-- Private tracked files currently live in the `dotfiles_private` Git submodule.
-- Private machine-managed targets in the main repo are thin templates that include content from `dotfiles_private`.
-- Non-managed private reference material, such as the NAS private README, lives directly in `dotfiles_private`.
-- Public-repo privacy denylist patterns live in `dotfiles_private/privacy/denylist.tsv`.
-- Machine shell secrets can be tracked in encrypted form with `age`.
-- The local age identity is machine-local and lives outside the repo.
-
-## Privacy Checks
-
-This public repo uses `pre-commit` for two privacy checks:
-
-- `gitleaks-system` catches common secrets in staged content.
-- `scripts/privacy_check.py` catches dotfiles-specific private context using the
-  private denylist in `dotfiles_private/privacy/denylist.tsv`.
-
-Install local hooks after cloning:
-
-```bash
-pre-commit install --hook-type pre-commit --hook-type pre-push
-```
-
-Run the full local check manually:
-
-```bash
-python3 scripts/privacy_check.py --history
-```
-
-## Machine Setup
-
-Each machine identifies itself through its local chezmoi config
-(`~/.config/chezmoi/chezmoi.toml`) — the one place chezmoi reliably loads at
-apply time. It declares the few facts that can't be auto-detected:
+`chezmoi init` prompts once for the few facts that can't be auto-detected and
+writes them to `~/.config/chezmoi/chezmoi.toml` — the one place chezmoi reliably
+loads at apply time:
 
 ```toml
 [data]
@@ -163,91 +47,128 @@ machine_class = "work"          # work | personal  -> task shell layer
 has_gui       = false           # gate GUI-only targets (VS Code, Nautilus)
 ```
 
-`os_type` (ubuntu/macos) is derived automatically from chezmoi's OS detection,
-so it is not declared.
+`os_type` (ubuntu/macos) is auto-derived. To configure by hand instead, just
+write that block yourself; with the private repo + encrypted secrets, also add:
 
-- **(a) Automatic (recommended):** `chezmoi init` prompts for these once and
-  writes the config for you. If your age key (`~/.config/chezmoi/key.txt`) is
-  present, it also configures age encryption. Your answers are remembered.
-- **(b) Manual / fallback:** if the prompts aren't what you want, just write the
-  block above into `~/.config/chezmoi/chezmoi.toml` by hand. With the private
-  repo and encrypted secrets, also add:
-  ```toml
-  encryption = "age"
-  [age]
-      identity = "~/.config/chezmoi/key.txt"
-      recipient = "<your age recipient>"
-  ```
+```toml
+encryption = "age"
+[age]
+    identity = "~/.config/chezmoi/key.txt"
+    recipient = "<your age recipient>"
+```
 
-`dotfiles_private/machines.reference.yaml` is only a human inventory of machines
-— chezmoi does **not** load it (it can't load a private catalog at apply time),
-so the local config is the real source of truth.
+(`dotfiles_private/machines.reference.yaml` is only a human inventory — chezmoi
+does not load it; this local config is the source of truth.)
 
-## Shell Config
+## Workflow CLIs
 
-The shell config is built in layers, loaded most-general to most-specific so a
-machine only creates the layers it needs:
+A few small, public command-line tools, all installable with uv (or `pip`):
+
+```bash
+uv tool install worklogs workset quick-status veneer-py agent-chat-reader
+```
+
+- **`worklogs`** — create dated worklog notes/plans (and the worksets that mirror them).
+- **`workset`** — make a **workset**: a directory of git worktrees for one task.
+- **`veneer`** — per-worktree Python env: a thin venv "veneer" over a shared conda base.
+- **`quick-status`** (`qs`) — one-shot snapshot of repo, worktree, CI, and env state.
+- **`agent-chat-reader`** — read and search past Codex & Claude CLI history.
+
+`workset` reads `~/.config/workset/repos.toml`, which maps a short name to a
+**local clone you've already made**. It isn't shipped (it points at your own
+paths), so create it — `api`/`web` here are placeholders:
+
+```toml
+[workset]
+root = "~/worksets"
+date_prefix = true
+timezone = "America/New_York"
+
+[repos]
+api = "~/repos/api"   # placeholder: your short-name = local clone path
+web = "~/repos/web"
+```
+
+`worklogs` reads `~/.config/worklogs/config.toml` (chezmoi ships an editable
+default — `root`, `default_scope`, `timezone`, `worksets_root`). A worklog's
+**scope** is just its top-level bucket, e.g. `personal` or `work`.
+
+First run (replace the `your-org`/`api` placeholders; match `--scope` to your
+`default_scope`):
+
+```bash
+git clone git@github.com:your-org/api.git ~/repos/api
+worklogs new api-refactor--plan --scope personal
+worklogs workset api-refactor api:feat/refactor
+```
+
+For the day-to-day loop, see `~/.agent_files/docs/dev-workflow.md` (applied by
+chezmoi).
+
+## How it works
+
+Most files apply into `$HOME`; per-machine differences come from the local
+`~/.config/chezmoi/chezmoi.toml` data plus a few machine-local files (like the
+age identity). The repo is **public**; a private `dotfiles_private` submodule
+holds machine-specific and secret content. Public targets that need private
+content are thin templates that include from the submodule and degrade to
+no-ops when it's absent — so the public subset stands on its own.
+
+### Shell config
+
+Layers load most-general to most-specific, each only if present:
 
 ```text
 shared  -> ~/.config/shell/* : aliases, PATH/env, and the task/machine/secrets
                                layers, loaded by both bash and zsh, every machine
-base    -> ~/.config/bash/base.sh : bash-only init such as conda/nvm  (bash only)
-task    -> machine_class (work)            (public, in the shared tree)
-machine -> this machine's additions        (private, pulled in by machine_name)
-secrets -> this machine's secrets          (private, age-encrypted)
+base    -> ~/.config/bash/base.sh : bash-only init (conda/nvm)
+task    -> machine_class (work)        (public, in the shared tree)
+machine -> this machine's additions    (private, by machine_name)
+secrets -> this machine's secrets       (private, age-encrypted)
 ```
 
-- The shared layer lives under `~/.config/shell/` and is loaded by both bash and
-  zsh on every machine; `base` is bash-specific (conda/nvm) under
-  `~/.config/bash/`. Layers load most-general to most-specific, each only if
-  present.
-- `task` and the shared tree use generic names and are public — safe to share.
-  The `machine` and `secrets` layers live in the private repo, keyed by real
-  `machine_name`, and are pulled into name-free `local.sh` / `local.secrets.sh`
-  targets. No machine name appears in the public repo.
-- Put new config in the machine layer first; promote it to `task` or the shared
-  tree only once it's clearly a shared pattern.
-- When an installer appends shell init to `~/.bashrc` (conda, nvm, rustup, ...),
-  move those lines by hand into the right layer — cross-shell init into the
-  shared tree (`~/.config/shell/shared.sh`), bash-only tool init into
-  `~/.config/bash/base.sh`, machine-only init into the private machine layer —
-  then `chezmoi apply ~/.bashrc`. This is a once-per-tool manual step on purpose;
-  there is no machinery that tries to relocate it automatically.
-- `secrets` is tracked age-encrypted in the private repo; the live plaintext
-  target is local-only with restrictive permissions. To change a secret,
-  decrypt → edit → re-encrypt the private age file (see `jira-rest`'s error
-  output for the exact command).
+- The shared tree is public and cross-shell; `machine`/`secrets` come from the
+  private repo (keyed by `machine_name`, rendered into name-free `local.sh` /
+  `local.secrets.sh`) — no machine name appears in the public repo.
+- Put new config in the machine layer first; promote to `task`/shared only once
+  it's clearly a shared pattern.
+- When an installer appends init to `~/.bashrc`, move it by hand into the right
+  layer — cross-shell → `~/.config/shell/shared.sh`, bash-only tool init →
+  `~/.config/bash/base.sh`, machine-only → the private layer — then
+  `chezmoi apply ~/.bashrc`.
 
-## Codex Files
+## Reference
 
-- `dot_codex/` contains the managed global Codex `AGENTS.md`, `config.toml`, and rules.
-- `dot_agent_files/` contains the managed `~/.agent_files/...` targets used by the global Codex setup.
-- Some `dot_agent_files/` targets are thin templates that include content from `dotfiles_private`.
-- Keep in mind that Codex programmatically adds some live config on startup.
-- In particular, trusted project paths and `model_reasoning_effort` may appear in the live `~/.codex/config.toml` even when they are not present in the chezmoi source.
+### Private files & secrets
+Private tracked files live in the `dotfiles_private` submodule; public targets
+that need them are thin templates that include from it. The public-repo privacy
+denylist is `dotfiles_private/privacy/denylist.tsv`. Machine secrets are
+`age`-encrypted; the age identity is machine-local and lives outside the repo.
 
-## Bootstrap Material
+### Privacy checks
+Two `pre-commit` checks guard the public repo (install with
+`pre-commit install --hook-type pre-commit --hook-type pre-push`):
 
-- `bootstrap/` is tracked reference material, not home-directory state applied by chezmoi.
-- `bootstrap/linux/` contains Linux bootstrap helpers.
-- `bootstrap/macos/` contains macOS bootstrap helpers.
-- `bootstrap/nas/` contains NAS setup reference files.
-- `bootstrap/nautilus/` documents the Nautilus copy-path scripts.
+- `gitleaks-system` — common secrets in staged content.
+- `scripts/privacy_check.py` — dotfiles-specific private context via the
+  denylist; it no-ops without the private repo, so it won't block a colleague.
+  Full manual run: `python3 scripts/privacy_check.py --history`.
 
-## Further Reading
+### Codex / agent files
+`dot_codex/` and `dot_agent_files/` provide the global Codex/Claude agent setup:
+`~/.agent_files/AGENTS.md` is the source of truth, and `~/.codex/AGENTS.md` /
+`~/.claude/CLAUDE.md` point to it. Codex rewrites parts of `~/.codex/config.toml`
+at runtime, so chezmoi intentionally does not manage that file.
 
-If you need more context, these READMEs cover narrower parts of the setup:
+### Bootstrap
+`bootstrap/` is tracked reference material (not applied): `linux/`, `macos/`,
+`nas/`, `nautilus/`.
 
-- [`bootstrap/linux/README.md`](bootstrap/linux/README.md)
-- [`bootstrap/macos/README.md`](bootstrap/macos/README.md)
-- [`bootstrap/nas/README.md`](bootstrap/nas/README.md)
-- [`bootstrap/nautilus/README.md`](bootstrap/nautilus/README.md)
-- [`dot_config/Code/User/README.md`](dot_config/Code/User/README.md)
-- [`dotfiles_private/README.md`](dotfiles_private/README.md)
-- [`dotfiles_private/bootstrap/nas/README.private.md`](dotfiles_private/bootstrap/nas/README.private.md)
-- [`dotfiles_private/private_dot_ssh/README.md`](dotfiles_private/private_dot_ssh/README.md)
-
-## Notes
-
+### Notes
 - The repo must not contain secrets.
-- If `chezmoi status` is dirty but Git is clean, a live home-directory file was modified after apply.
+- If `chezmoi status` is dirty but Git is clean, a live file was edited after apply.
+
+### Further reading
+- [`bootstrap/linux/README.md`](bootstrap/linux/README.md) · [`macos`](bootstrap/macos/README.md) · [`nas`](bootstrap/nas/README.md) · [`nautilus`](bootstrap/nautilus/README.md)
+- [`dot_config/Code/User/README.md`](dot_config/Code/User/README.md)
+- [`dotfiles_private/README.md`](dotfiles_private/README.md) (private)

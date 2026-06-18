@@ -92,10 +92,8 @@ When a machine is used over SSH with agent forwarding and Git SSH stops working
 in a long-lived shell, suspect a stale forwarded-agent socket before debugging
 GitHub auth.
 
-## Worklog scratch
+## Worklog
 
-Use `~/worklog/SCRATCH.md` for temporary commands, bulky output, and rough
-working notes. For clickable local-file links there, prefer paths relative to
-the scratch file, and also include a copyable terminal path in backticks using
-`~` or `$HOME` — VS Code Remote can fail to open absolute home-directory
-Markdown links. See `worklog.md` for the full worklog conventions.
+Durable notes/plans live under `~/worklog`; `~/worklog/SCRATCH.md` holds
+temporary/bulky output. See `worklog.md` for the conventions (layout, kinds,
+scratch link rules) and `dev-workflow.md` for the task loop.
