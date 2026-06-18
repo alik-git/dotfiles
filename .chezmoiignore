@@ -49,8 +49,8 @@ dotfiles_private/**
 .local/share/nautilus/**
 .local/share/nautilus/scripts/**
 {{- end }}
-{{/* Ubuntu packages fd and bat as fdfind and batcat; expose upstream names only on work machines. */}}
-{{- if ne $machineClass "work" }}
+{{/* Ubuntu packages fd and bat as fdfind and batcat; expose upstream names only on Linux work machines (the symlinks point at /usr/bin/{batcat,fdfind}, which don't exist on macOS). */}}
+{{- if or (ne $machineClass "work") (ne .chezmoi.os "linux") }}
 .local/bin/bat
 .local/bin/fd
 {{- end }}
@@ -86,8 +86,6 @@ backups/**
 .config/Code/**
 .config/Code/User
 .config/Code/User/**
-.config/Code/User/settings.json
-.config/Code/User/keybindings.json
 {{- end }}
 {{/* The ~/Library tree is macOS-only; never manage it on other OSes (avoids
      creating empty ~/Library/Application Support on Linux). On macOS, still gate
@@ -103,5 +101,4 @@ Library/Application Support/Code/**
 {{- if or (ne $machineClass "personal") (ne .chezmoi.os "linux") }}
 .config/wireplumber
 .config/wireplumber/**
-.config/wireplumber/policy.lua.d/11-bluetooth-no-auto-hfp.lua
 {{- end }}
