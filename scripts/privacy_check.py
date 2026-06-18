@@ -65,11 +65,16 @@ def load_patterns(repo: Path) -> list[Pattern]:
         )
     )
     if not denylist_path.exists():
-        raise SystemExit(
-            "[privacy] missing private denylist: "
-            f"{denylist_path}\n"
-            "Set DOTFILES_PRIVACY_DENYLIST or initialize dotfiles_private."
+        # Public-only clones (colleagues without the private companion repo)
+        # have no denylist. The dotfiles privacy check is maintainer-only, so
+        # skip it cleanly instead of blocking their commits/pushes.
+        print(
+            f"[privacy] no private denylist at {denylist_path}; "
+            "skipping maintainer-only privacy check "
+            "(set DOTFILES_PRIVACY_DENYLIST or initialize dotfiles_private to enable).",
+            file=sys.stderr,
         )
+        raise SystemExit(0)
 
     patterns: list[Pattern] = []
     for line_number, raw_line in enumerate(denylist_path.read_text(encoding="utf-8").splitlines(), 1):

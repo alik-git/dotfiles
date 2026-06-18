@@ -79,7 +79,8 @@ them and their source is cross-installed into veneer venvs by workset.
 ~/.config/worklogs/config.toml  # default scope, worksets_root, timezone
 ```
 
-Minimal `~/.config/workset/repos.toml`:
+Minimal `~/.config/workset/repos.toml` (`api`/`web`/`your-org` are placeholders;
+`[repos]` maps a short name to a local clone you've already made):
 
 ```toml
 [workset]
@@ -91,6 +92,9 @@ timezone = "America/New_York"
 api = "~/repos/api"
 web = "~/repos/web"
 ```
+
+`worklogs` reads `~/.config/worklogs/config.toml` (`root`, `default_scope`,
+`timezone`, `worksets_root`); use a `--scope` that matches `default_scope`.
 
 First successful setup:
 
