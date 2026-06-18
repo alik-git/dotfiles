@@ -1,1 +1,13 @@
-{{- include (joinPath .chezmoi.sourceDir "dotfiles_private" "dot_config" "worklogs" "config.toml") -}}
+{{- /* Use the private per-user worklogs config when the private repo is present;
+       otherwise ship a generic, editable default so a public-only clone still
+       gets a working ~/.config/worklogs/config.toml. */ -}}
+{{- $f := joinPath .chezmoi.sourceDir "dotfiles_private" "dot_config" "worklogs" "config.toml" -}}
+{{- if stat $f -}}
+{{ include $f -}}
+{{- else -}}
+# worklogs config — edit to taste. See ~/.agent_files/docs/dev-workflow.md.
+root = "~/worklog"
+default_scope = "personal"
+timezone = "America/New_York"
+worksets_root = "~/worksets"
+{{- end -}}

@@ -23,6 +23,16 @@ The workflow CLIs (all public, installable via `uv tool install`):
 - **`quick-status`** (`qs`) — fast snapshot of repo, worktree, CI, and env state.
 - **`agent-chat-reader`** — read and search past Codex & Claude CLI chat history.
 
+## Prerequisites
+
+- **[chezmoi](https://www.chezmoi.io/install/)** — applies these dotfiles.
+- **[uv](https://docs.astral.sh/uv/)** — installs the workflow CLIs:
+  `curl -LsSf https://astral.sh/uv/install.sh | sh` (plain `pip` also works).
+- **Miniconda/conda** — only needed if you use `veneer`, which overlays editable
+  Python packages on a conda base env. Install Miniconda, then create your own
+  env(s); each repo's `veneer.toml` names the env to use. `worklogs`, `workset`,
+  `quick-status`, and `agent-chat-reader` need no conda.
+
 ## Installation
 
 ```bash
@@ -71,7 +81,9 @@ Plain pip also works:
 python -m pip install worklogs workset quick-status veneer-py agent-chat-reader
 ```
 
-Configure repo aliases for worksets in `~/.config/workset/repos.toml`:
+Configure repo aliases for worksets in `~/.config/workset/repos.toml`. The
+`[repos]` entries map a short name to a **local clone you've already made** —
+`api`/`web` below are placeholders, replace them with your own:
 
 ```toml
 [workset]
@@ -80,11 +92,16 @@ date_prefix = true
 timezone = "America/New_York"
 
 [repos]
-api = "~/repos/api"
+api = "~/repos/api"   # placeholder: your real short-name = local clone path
 web = "~/repos/web"
 ```
 
-First successful example:
+`worklogs` reads `~/.config/worklogs/config.toml` (chezmoi applies a generic
+default — `root`, `default_scope`, `timezone`, `worksets_root` — edit it to
+taste). With the private companion repo, your own config is used instead.
+
+First successful example (replace the `your-org`/`api` placeholders with real
+values; pick a `--scope` that matches your `default_scope`):
 
 ```bash
 git clone git@github.com:your-org/api.git ~/repos/api
