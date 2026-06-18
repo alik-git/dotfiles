@@ -6,17 +6,20 @@ These files are tracked in the dotfiles repo, but they are not managed into
 
 ## Machine Identity
 
-The local chezmoi config declares only the machine name. Everything else
-(`machine_class`, `os_type`, `has_gui`, ...) comes from that machine's entry in
-the private `machines.yaml` inventory.
+Declare the machine's facts in the local chezmoi config
+(`~/.config/chezmoi/chezmoi.toml`), which chezmoi loads at apply time. `os_type`
+is auto-derived (macos), so you set:
 
 ```toml
 [data]
-machine_name = "<your-macos-machine-name>"
+machine_name  = "<your-macos-machine-name>"
+machine_class = "work"   # work | personal
+has_gui       = true
 ```
 
-Add a matching entry (with `os_type: macos`) for that machine name to the
-private `machines.yaml` before applying.
+`chezmoi init` prompts for these. You may also record the machine in
+`dotfiles_private/machines.reference.yaml` for your own inventory, but chezmoi
+does not load that file — the local config is the source of truth.
 
 ## Package Plan
 
