@@ -1,4 +1,4 @@
-dot_config/bash/machine/*.secrets.sh
+dot_config/shell/machine/*.secrets.sh
 
 # Python
 __pycache__/
