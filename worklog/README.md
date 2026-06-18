@@ -98,6 +98,6 @@ reference it.
 
 ## Git
 
-Each scope under `~/worklog/` has its own private git repo. The parent
-`~/worklog/` directory is not itself a git repo. Commit to the repo for
-whichever scope the note belongs to.
+A scope under `~/worklog/` may have its own private git repo (the parent
+`~/worklog/` directory is never itself a git repo). When a scope is
+git-managed, commit to the repo for whichever scope the note belongs to.
