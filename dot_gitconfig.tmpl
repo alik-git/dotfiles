@@ -1,9 +1,0 @@
-{{- $machineClass := index . "machine_class" | default "" -}}
-[user]
-	name = "alik-git"
-	email = "15948631+alik-git@users.noreply.github.com"
-{{ if eq $machineClass "work" }}
-
-[include]
-	path = ~/.gitconfig.work
-{{- end }}

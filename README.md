@@ -56,6 +56,14 @@ your own local equivalents.
 
 If needed, do machine-local follow-up after apply for tools not yet represented in the dotfiles.
 
+chezmoi does not manage `~/.gitconfig` (it carries machine-local `gh` credential
+helpers), so set your own git identity once:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+```
+
 For normal updates:
 
 ```bash
@@ -81,7 +89,8 @@ Plain pip also works:
 python -m pip install worklogs workset quick-status veneer-py agent-chat-reader
 ```
 
-Configure repo aliases for worksets in `~/.config/workset/repos.toml`. The
+Configure repo aliases for worksets in `~/.config/workset/repos.toml`. This file
+isn't shipped (it points at your own local clones), so create it yourself. The
 `[repos]` entries map a short name to a **local clone you've already made** —
 `api`/`web` below are placeholders, replace them with your own:
 
@@ -101,11 +110,11 @@ default — `root`, `default_scope`, `timezone`, `worksets_root` — edit it to
 taste). With the private companion repo, your own config is used instead.
 
 First successful example (replace the `your-org`/`api` placeholders with real
-values; pick a `--scope` that matches your `default_scope`):
+values; the `--scope` should match your config's `default_scope`):
 
 ```bash
 git clone git@github.com:your-org/api.git ~/repos/api
-worklogs new api-refactor--plan --scope work
+worklogs new api-refactor--plan --scope personal
 worklogs workset api-refactor api:feat/refactor
 ```
 

@@ -100,7 +100,7 @@ First successful setup:
 
 ```bash
 git clone git@github.com:your-org/api.git ~/repos/api
-worklogs new api-refactor--plan --scope work
+worklogs new api-refactor--plan --scope personal
 worklogs workset api-refactor api:feat/refactor
 ```
 
