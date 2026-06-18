@@ -163,25 +163,29 @@ The shell config is built in layers, loaded most-general to most-specific so a
 machine only creates the layers it needs:
 
 ```text
-base      -> every machine                  (public)
-os        -> detected os_type (ubuntu/macos) (public)
-task      -> machine_class (work/personal)   (public)
-machine   -> this machine's additions        (private, pulled in by machine_name)
-secrets   -> this machine's secrets          (private, age-encrypted)
+shared  -> ~/.config/shell/* : aliases, PATH/env, and the task/machine/secrets
+                               layers, loaded by both bash and zsh, every machine
+base    -> ~/.config/bash/base.sh : bash-only init such as conda/nvm  (bash only)
+task    -> machine_class (work)            (public, in the shared tree)
+machine -> this machine's additions        (private, pulled in by machine_name)
+secrets -> this machine's secrets          (private, age-encrypted)
 ```
 
-- `.bashrc`/`.zshrc` stay small: they source `base`, then the matching `os` and
-  `task` layers, then the machine and secrets layers, each only if present.
-- `base`/`os`/`task` use generic names and are public — safe to share. The
-  `machine` and `secrets` layers live in the private repo, keyed by real
+- The shared layer lives under `~/.config/shell/` and is loaded by both bash and
+  zsh on every machine; `base` is bash-specific (conda/nvm) under
+  `~/.config/bash/`. Layers load most-general to most-specific, each only if
+  present.
+- `task` and the shared tree use generic names and are public — safe to share.
+  The `machine` and `secrets` layers live in the private repo, keyed by real
   `machine_name`, and are pulled into name-free `local.sh` / `local.secrets.sh`
   targets. No machine name appears in the public repo.
-- Put new config in the machine layer first; promote it to `task`/`os`/`base`
-  only once it's clearly a shared pattern.
+- Put new config in the machine layer first; promote it to `task` or the shared
+  tree only once it's clearly a shared pattern.
 - When an installer appends shell init to `~/.bashrc` (conda, nvm, rustup, ...),
-  move those lines by hand into the right layer — shared init into
-  `base.sh`, machine-only init into the private machine layer — then
-  `chezmoi apply ~/.bashrc`. This is a once-per-tool manual step on purpose;
+  move those lines by hand into the right layer — cross-shell init into the
+  shared tree (`~/.config/shell/shared.sh`), bash-only tool init into
+  `~/.config/bash/base.sh`, machine-only init into the private machine layer —
+  then `chezmoi apply ~/.bashrc`. This is a once-per-tool manual step on purpose;
   there is no machinery that tries to relocate it automatically.
 - `secrets` is tracked age-encrypted in the private repo; the live plaintext
   target is local-only with restrictive permissions. To change a secret,
