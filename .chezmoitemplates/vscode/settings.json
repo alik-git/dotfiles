@@ -101,7 +101,7 @@
     "*.js.tmpl": "javascript",
     "*.ts.tmpl": "typescript",
     "dot_bashrc.tmpl": "shellscript",
-    "dot_gitconfig.tmpl": "ini",
+    "private_dot_gitconfig.work.tmpl": "ini",
   },
 
   // Workspace trust and Python UX
