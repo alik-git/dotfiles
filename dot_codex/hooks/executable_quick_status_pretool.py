@@ -37,7 +37,7 @@ _TRIGGERS = {
     ("which", "pip3"): "quick-status env --plain --show-tools",
     ("which", "conda"): "quick-status env --plain --show-tools",
     ("which", "uv"): "quick-status env --plain --show-tools",
-    ("which", "devpy"): "quick-status env --plain --show-tools",
+    ("which", "veneer"): "quick-status env --plain --show-tools",
     ("python", "--version"): "quick-status env --plain --show-tools",
     ("python3", "--version"): "quick-status env --plain --show-tools",
     ("pip", "--version"): "quick-status env --plain --show-tools",
@@ -47,7 +47,7 @@ _TRIGGERS = {
     ("uv", "tool", "list"): "quick-status env --plain --show-tools",
     ("uv", "python", "list"): "quick-status env --plain --show-tools",
     ("uv", "python", "dir"): "quick-status env --plain --show-tools",
-    ("devpy", "info"): "quick-status env --plain --show-tools",
+    ("veneer", "info"): "quick-status env --plain --show-tools",
 }
 
 

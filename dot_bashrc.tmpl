@@ -19,8 +19,9 @@ if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
-if [ -f "$HOME/.config/bash/aliases.sh" ]; then
-    . "$HOME/.config/bash/aliases.sh"
+if [ -f "$HOME/.config/shell/aliases.sh" ]; then
+    ALI_SHELL_RC="$HOME/.bashrc"
+    . "$HOME/.config/shell/aliases.sh"
 fi
 
 # If this is an xterm set the title to user@host:dir
@@ -33,23 +34,19 @@ xterm*|rxvt*)
 esac
 
 {{ $taskType := index . "machine_class" | default "" -}}
-{{ $osType := index (index .chezmoi "osRelease" | default dict) "id" | default .chezmoi.os -}}
-{{ if eq .chezmoi.os "darwin" }}{{ $osType = "macos" }}{{ end -}}
 # Layered shell config, loaded most-general to most-specific:
-#   base -> os -> task -> machine -> secrets
-# Each layer loads only if present, so a machine only creates the layers it
-# needs. base/os/task are generic and public; the machine and secrets layers
-# are rendered from the private repo for this machine.
+#   base -> task -> machine -> secrets
+# `base` is bash-specific (conda/nvm) and lives under ~/.config/bash. The
+# shared task/machine/secrets layers live under ~/.config/shell (loaded by both
+# bash and zsh). Each layer loads only if present; machine and secrets are
+# rendered from the private repo for this machine.
 _load_layer() { [ -f "$1" ] && . "$1"; }
 _load_layer "$HOME/.config/bash/base.sh"
-{{- if $osType }}
-_load_layer "$HOME/.config/bash/os/{{ $osType }}.sh"
-{{- end }}
 {{- if $taskType }}
-_load_layer "$HOME/.config/bash/task/{{ $taskType }}.sh"
+_load_layer "$HOME/.config/shell/task/{{ $taskType }}.sh"
 {{- end }}
-_load_layer "$HOME/.config/bash/machine/local.sh"
-_load_layer "$HOME/.config/bash/machine/local.secrets.sh"
+_load_layer "$HOME/.config/shell/machine/local.sh"
+_load_layer "$HOME/.config/shell/machine/local.secrets.sh"
 unset -f _load_layer
 
 if command -v quick-status >/dev/null 2>&1; then
