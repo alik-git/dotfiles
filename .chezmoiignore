@@ -1,7 +1,4 @@
 README.md
-SCRATCH.md
-temp
-temp/**
 scripts
 scripts/**
 bootstrap/**
@@ -28,8 +25,6 @@ dotfiles_private/**
 .local/lib/jira_rest.py
 .local/lib/jira_web_link.py
 .ssh/config
-.config/bash/machine/local.sh
-.config/bash/machine/local.secrets.sh
 .config/shell/machine/local.sh
 .config/shell/machine/local.secrets.sh
 .agent_files/local
@@ -39,14 +34,12 @@ dotfiles_private/**
 {{- if and (ne $machineClass "work") (ne .chezmoi.os "darwin") }}
 .profile
 {{- end }}
-{{/* zsh and the zsh-side shell layer are only managed on macOS. */}}
+{{/* zsh itself is only managed on macOS; the shared shell layer applies everywhere. */}}
 {{- if ne .chezmoi.os "darwin" }}
 .zprofile
 .zshrc
 .config/zsh
 .config/zsh/**
-.config/shell
-.config/shell/**
 {{- end }}
 {{/* Linux-only service and desktop integration. */}}
 {{- if ne .chezmoi.os "linux" }}
@@ -67,7 +60,6 @@ dotfiles_private/**
 {{- end }}
 {{/* The work task shell layer is only for work machines. */}}
 {{- if ne $machineClass "work" }}
-.config/bash/task/work.sh
 .config/shell/task/work.sh
 {{- end }}
 {{/* Per-machine agent docs are pulled from the private repo for work machines. */}}

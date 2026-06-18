@@ -18,15 +18,11 @@ if [ -f "$HOME/.config/zsh/prompt.zsh" ]; then
 fi
 
 {{ $taskType := index . "machine_class" | default "" -}}
-{{ $osType := index (index .chezmoi "osRelease" | default dict) "id" | default .chezmoi.os -}}
-{{ if eq .chezmoi.os "darwin" }}{{ $osType = "macos" }}{{ end -}}
 # Layered shell config, loaded most-general to most-specific:
-#   base -> os -> task -> machine -> secrets (each loads only if present).
+#   task -> machine -> secrets (each loads only if present).
+# (Bash adds a base layer too; on macOS, zsh's shared base comes from
+# ~/.config/shell/shared.sh, loaded above.)
 _load_layer() { [ -f "$1" ] && . "$1"; }
-_load_layer "$HOME/.config/shell/base.sh"
-{{- if $osType }}
-_load_layer "$HOME/.config/shell/os/{{ $osType }}.sh"
-{{- end }}
 {{- if $taskType }}
 _load_layer "$HOME/.config/shell/task/{{ $taskType }}.sh"
 {{- end }}
