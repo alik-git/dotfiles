@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import re
+import sys
+
+MANAGED_TOP_LEVEL = {
+    "approval_policy": '"on-request"',
+    "sandbox_mode": '"workspace-write"',
+    "web_search": '"live"',
+}
+
+MANAGED_TABLES = {
+    "features": {
+        "memories": "true",
+        "goals": "true",
+    },
+    "sandbox_workspace_write": {
+        "network_access": "true",
+    },
+    "shell_environment_policy": {
+        "inherit": '"core"',
+        "ignore_default_excludes": "true",
+        "include_only": '["PATH", "HOME", "BASH_ENV", "SSH_AUTH_SOCK", "WANDB_API_KEY"]',
+    },
+}
+
+TABLE_RE = re.compile(r"^\s*\[([^\]]+)\]\s*$")
+KEY_RE = re.compile(r"^(\s*)([A-Za-z0-9_.-]+)(\s*=).*$")
+
+
+def section_name(line: str) -> str | None:
+    match = TABLE_RE.match(line)
+    return match.group(1) if match else None
+
+
+def replace_key(line: str, value: str) -> str:
+    match = KEY_RE.match(line)
+    if not match:
+        return line
+    return f"{match.group(1)}{match.group(2)}{match.group(3)} {value}\n"
+
+
+def set_top_level(lines: list[str], keys: dict[str, str]) -> list[str]:
+    seen: set[str] = set()
+    output: list[str] = []
+    insert_at = 0
+    in_top_level = True
+
+    for line in lines:
+        if section_name(line) is not None:
+            in_top_level = False
+        if in_top_level and KEY_RE.match(line):
+            insert_at = len(output) + 1
+            key = KEY_RE.match(line).group(2)
+            if key in keys:
+                line = replace_key(line, keys[key])
+                seen.add(key)
+        output.append(line)
+
+    additions = [f"{key} = {value}\n" for key, value in keys.items() if key not in seen]
+    if additions:
+        output[insert_at:insert_at] = additions
+    return output
+
+
+def set_table(lines: list[str], table: str, keys: dict[str, str]) -> list[str]:
+    header = f"[{table}]\n"
+    start = None
+    end = len(lines)
+    for index, line in enumerate(lines):
+        current = section_name(line)
+        if current == table:
+            start = index
+            continue
+        if start is not None and current is not None:
+            end = index
+            break
+
+    if start is None:
+        if lines and lines[-1].strip():
+            lines.append("\n")
+        lines.append(header)
+        for key, value in keys.items():
+            lines.append(f"{key} = {value}\n")
+        return lines
+
+    seen: set[str] = set()
+    for index in range(start + 1, end):
+        match = KEY_RE.match(lines[index])
+        if not match:
+            continue
+        key = match.group(2)
+        if key in keys:
+            lines[index] = replace_key(lines[index], keys[key])
+            seen.add(key)
+
+    additions = [f"{key} = {value}\n" for key, value in keys.items() if key not in seen]
+    if additions:
+        insert_at = end
+        while insert_at > start + 1 and not lines[insert_at - 1].strip():
+            insert_at -= 1
+        lines[insert_at:insert_at] = additions
+    return lines
+
+
+def main() -> int:
+    lines = sys.stdin.readlines()
+    lines = set_top_level(lines, MANAGED_TOP_LEVEL)
+    for table, keys in MANAGED_TABLES.items():
+        lines = set_table(lines, table, keys)
+    sys.stdout.writelines(lines)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
