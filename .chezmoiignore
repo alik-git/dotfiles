@@ -40,6 +40,13 @@ dotfiles_private/**
 .config/zsh
 .config/zsh/**
 {{- end }}
+{{/* macOS uses zsh by default here; avoid creating bash targets on this Mac
+     unless a future machine-specific workflow needs them. */}}
+{{- if eq .chezmoi.os "darwin" }}
+.bashrc
+.config/bash
+.config/bash/**
+{{- end }}
 {{/* Linux-only service and desktop integration. */}}
 {{- if ne .chezmoi.os "linux" }}
 .config/systemd
