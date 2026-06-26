@@ -1,18 +1,6 @@
 {{- $machineClass := index . "machine_class" | default "" -}}
-{{- $usesForwardedSshAgent := and (eq $machineClass "work") (eq .chezmoi.os "linux") -}}
-Host github.com
-    HostName github.com
-    User git
-{{- if eq .chezmoi.os "darwin" }}
-    AddKeysToAgent yes
-    UseKeychain yes
-    IdentityFile ~/.ssh/id_ed25519_github
-{{- end }}
-{{- if $usesForwardedSshAgent }}
-    # GitHub auth comes from a forwarded agent. Point SSH at a stable symlink
-    # so shells and tools do not depend on transient socket paths.
-    IdentityAgent ~/.ssh/ssh_auth_sock
-{{- end }}
+{{/* GitHub git auth is HTTPS via the gh credential helper, so no github.com SSH
+     host block is needed here. SSH config below is only for non-GitHub hosts. */}}
 {{- if eq $machineClass "personal" }}
 
 {{ include (joinPath .chezmoi.sourceDir "dotfiles_private" "private_dot_ssh" "config.personal") }}
