@@ -12,7 +12,7 @@ Prerequisites: **chezmoi** (applies the dotfiles) and **[uv](https://docs.astral
 `pip`). `veneer` additionally needs Miniconda/conda; the other CLIs don't.
 
 ```bash
-chezmoi init git@github.com:alik-git/dotfiles.git
+chezmoi init https://github.com/alik-git/dotfiles.git
 cd ~/.local/share/chezmoi
 chezmoi diff      # preview before applying
 chezmoi apply
@@ -20,7 +20,8 @@ chezmoi apply
 
 Not Ali / no access to the private companion repo? Fine — skip
 `git submodule update` and you get the working public subset (private-backed
-targets are simply omitted). With access, run
+targets are simply omitted). With access, authenticate to GitHub first
+(`gh auth login` — all git here uses HTTPS via `gh`), then run
 `git submodule update --init --recursive` before `apply`.
 
 chezmoi does **not** manage `~/.gitconfig` (it carries machine-local `gh`
@@ -97,7 +98,7 @@ First run (replace the `your-org`/`api` placeholders; match `--scope` to your
 `default_scope`):
 
 ```bash
-git clone git@github.com:your-org/api.git ~/repos/api
+git clone https://github.com/your-org/api.git ~/repos/api
 worklogs new api-refactor--plan --scope personal
 worklogs workset api-refactor api:feat/refactor
 ```

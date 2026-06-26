@@ -62,14 +62,11 @@ macOS VS Code settings target:
 
 Both targets render from the shared files under `.chezmoitemplates/vscode/`.
 
-## SSH
+## GitHub auth
 
-This machine uses a local GitHub key at:
+Git uses HTTPS via the `gh` CLI: run `gh auth login` once and `gh auth
+setup-git` wires the credential helper into `~/.gitconfig`. No SSH key is needed
+for GitHub.
 
-```text
-~/.ssh/id_ed25519_github
-```
-
-The managed SSH config includes the macOS Keychain settings only on macOS
-machines (`.chezmoi.os == "darwin"`), so other machines can continue using their
-own SSH authentication strategy.
+A local SSH key (`~/.ssh/id_ed25519_github`) is kept for any non-GitHub SSH
+hosts; it is no longer used for git.
