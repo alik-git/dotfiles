@@ -96,5 +96,6 @@
   },
   "effortLevel": "xhigh",
   "advisorModel": "opus",
-  "theme": "dark"
+  "theme": "dark",
+  "skipWorkflowUsageWarning": true
 }
