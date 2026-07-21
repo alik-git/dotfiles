@@ -27,5 +27,9 @@ _load_layer() { [ -f "$1" ] && . "$1"; }
 _load_layer "$HOME/.config/shell/task/{{ $taskType }}.sh"
 {{- end }}
 _load_layer "$HOME/.config/shell/machine/local.sh"
-_load_layer "$HOME/.config/shell/machine/local.secrets.sh"
+# Login shells load secrets from ~/.zprofile. Keep this fallback for shells
+# started interactively without a login parent, such as some editor terminals.
+if [[ ! -o login ]]; then
+    _load_layer "$HOME/.config/shell/machine/local.secrets.sh"
+fi
 unset -f _load_layer
