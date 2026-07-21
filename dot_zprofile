@@ -3,3 +3,8 @@
 if [ -f "$HOME/.profile" ]; then
     . "$HOME/.profile"
 fi
+
+# Login-only shells (including Codex commands) do not read ~/.zshrc.
+if [ -f "$HOME/.config/shell/machine/local.secrets.sh" ]; then
+    . "$HOME/.config/shell/machine/local.secrets.sh"
+fi
