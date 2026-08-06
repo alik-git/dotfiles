@@ -1,0 +1,9 @@
+# ~/.zshenv: executed by zsh(1) for every invocation - login or not,
+# interactive or not, script or command - unless zsh is started with `-f`.
+# It is the only zsh startup file a non-interactive shell (scripts, cron,
+# agent/tool shells) is guaranteed to read, so it carries only the vars and
+# secrets scripts need. Interactive setup (prompt, aliases, completion) stays
+# in ~/.zshrc, gated on interactivity as before.
+if [ -f "$HOME/.config/shell/env.sh" ]; then
+    . "$HOME/.config/shell/env.sh"
+fi

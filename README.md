@@ -138,6 +138,62 @@ secrets -> this machine's secrets       (private, age-encrypted)
   `~/.config/bash/base.sh`, machine-only → the private layer — then
   `chezmoi apply ~/.bashrc`.
 
+#### Interactive-only vs. always-loaded
+
+The `task`/`secrets` layers (env vars and API keys) and the `machine` layer
+(per-machine interactive aliases/functions, some with side effects — see
+below) are loaded through **different** entry points, on purpose:
+
+```text
+~/.config/shell/env.sh          task -> secrets only, no machine layer.
+                                 POSIX sh; sourced by every entry point below.
+
+~/.zshenv         (macOS)       loads env.sh. Every zsh invocation reads this
+                                 — login or not, interactive or not — so it's
+                                 the only place a plain `zsh -c '...'` is
+                                 guaranteed to pick up secrets.
+~/.zshrc          (macOS)       interactive only (guarded by the
+                                 `case $- in *i*)` check). Prompt, aliases,
+                                 completion, and the `machine` layer
+                                 (~/.config/shell/machine/local.sh).
+~/.zprofile       (macOS)       login shells; sources ~/.profile.
+
+~/.bashrc         (Linux)       interactive only. Prompt, aliases,
+                                 completion, base.sh (conda/nvm), the
+                                 `machine` layer, and env.sh — a plain new
+                                 terminal on Linux is usually an interactive
+                                 *non-login* shell, so ~/.bashrc is the only
+                                 file it reads.
+~/.profile        (both)        login shells (there's no ~/.bash_profile, so
+                                 bash falls through to this file too).
+                                 Sources env.sh, and exports $BASH_ENV so
+                                 non-interactive non-login bash processes
+                                 descending from this shell (e.g.
+                                 `bash -c '...'`, how most scripts and
+                                 agent/tool shells run) also read env.sh.
+```
+
+Why `machine`/`local.sh` is excluded from `env.sh`: it's free-form per-machine
+interactive shell UX, and on at least one machine it runs a side-effecting
+SSH-agent-socket refresh at *source time* — fine once per interactive shell,
+not something that should re-run on every non-interactive script invocation.
+
+Bash's `$BASH_ENV` mechanism only fires for shells that inherit it from an
+ancestor that ran `~/.profile` (or had it set some other way) — a truly
+cold-started non-interactive, non-login bash with no such ancestor (bare
+`cron`, a `systemd` unit with `SHELL=/bin/sh`, no `BASH_ENV` set anywhere)
+still won't see these vars. Zsh has no such gap: `~/.zshenv` runs
+unconditionally for every invocation.
+
+macOS manages the zsh files (`~/.zshenv`/`~/.zprofile`/`~/.zshrc`/`~/.config/zsh`)
+and leaves bash unmanaged (bash isn't the daily driver there, but the system
+`/bin/bash` still benefits from `$BASH_ENV` once a login zsh shell has
+exported it). Linux manages `~/.bashrc`/`~/.config/bash` and leaves the zsh
+files unmanaged. `~/.profile` is shared content (plain POSIX sh, no zsh/bash-
+only syntax) applied on both — macOS always, Linux only on `work`-class
+machines (see `.chezmoiignore`) — since it's the one file both OSes' login
+paths read.
+
 ## Reference
 
 ### Private files & secrets

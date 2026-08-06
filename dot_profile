@@ -33,3 +33,20 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+
+# Task/secrets vars scripts need. Login shells (macOS via ~/.zprofile above;
+# Linux directly, since there is no ~/.bash_profile so bash falls through to
+# this file) do not read ~/.zshrc's/~/.bashrc's interactive-only chain, so
+# load the same layer here too.
+if [ -f "$HOME/.config/shell/env.sh" ]; then
+    . "$HOME/.config/shell/env.sh"
+fi
+
+# Also reach non-interactive, non-login bash (e.g. `bash -c '...'`, how most
+# scripts and agent/tool shells run): bash sources $BASH_ENV before running
+# such a command, so point it at the same layer for any bash process that
+# descends from a shell that read this file. Only set if nothing has already
+# claimed BASH_ENV; zsh ignores this var entirely, so it is harmless there.
+if [ -f "$HOME/.config/shell/env.sh" ] && [ -z "${BASH_ENV:-}" ]; then
+    export BASH_ENV="$HOME/.config/shell/env.sh"
+fi
