@@ -33,20 +33,17 @@ xterm*|rxvt*)
     ;;
 esac
 
-{{ $taskType := index . "machine_class" | default "" -}}
-# Layered shell config, loaded most-general to most-specific:
-#   base -> task -> machine -> secrets
-# `base` is bash-specific (conda/nvm) and lives under ~/.config/bash. The
-# shared task/machine/secrets layers live under ~/.config/shell (loaded by both
-# bash and zsh). Each layer loads only if present; machine and secrets are
-# rendered from the private repo for this machine.
+# base    -> bash-only tool-managed init (conda, nvm, ...)
+# machine -> this machine's own interactive shell additions (private)
+# env.sh  -> task/secrets vars scripts need (~/.config/shell/env.sh). A
+#            plain new terminal on Linux is an interactive NON-login shell,
+#            so it reads only this file, never ~/.profile - hence env.sh is
+#            loaded here too. Harmless if also loaded via ~/.profile for a
+#            login shell first; it only (re-)exports vars.
 _load_layer() { [ -f "$1" ] && . "$1"; }
 _load_layer "$HOME/.config/bash/base.sh"
-{{- if $taskType }}
-_load_layer "$HOME/.config/shell/task/{{ $taskType }}.sh"
-{{- end }}
 _load_layer "$HOME/.config/shell/machine/local.sh"
-_load_layer "$HOME/.config/shell/machine/local.secrets.sh"
+_load_layer "$HOME/.config/shell/env.sh"
 unset -f _load_layer
 
 if command -v quick-status >/dev/null 2>&1; then

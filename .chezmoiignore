@@ -35,6 +35,7 @@ dotfiles_private/**
 {{- end }}
 {{/* zsh itself is only managed on macOS; the shared shell layer applies everywhere. */}}
 {{- if ne .chezmoi.os "darwin" }}
+.zshenv
 .zprofile
 .zshrc
 .config/zsh

@@ -1,0 +1,27 @@
+# ~/.zshrc: executed by zsh(1) for interactive shells.
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+if [ -f "$HOME/.config/shell/shared.sh" ]; then
+    . "$HOME/.config/shell/shared.sh"
+fi
+
+if [ -f "$HOME/.config/shell/aliases.sh" ]; then
+    ALI_SHELL_RC="$HOME/.zshrc"
+    . "$HOME/.config/shell/aliases.sh"
+fi
+
+if [ -f "$HOME/.config/zsh/prompt.zsh" ]; then
+    . "$HOME/.config/zsh/prompt.zsh"
+fi
+
+# Machine layer: this machine's own interactive shell additions (aliases,
+# functions, and any machine-specific side effects like SSH-agent-socket
+# recovery). Task/secrets vars scripts need are already loaded by
+# ~/.zshenv, which runs before this file for every zsh invocation - not
+# repeated here.
+if [ -f "$HOME/.config/shell/machine/local.sh" ]; then
+    . "$HOME/.config/shell/machine/local.sh"
+fi
