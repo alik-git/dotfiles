@@ -95,7 +95,6 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus-5",
   "effortLevel": "medium",
   "advisorModel": "opus",
   "theme": "dark",
