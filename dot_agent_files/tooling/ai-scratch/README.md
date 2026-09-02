@@ -10,11 +10,10 @@ Use the direct interpreter wrapper from any working directory:
 ~/.agent_files/tooling/ai-scratch/bin/ai-python script.py
 ```
 
-Convenience commands are also installed on the normal user `PATH`:
+The convenience command is also installed on the normal user `PATH`:
 
 ```bash
 ai-python script.py
-ai-run script.py
 ```
 
 For an interactive shell, source `load.sh`. To reproduce the environment after
