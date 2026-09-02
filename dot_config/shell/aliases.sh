@@ -4,7 +4,6 @@ alias spp='shpool'
 alias spl='shpool list'
 alias pqst='pueue status columns=id,status,label,start,end'
 alias qs='quick-status'
-alias wl='worklogs'
 alias ca='conda activate'
 alias updatecodex='npm install -g @openai/codex@latest'
 
