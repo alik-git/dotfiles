@@ -1,8 +1,6 @@
 # Workspace Setup
 
-Generic machine/workspace layout and environment conventions. For the task
-lifecycle (worklogs, worksets, companion notes, veneer), see `dev-workflow.md`.
-For worklog conventions, see `worklog.md`.
+Generic machine/workspace layout and environment conventions.
 
 Anything specific to a given machine — shared environment names, repo shorthand,
 VM/cloud access — lives in that machine's private companion doc under
@@ -28,11 +26,9 @@ for a task, under `~/Projects/worksets/<...>/<repo-name>`.
 
 - Do not do active task work in canonical checkouts under `~/Projects/repos`.
   Those are stable/reference copies and global tool install sources only.
-- For edits, branches, investigations, and reviews, use an existing free
-  workset or create a new one.
-- Let the workflow tools create worksets (`worklogs new --workset` /
-  `workset new`) so worklog and workset paths mirror each other. Do not
-  hand-create numbered (`dev-1`) or freeform folders.
+- For active edits, use an existing free workset or create one with `workset
+  new`. Read-only inspection does not require a new workset.
+- A direct Git worktree is also fine for a focused single-repository change.
 - Keep folder contents self-explanatory — branch name, `veneer.toml`, and git
   status should cover the normal case. No per-workset marker files or
   registries.
@@ -49,7 +45,6 @@ Core tools (installed via `uv tool install`):
 
 - `veneer-py` — Python env manager for conda-based repos (`veneer` command)
 - `workset` — create isolated git-worktree worksets
-- `worklogs` — create worklog plans, companion notes, and worksets
 - `quick-status` (alias `qs`) — fast snapshot of repo, worktree, CI, and env
   state
 - `agent-chat-reader` — read and search past Codex & Claude CLI chat history
@@ -57,9 +52,9 @@ Core tools (installed via `uv tool install`):
 ## Python workflow
 
 Repos with conda dependencies carry a committed, self-contained `veneer.toml`;
-pure-Python repos are managed by uv directly. See `dev-workflow.md` for the full
-veneer workflow. The shared conda env name for a given repo comes from that
-machine's local doc or the repo's `veneer.toml` comment.
+pure-Python repos are managed by uv directly. The shared conda env name for a
+given repo comes from that machine's local doc or the repo's `veneer.toml`
+comment.
 
 `notuv`, `devpy`, and the old `extends`/stack pattern are deprecated — use
 `veneer`.
@@ -91,9 +86,3 @@ user asks otherwise.
 When a machine is used over SSH with agent forwarding and Git SSH stops working
 in a long-lived shell, suspect a stale forwarded-agent socket before debugging
 GitHub auth.
-
-## Worklog
-
-Durable notes/plans live under `~/worklog`; `~/worklog/SCRATCH.md` holds
-temporary/bulky output. See `worklog.md` for the conventions (layout, kinds,
-scratch link rules) and `dev-workflow.md` for the task loop.
