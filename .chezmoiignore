@@ -18,6 +18,7 @@ dotfiles_private/**
 {{- if eq .chezmoi.os "darwin" }}{{- $osType = "macos" }}{{- end }}
 {{/* Public-only clones have no private companion submodule. */}}
 {{- $hasPrivateRepo := stat (joinPath .chezmoi.sourceDir "dotfiles_private" "privacy" "denylist.tsv") }}
+{{- $hasRobotSafetySkill := stat (joinPath .chezmoi.sourceDir "dotfiles_private" "vendor" "skills" "private-safety-skill" "SKILL.md") }}
 {{- if not $hasPrivateRepo }}
 .codex/config.toml
 .gitconfig.work
@@ -30,6 +31,10 @@ dotfiles_private/**
 .config/shell/machine/local.secrets.sh
 .agent_files/local
 .agent_files/local/**
+{{- end }}
+{{- if not $hasRobotSafetySkill }}
+.agents/skills/private-safety-skill
+.claude/skills/private-safety-skill
 {{- end }}
 {{/* Manage ~/.profile on work machines and macOS machines for login-shell environment. */}}
 {{- if and (ne $machineClass "work") (ne .chezmoi.os "darwin") }}
