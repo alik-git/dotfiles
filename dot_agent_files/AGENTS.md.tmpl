@@ -12,6 +12,13 @@ Ali K's personal global `AGENTS.md`.
 
 This file is only for persistent cross-project instructions. Put repo-specific workflow, commands, architecture, and environment details in the repo's own `AGENTS.md`.
 
+## Physical Robot Safety
+
+Never execute anything that could physically actuate a robot; the user must run it.
+When an action may enter a live robot path, load and follow `robot-safety`; if the
+skill is unavailable, stop rather than proceeding. Clearly local/offline work does
+not activate it.
+
 ## quick-status
 
 Use the `quick-status` CLI command whenever it would help quickly understand repo,
