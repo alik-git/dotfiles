@@ -30,6 +30,10 @@ MANAGED_TABLES = {
         "tool_timeout_sec": "120",
         "default_tools_approval_mode": '"prompt"',
     },
+    "desktop": {
+        "open-link-in-target-preference": '"external-browser"',
+        "open-local-url-in-target-preference": '"external-browser"',
+    },
 }
 
 TABLE_RE = re.compile(r"^\s*\[([^\]]+)\]\s*$")
