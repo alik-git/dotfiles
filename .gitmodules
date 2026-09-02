@@ -1,3 +1,6 @@
 [submodule "dotfiles_private"]
 	path = dotfiles_private
 	url = https://github.com/alik-git/dotfiles_private.git
+[submodule "vendor/skills/frontier-advisor"]
+	path = vendor/skills/frontier-advisor
+	url = https://github.com/alik-git/frontier-advisor-skill.git
