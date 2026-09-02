@@ -16,7 +16,6 @@ chezmoi init https://github.com/alik-git/dotfiles.git
 cd ~/.local/share/chezmoi
 chezmoi diff      # preview before applying
 chezmoi apply
-agent-skills bootstrap
 ```
 
 Not Ali / no access to the private companion repo? Fine — skip
@@ -34,10 +33,7 @@ git config --global user.email "you@example.com"
 ```
 
 Update later with `git pull && git submodule update --init dotfiles_private &&
-chezmoi diff && chezmoi apply`. Agent skills are independent clones: run
-`agent-skills update frontier-advisor` for the general advisor, and
-`agent-skills review robot-safety` before installing the exact reviewed safety
-commit it reports.
+chezmoi diff && chezmoi apply`.
 
 ## Machine setup
 
@@ -166,15 +162,18 @@ Two `pre-commit` checks guard the public repo (install with
 private repo (absent on public-only clones); Codex rewrites parts of it at
 runtime, so expect `chezmoi diff` to show drift there.
 
-Agent skills are standalone Git clones under `~/.local/share/agent-skills`.
-Chezmoi manages only their discovery symlinks for Codex and Claude; skill
-updates do not require dotfiles commits. `agent-skills bootstrap` clones missing
-public skills; authorized users can add robot safety with `agent-skills
-bootstrap robot-safety REPOSITORY_URL`. `agent-skills doctor` reports missing
-clones, broken links, and installed revisions. Frontier advisor fast-forwards
-explicitly. Robot safety requires reviewing the candidate diff and supplying
-its full commit SHA, so a dotfiles apply or shell startup can never silently
-change the safety policy.
+Agent skills are standalone Git clones under `~/.agents/skills`, where Codex
+discovers them directly. Claude uses symlinks to the same clones. Install or
+update a skill with ordinary Git commands; skill releases do not require
+dotfiles commits. For example:
+
+```bash
+git clone https://github.com/alik-git/frontier-advisor-skill.git \
+  ~/.agents/skills/frontier-advisor
+git -C ~/.agents/skills/frontier-advisor pull --ff-only
+```
+
+Private skills use the same layout with their authorized repository URL.
 
 ### Bootstrap
 `bootstrap/` is tracked reference material (not applied): `linux/`, `macos/`,
