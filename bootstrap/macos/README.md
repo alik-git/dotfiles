@@ -42,7 +42,7 @@ Optional or workflow-dependent tools:
 - Miniconda or Miniforge
 - VS Code command-line launcher, `code`
 - `shpool`, if macOS support is wanted for the same workflow as Linux
-- worklogs / quick-status CLIs, depending on their current install source
+- quick-status CLI, depending on its current install source
 
 ## Shell
 

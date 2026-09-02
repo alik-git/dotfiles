@@ -48,19 +48,12 @@ If the user understands the tradeoff and is making an intentional design or
 workflow decision, trust that decision and implement it; the user is ultimately
 responsible for the work.
 
-## Worklog and Scratch
+## Task Artifacts
 
-Use `~/worklog` for durable notes, plans, investigations, and code reviews.
-Use `~/worklog/SCRATCH.md` for temporary commands, bulky output, and rough
-working notes. For all rules, layouts, git repos, and artifact conventions,
-read `~/.agent_files/docs/worklog.md`.
-{{- $wlr := joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "AGENTS.md.d" "section_worklog_repos.md.tmpl" -}}
-{{- if stat $wlr }}
-
-Worklog scope → git remote mapping (private):
-
-{{ include $wlr -}}
-{{- end }}
+Use the chat as the default working record. Do not create worklogs, plan files,
+companion notes, investigation documents, or similar task artifacts unless the
+user explicitly asks for one. Commits, pull requests, issues, and repository
+documentation are the normal durable engineering record.
 
 If a referenced file under `~/.agent_files` is missing or unavailable, say that explicitly instead of assuming its contents.
 
@@ -127,18 +120,9 @@ history is under `~/.codex/sessions`.
 - Use `tqdm` for long-running loops or processes.
 - Organize code as a proper Python package unless there is a good reason not to.
 
-## Dev Workflow
-
-Before starting any task, read `~/.agent_files/docs/dev-workflow.md`. It covers
-the three task buckets (read-only, discuss-first, upfront-workset), task notes,
-worksets, and companion note discipline. Do not create a workset for read-only
-tasks like code reviews or investigations.
-
 ## References
 
 - Pull request guidance: `~/.agent_files/PULL_REQUEST_TEMPLATE.md`
-- Dev workflow reference: `~/.agent_files/docs/dev-workflow.md`
-- Worklog guidance: `~/.agent_files/docs/worklog.md`
 {{ $mn := index . "machine_name" | default "" -}}
 {{- $msec := joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "AGENTS.md.d" (printf "section_%s.md.tmpl" $mn) -}}
 {{- if and (ne $mn "") (stat $msec) }}
