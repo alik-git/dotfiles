@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+      "Bash(agent-chat-reader*)",
       "Bash(awk*)",
       "Bash(basename*)",
       "Bash(cat*)",
