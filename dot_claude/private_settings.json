@@ -95,7 +95,7 @@
     ],
     "defaultMode": "auto"
   },
-  "effortLevel": "xhigh",
+  "effortLevel": "medium",
   "advisorModel": "opus",
   "theme": "dark",
   "skipWorkflowUsageWarning": true
