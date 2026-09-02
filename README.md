@@ -32,8 +32,8 @@ git config --global user.name "Your Name"
 git config --global user.email "you@example.com"
 ```
 
-Update later with `git pull && chezmoi diff && chezmoi apply` (prefix
-`git submodule update --init --recursive &&` if you have the private repo).
+Update later with `git pull && git submodule update --init dotfiles_private &&
+chezmoi diff && chezmoi apply`.
 
 ## Machine setup
 
@@ -161,6 +161,19 @@ Two `pre-commit` checks guard the public repo (install with
 `~/.claude/CLAUDE.md` point to it. `~/.codex/config.toml` is managed from the
 private repo (absent on public-only clones); Codex rewrites parts of it at
 runtime, so expect `chezmoi diff` to show drift there.
+
+Agent skills are standalone Git clones under `~/.agents/skills`, where Codex
+discovers them directly. Claude uses symlinks to the same clones. Install or
+update a skill with ordinary Git commands; skill releases do not require
+dotfiles commits. For example:
+
+```bash
+git clone https://github.com/alik-git/frontier-advisor-skill.git \
+  ~/.agents/skills/frontier-advisor
+git -C ~/.agents/skills/frontier-advisor pull --ff-only
+```
+
+Private skills use the same layout with their authorized repository URL.
 
 ### Bootstrap
 `bootstrap/` is tracked reference material (not applied): `linux/`, `macos/`,
