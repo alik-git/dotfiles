@@ -106,6 +106,13 @@ history is under `~/.codex/sessions`.
 
 - Use the Python environment tooling documented by the repo or local machine
   docs.
+- For ad hoc plotting, data analysis, image/video inspection, MCAP or ROS bag
+  decoding, and temporary Python scripts, use the shared scratch interpreter:
+  `~/.agent_files/tooling/ai-scratch/bin/ai-python`. It is available to Codex,
+  Claude, and other local agents without shell activation.
+- Do not install repository code or heavy project runtimes into the shared
+  scratch environment. Continue using each repository's documented uv, veneer,
+  Conda, or ROS environment for repository tests and runtime work.
 - Docstring every function: one line for simple helpers; a concise purpose and
   invariants paragraph for complex logic. Do not restate arguments or types.
 - Prefer `pathlib` over `os` for path-related code.

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly SCRIPT_PATH="$(realpath "${BASH_SOURCE[0]}")"
+readonly ROOT="$(cd "$(dirname "$SCRIPT_PATH")/.." && pwd)"
+readonly PYTHON="$ROOT/.venv/bin/python"
+readonly CACHE_ROOT="${AI_SCRATCH_CACHE_DIR:-${TMPDIR:-/tmp}/ai-scratch-cache-${UID}}"
+
+if [[ ! -x "$PYTHON" ]]; then
+  echo "error: ai-scratch is not bootstrapped; run $ROOT/bin/bootstrap" >&2
+  exit 1
+fi
+
+export MPLCONFIGDIR="${MPLCONFIGDIR:-$CACHE_ROOT/matplotlib}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$CACHE_ROOT/xdg}"
+mkdir -p "$MPLCONFIGDIR" "$XDG_CACHE_HOME"
+exec "$PYTHON" "$@"
