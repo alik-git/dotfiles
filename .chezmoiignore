@@ -1,6 +1,8 @@
 README.md
 scripts
 scripts/**
+vendor
+vendor/**
 bootstrap/**
 dotfiles_private/**
 {{/* ~/.gitconfig carries machine-local gh credential helpers that `gh auth
