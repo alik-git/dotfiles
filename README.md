@@ -66,10 +66,9 @@ does not load it; this local config is the source of truth.)
 A few small, public command-line tools, all installable with uv (or `pip`):
 
 ```bash
-uv tool install worklogs workset quick-status veneer-py agent-chat-reader
+uv tool install workset quick-status veneer-py agent-chat-reader
 ```
 
-- **`worklogs`** — create dated worklog notes/plans (and the worksets that mirror them).
 - **`workset`** — make a **workset**: a directory of git worktrees for one task.
 - **`veneer`** — per-worktree Python env: a thin venv "veneer" over a shared conda base.
 - **`quick-status`** (`qs`) — one-shot snapshot of repo, worktree, CI, and env state.
@@ -90,21 +89,12 @@ api = "~/repos/api"   # placeholder: your short-name = local clone path
 web = "~/repos/web"
 ```
 
-`worklogs` reads `~/.config/worklogs/config.toml` (chezmoi ships an editable
-default — `root`, `default_scope`, `timezone`, `worksets_root`). A worklog's
-**scope** is just its top-level bucket, e.g. `personal` or `work`.
-
-First run (replace the `your-org`/`api` placeholders; match `--scope` to your
-`default_scope`):
+First run (replace the `your-org`/`api` placeholders):
 
 ```bash
 git clone https://github.com/your-org/api.git ~/repos/api
-worklogs new api-refactor--plan --scope personal
-worklogs workset api-refactor api:feat/refactor
+workset new api-refactor api:feat/refactor
 ```
-
-For the day-to-day loop, see `~/.agent_files/docs/dev-workflow.md` (applied by
-chezmoi).
 
 ## How it works
 
