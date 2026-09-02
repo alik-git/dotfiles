@@ -16,6 +16,7 @@ chezmoi init https://github.com/alik-git/dotfiles.git
 cd ~/.local/share/chezmoi
 chezmoi diff      # preview before applying
 chezmoi apply
+agent-skills bootstrap
 ```
 
 Not Ali / no access to the private companion repo? Fine — skip
@@ -32,8 +33,11 @@ git config --global user.name "Your Name"
 git config --global user.email "you@example.com"
 ```
 
-Update later with `git pull && chezmoi diff && chezmoi apply` (prefix
-`git submodule update --init --recursive &&` if you have the private repo).
+Update later with `git pull && git submodule update --init dotfiles_private &&
+chezmoi diff && chezmoi apply`. Agent skills are independent clones: run
+`agent-skills update frontier-advisor` for the general advisor, and
+`agent-skills review robot-safety` before installing the exact reviewed safety
+commit it reports.
 
 ## Machine setup
 
@@ -161,6 +165,16 @@ Two `pre-commit` checks guard the public repo (install with
 `~/.claude/CLAUDE.md` point to it. `~/.codex/config.toml` is managed from the
 private repo (absent on public-only clones); Codex rewrites parts of it at
 runtime, so expect `chezmoi diff` to show drift there.
+
+Agent skills are standalone Git clones under `~/.local/share/agent-skills`.
+Chezmoi manages only their discovery symlinks for Codex and Claude; skill
+updates do not require dotfiles commits. `agent-skills bootstrap` clones missing
+public skills; authorized users can add robot safety with `agent-skills
+bootstrap robot-safety REPOSITORY_URL`. `agent-skills doctor` reports missing
+clones, broken links, and installed revisions. Frontier advisor fast-forwards
+explicitly. Robot safety requires reviewing the candidate diff and supplying
+its full commit SHA, so a dotfiles apply or shell startup can never silently
+change the safety policy.
 
 ### Bootstrap
 `bootstrap/` is tracked reference material (not applied): `linux/`, `macos/`,
