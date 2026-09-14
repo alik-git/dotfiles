@@ -32,6 +32,16 @@ dotfiles_private/**
 .agent_files/local
 .agent_files/local/**
 {{- end }}
+{{/* Client private keys are opt-in per machine; never deploy them to servers
+     just because the private companion repository is present. */}}
+{{- $sshClient := index . "ssh_client_key" | default "" }}
+{{- if or (not $hasPrivateRepo) (eq $sshClient "") }}
+.ssh/id_ed25519_work
+.ssh/id_ed25519_work.pub
+{{- end }}
+{{- if or (not $hasPrivateRepo) (ne .chezmoi.os "darwin") }}
+.ssh/known_hosts_mnv
+{{- end }}
 {{- if not $hasRobotSafetySkill }}
 .agents/skills/robot-safety
 .claude/skills/robot-safety

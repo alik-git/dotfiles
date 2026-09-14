@@ -6,6 +6,7 @@
 {{- $machineName := promptStringOnce . "machine_name" "machine_name - short identity for this machine, type a name (e.g. workstation, laptop)" -}}
 {{- $machineClass := promptStringOnce . "machine_class" "machine_class - type exactly: work  OR  personal" "personal" -}}
 {{- $hasGui := promptBoolOnce . "has_gui" "has_gui - does this machine have a desktop GUI? type: true  OR  false" true -}}
+{{- $sshClient := index . "ssh_client_key" | default "" -}}
 {{- $ageKey := joinPath .chezmoi.homeDir ".config" "chezmoi" "key.txt" -}}
 {{ if stat $ageKey -}}
 encryption = "age"
@@ -17,3 +18,5 @@ encryption = "age"
     machine_name = {{ $machineName | quote }}
     machine_class = {{ $machineClass | quote }}
     has_gui = {{ $hasGui }}
+{{ if $sshClient }}    ssh_client_key = {{ $sshClient | quote }}
+{{ end }}
