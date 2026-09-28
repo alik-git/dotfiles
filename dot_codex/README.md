@@ -1,12 +1,9 @@
-# Codex Notes
+# Codex configuration ownership
 
-This folder holds the managed global Codex setup.
+Chezmoi manages the explicitly listed defaults in `modify_private_config.toml`.
+Other keys, including model selection, trusted project paths, and desktop browser
+preferences, belong to the application/user and pass through unchanged.
 
-## Trust Paths
-
-Codex may programmatically add trusted project paths to the live
-`~/.codex/config.toml` on startup. That can make `chezmoi diff` look dirty even
-when the chezmoi source is unchanged.
-
-Treat those path entries as expected local state unless there is a reason to
-manage them explicitly in the chezmoi source.
+Browser preferences are set in the app. Applying dotfiles does not force either
+browser choice or reset an existing preference. The modifier's permission and
+MCP defaults are unchanged by this ownership cleanup.
