@@ -140,29 +140,11 @@ Two `pre-commit` checks guard the public repo (install with
 updates shared Codex settings without overwriting other settings.
 See [browser setup](dot_codex/README.md).
 
-Standalone skills live under `~/.agents/skills`; Claude links to those same
-installations when present. Plugin-installed skills belong to their plugin
-manager. Neither kind needs a submodule or a custom skill-update wrapper.
-
-The local `ali-code-review` skill is owned by this repository under
-`dot_agent_files/skills/`; its Codex and Claude entries link to that one source.
-Older unmanaged copies under `~/.agent_files/skills` are not updated by this repo;
-compare them with their maintained installation before retiring them.
-
-For a standalone skill, ordinary Git commands are enough:
-
-```bash
-git clone https://github.com/alik-git/frontier-advisor-skill.git \
-  ~/.agents/skills/frontier-advisor
-```
-
-Later, after accounting for any local edits:
-
-```bash
-cd ~/.agents/skills/frontier-advisor && git pull --ff-only
-```
-
-Private skills use the same layout with their authorized repository URL.
+Custom skills are standalone Git repos cloned into `~/.agents/skills/<name>`.
+Codex discovers them there; link each installation into `~/.claude/skills/<name>`
+for Claude. Update with ordinary Git. The private companion's
+`bootstrap/skills.md` lists the repos to install. Plugin skills stay with their
+plugin manager; dotfiles does not manage skill contents or links.
 
 ### Bootstrap
 `bootstrap/` is tracked reference material (not applied): `linux/`, `macos/`,
