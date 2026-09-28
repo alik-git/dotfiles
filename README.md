@@ -32,8 +32,33 @@ git config --global user.name "Your Name"
 git config --global user.email "you@example.com"
 ```
 
-Update later with `git pull && git submodule update --init dotfiles_private &&
-chezmoi diff && chezmoi apply`.
+## Updating an existing machine
+
+The public source, private companion, and live dotfiles can each have local
+changes. Inspect them before updating; a merged PR does not update any of them:
+
+```bash
+cd ~/.local/share/chezmoi && \
+  git status --short && \
+  git diff --submodule && \
+  git submodule status
+```
+
+For an initialized private companion, inspect its own `git status` and `git diff`
+as well. Preserve or reconcile local edits before fast-forwarding the public
+checkout and updating the companion to the pinned revision. Authenticate with
+`gh` if the companion has not been initialized; the public-only subset omits
+private targets.
+
+After reconciling the source, preview the intended targets with `chezmoi diff`,
+then apply that same scope. Recheck it afterward. A whole-home apply is optional,
+not part of every update. Machine-specific `[data]` and the age identity stay
+local; do not copy another computer's configuration wholesale.
+
+If chezmoi reports that its config template changed, review `.chezmoi.toml.tmpl`
+and run `chezmoi init` to regenerate the local config from the existing answers.
+Review the result before applying; this is separate from fetching source updates.
+
 
 ## Machine setup
 
