@@ -1,7 +1,13 @@
-{{- /* This machine's workspace-setup doc, pulled from the private repo by
-       machine_name. Public source names no machine; renders empty without the
-       private repo. */ -}}
+{{- /* Shared references apply to every work-machine profile. */ -}}
+{{- $shared := joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "shared" "docs" -}}
+{{- if and (stat (joinPath $shared "machines.md")) (stat (joinPath $shared "resources.md")) -}}
+# Private environment reference
+
+- [Machines](machines.md): host roles, OS users, and configuration ownership.
+- [Resources](resources.md): services, accounts, and artifact locations.
+{{- else -}}
 {{- $f := joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" (index . "machine_name" | default "") "docs" "workspace-setup-private.md" -}}
-{{- if and (ne (index . "machine_name" | default "") "") (stat $f) -}}
+{{- if stat $f -}}
 {{ include $f }}
+{{- end -}}
 {{- end -}}

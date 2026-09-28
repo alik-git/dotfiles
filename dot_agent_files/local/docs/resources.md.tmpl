@@ -1,0 +1,4 @@
+{{- $f := joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "shared" "docs" "resources.md" -}}
+{{- if stat $f -}}
+{{ include $f }}
+{{- end -}}
