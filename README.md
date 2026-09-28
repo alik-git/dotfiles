@@ -107,7 +107,7 @@ For projects needing a Conda base, `uv tool install veneer-py` adds the veneer C
 - `veneer-py`: the `veneer` CLI for projects needing a shared Conda base.
   Install Conda only when the project needs it; uv is the usual Python starting point.
 
-See [workspace reference](dot_agent_files/docs/workspace-setup.md) for locations.
+See [workspace reference](private_dot_agent_files/docs/workspace-setup.md) for locations.
 
 ## How it works
 
@@ -159,11 +159,11 @@ Two `pre-commit` checks guard the public repo (install with
   Full manual run: `python3 scripts/privacy_check.py --history`.
 
 ### Codex / agent files
-`dot_codex/` and `dot_agent_files/` provide the global Codex/Claude agent setup:
+`private_dot_codex/` and `private_dot_agent_files/` provide the global Codex/Claude agent setup:
 `~/.agent_files/AGENTS.md` is the source of truth, and `~/.codex/AGENTS.md` /
 `~/.claude/CLAUDE.md` point to it. With the private companion installed, chezmoi
 updates shared Codex settings without overwriting other settings.
-See [browser setup](dot_codex/README.md).
+See [browser setup](private_dot_codex/README.md).
 
 Custom skills are standalone Git repos cloned into `~/.agents/skills/<name>`.
 Codex discovers them there; link each installation into `~/.claude/skills/<name>`
