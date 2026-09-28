@@ -1,88 +1,42 @@
-# Workspace Setup
+# Workspace reference
 
-Generic machine/workspace layout and environment conventions.
+Available locations and tools, not a required task setup. Reuse an appropriate
+checkout; a worktree is useful for isolation, and a workset groups worktrees
+when a change spans repositories. No task registry or companion notes are needed.
 
-Anything specific to a given machine — shared environment names, repo shorthand,
-VM/cloud access — lives in that machine's private companion doc under
-`~/.agent_files/local/docs/` (empty unless a private repo provides it).
+## Locations
 
-If you are Ali K and have the private `dotfiles_private` repo applied, also read
-the machine-local companion at
-`~/.agent_files/local/docs/workspace-setup-private.md` for this machine's
-specifics.
+| Location | Typical contents |
+| --- | --- |
+| `~/Projects/repos/` | Existing clones and editable tool-install sources |
+| `~/Projects/worksets/` | Related worktrees grouped by task |
+| `~/Projects/local_data/` | Large datasets and shared local artifacts |
+| `~/Projects/archive/` | Historical local work |
+| `~/.local/share/chezmoi/` | Dotfiles source; private configuration is in `dotfiles_private/` |
+| `~/.agent_files/local/docs/` | Private machine and service references, if installed |
 
-## Project layout
+These describe the existing layout; other checkouts or app-managed worktrees
+are fine. Preserve checkouts and environments that active work relies on.
 
-```text
-~/Projects/
-  repos/       stable/reference checkouts and global tool install sources
-  worksets/    active development contexts with repo worktrees nested inside
-  local_data/  large datasets, generated data, and shared local artifacts
-  archive/     inactive or historical local work
-```
+## Tools
 
-The active unit is a **workset**: a directory holding one or more git worktrees
-for a task, under `~/Projects/worksets/<...>/<repo-name>`.
+| Tool | Useful for |
+| --- | --- |
+| `uv` | Python projects, virtual environments, and standalone CLI tools |
+| `agent-chat-reader` | Searching and reading prior Codex/Claude conversations |
+| `quick-status` (`qs`) | Combined repository, CI, or environment snapshots |
+| `workset` | Grouping Git worktrees for a multi-repository task |
+| `veneer` / Conda | Older environments or dependencies requiring a Conda base |
+| `~/.agent_files/tooling/ai-scratch/bin/ai-python` | Ad hoc analysis, plotting, and media/bag inspection |
 
-- Do not do active task work in canonical checkouts under `~/Projects/repos`.
-  Those are stable/reference copies and global tool install sources only.
-- For active edits, use an existing free workset or create one with `workset
-  new`. Read-only inspection does not require a new workset.
-- A direct Git worktree is also fine for a focused single-repository change.
-- Keep folder contents self-explanatory — branch name, `veneer.toml`, and git
-  status should cover the normal case. No per-workset marker files or
-  registries.
+Use the repository's environment configuration. For new lightweight Python work,
+uv is the usual starting point; veneer/Conda remain available for projects that
+need them. A uv error alone is not a reason to migrate an existing environment.
+The shared scratch environment is for temporary analysis, not project runtimes.
 
-## Stable checkouts and tools
+## Desktop and remote sessions
 
-`~/Projects/repos/<repo>` holds stable/reference checkouts. Point global
-`uv tool install` editable installs at these, not at active worksets.
-
-Inspecting a canonical checkout is fine when it is the fastest source of facts;
-switch to a workset before making edits.
-
-Core tools (installed via `uv tool install`):
-
-- `veneer-py` — Python env manager for conda-based repos (`veneer` command)
-- `workset` — create isolated git-worktree worksets
-- `quick-status` (alias `qs`) — fast snapshot of repo, worktree, CI, and env
-  state
-- `agent-chat-reader` — read and search past Codex & Claude CLI chat history
-
-## Python workflow
-
-Repos with conda dependencies carry a committed, self-contained `veneer.toml`;
-pure-Python repos are managed by uv directly. The shared conda env name for a
-given repo comes from that machine's local doc or the repo's `veneer.toml`
-comment.
-
-`notuv`, `devpy`, and the old `extends`/stack pattern are deprecated — use
-`veneer`.
-
-## GUI over SSH
-
-GUI apps launched from an SSH shell usually need the machine's desktop X session
-(for example an AnyDesk, VNC, or physical session):
-
-- `DISPLAY` is commonly `:1`, but varies by machine.
-- `XAUTHORITY` should usually be unset in the SSH shell.
-- The desktop user may need to allow the SSH user, for example
-  `xhost +si:localuser:<ssh-user>`.
-
-If a GUI app fails with display, GLX, or window-creation errors, verify the
-desktop session and display routing before treating it as an app bug.
-
-Capture the visible desktop with:
-
-```bash
-DISPLAY=:1 env -u XAUTHORITY python3 -c "from PIL import ImageGrab; ImageGrab.grab().save('/tmp/screenshot.png')"
-```
-
-When creating or converting videos, default to H.264 unless a repo doc or the
-user asks otherwise.
-
-## SSH and Git
-
-When a machine is used over SSH with agent forwarding and Git SSH stops working
-in a long-lived shell, suspect a stale forwarded-agent socket before debugging
-GitHub auth.
+A window appears on the machine running the GUI. macOS uses its logged-in desktop
+session; Linux remote GUIs depend on the target's display/session setup. Verify
+the intended host and desktop when launching a viewer remotely; display variables
+and screenshot commands are platform-specific.
