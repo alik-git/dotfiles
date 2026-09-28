@@ -61,14 +61,18 @@ encryption = "age"
 (`dotfiles_private/machines.reference.yaml` is only a human inventory — chezmoi
 does not load it; this local config is the source of truth.)
 
-## Optional tools
+## Workflow tools
 
-Install only tools needed for the current work. `uv tool install` takes one
-package at a time, for example:
+Install the usual helpers during bootstrap so they are available; their use is
+optional for each task. `uv tool install` takes one package at a time:
 
 ```bash
-uv tool install agent-chat-reader
+uv tool install agent-chat-reader && \
+  uv tool install quick-status && \
+  uv tool install workset
 ```
+
+For projects needing a Conda base, `uv tool install veneer-py` adds the veneer CLI.
 
 - `agent-chat-reader`: prior Codex/Claude chat search and reading.
 - `quick-status`: combined repository, CI, and environment snapshots.

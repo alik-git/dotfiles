@@ -21,15 +21,37 @@ has_gui       = true
 `dotfiles_private/machines.reference.yaml` for your own inventory, but chezmoi
 does not load that file — the local config is the source of truth.
 
-## Tools
+## Package Plan
 
-Install what is missing for the work at hand. The usual basics are Homebrew,
-chezmoi, GitHub CLI (`gh`), uv, and ripgrep. `age` is needed to apply encrypted
-private files. `pre-commit` and gitleaks support this repository's checks.
+Bootstrap is a one-time setup: install the recommended tools so they are ready
+when useful. Having a tool installed does not require agents to use it for any
+particular task.
 
-`tmux`, `zellij`, Node tooling, editor launchers, and workflow CLIs are optional.
-Conda/Miniforge and veneer are for projects that need their environment model;
-they are not prerequisites for ordinary uv projects.
+Recommended base tools:
+
+- Homebrew
+- chezmoi
+- GitHub CLI (`gh`)
+- uv
+- `age`
+- `pre-commit` and gitleaks
+- `ripgrep`
+- `fd`
+- `jq`
+- `tmux`
+- `zellij`
+- `nvm`
+- `agent-chat-reader`, `quick-status`, and `workset` (see the root README)
+
+Optional or workflow-dependent tools:
+
+- Miniconda or Miniforge, plus `veneer-py`, for projects needing a Conda base
+- VS Code command-line launcher, `code`, when VS Code is installed
+- `shpool`, if supported and useful on the target machine
+
+uv is the usual Python starting point. Conda and veneer remain available for
+projects that need them; the repository's environment configuration determines
+which to use.
 
 ## Shell
 
