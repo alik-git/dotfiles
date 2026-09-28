@@ -21,28 +21,15 @@ has_gui       = true
 `dotfiles_private/machines.reference.yaml` for your own inventory, but chezmoi
 does not load that file — the local config is the source of truth.
 
-## Package Plan
+## Tools
 
-Install these only after reviewing the first `chezmoi diff`.
+Install what is missing for the work at hand. The usual basics are Homebrew,
+chezmoi, GitHub CLI (`gh`), uv, and ripgrep. `age` is needed to apply encrypted
+private files. `pre-commit` and gitleaks support this repository's checks.
 
-Recommended base tools:
-
-- Homebrew
-- `age`
-- `pre-commit`
-- `ripgrep`
-- `fd`
-- `jq`
-- `tmux`
-- `zellij`
-- `nvm`
-
-Optional or workflow-dependent tools:
-
-- Miniconda or Miniforge
-- VS Code command-line launcher, `code`
-- `shpool`, if macOS support is wanted for the same workflow as Linux
-- quick-status CLI, depending on its current install source
+`tmux`, `zellij`, Node tooling, editor launchers, and workflow CLIs are optional.
+Conda/Miniforge and veneer are for projects that need their environment model;
+they are not prerequisites for ordinary uv projects.
 
 ## Shell
 
