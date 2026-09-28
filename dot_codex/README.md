@@ -1,12 +1,11 @@
-# Codex Notes
+# Codex settings
 
-This folder holds the managed global Codex setup.
+For click → Chrome and ⌘-click → the in-app browser:
 
-## Trust Paths
+- Make Chrome the macOS default browser.
+- In the app, set **Web URL and link open destination** to **Default browser**
+  (and **Local URL open destination** if desired).
+- Leave **Open web link in default browser** under keyboard shortcuts **Unassigned**.
 
-Codex may programmatically add trusted project paths to the live
-`~/.codex/config.toml` on startup. That can make `chezmoi diff` look dirty even
-when the chezmoi source is unchanged.
-
-Treat those path entries as expected local state unless there is a reason to
-manage them explicitly in the chezmoi source.
+Chezmoi leaves these app preferences alone. `modify_private_config.toml` updates
+our other shared settings without replacing the rest of `config.toml`.

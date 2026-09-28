@@ -23,26 +23,35 @@ does not load that file — the local config is the source of truth.
 
 ## Package Plan
 
-Install these only after reviewing the first `chezmoi diff`.
+Bootstrap is a one-time setup: install the recommended tools so they are ready
+when useful. Having a tool installed does not require agents to use it for any
+particular task.
 
 Recommended base tools:
 
 - Homebrew
+- chezmoi
+- GitHub CLI (`gh`)
+- uv
 - `age`
-- `pre-commit`
+- `pre-commit` and gitleaks
 - `ripgrep`
 - `fd`
 - `jq`
 - `tmux`
 - `zellij`
 - `nvm`
+- `agent-chat-reader`, `quick-status`, and `workset` (see the root README)
 
 Optional or workflow-dependent tools:
 
-- Miniconda or Miniforge
-- VS Code command-line launcher, `code`
-- `shpool`, if macOS support is wanted for the same workflow as Linux
-- quick-status CLI, depending on its current install source
+- Miniconda or Miniforge, plus `veneer-py`, for projects needing a Conda base
+- VS Code command-line launcher, `code`, when VS Code is installed
+- `shpool`, if supported and useful on the target machine
+
+uv is the usual Python starting point. Conda and veneer remain available for
+projects that need them; the repository's environment configuration determines
+which to use.
 
 ## Shell
 
