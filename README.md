@@ -148,9 +148,10 @@ Two `pre-commit` checks guard the public repo (install with
 ### Codex / agent files
 `dot_codex/` and `dot_agent_files/` provide the global Codex/Claude agent setup:
 `~/.agent_files/AGENTS.md` is the source of truth, and `~/.codex/AGENTS.md` /
-`~/.claude/CLAUDE.md` point to it. `~/.codex/config.toml` is managed from the
-private repo (absent on public-only clones); Codex rewrites parts of it at
-runtime, so expect `chezmoi diff` to show drift there.
+`~/.claude/CLAUDE.md` point to it. `~/.codex/config.toml` uses a modifier in
+this public source, enabled when the private companion is present. It manages
+listed defaults and preserves other app-owned values, including browser
+preferences. See [configuration ownership](dot_codex/README.md).
 
 Agent skills are standalone Git clones under `~/.agents/skills`, where Codex
 discovers them directly. Claude uses symlinks to the same clones. Install or
