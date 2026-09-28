@@ -8,8 +8,8 @@ CLIs. This page is how to adopt them. The canonical working copy lives at
 ## Quick start
 
 Prerequisites: **chezmoi** (applies the dotfiles) and **[uv](https://docs.astral.sh/uv/)**
-(installs the CLIs — `curl -LsSf https://astral.sh/uv/install.sh | sh`, or use
-`pip`). `veneer` additionally needs Miniconda/conda; the other CLIs don't.
+(Python environments and optional CLI tools). Conda is only needed by projects
+that explicitly depend on it.
 
 ```bash
 chezmoi init https://github.com/alik-git/dotfiles.git
@@ -61,40 +61,28 @@ encryption = "age"
 (`dotfiles_private/machines.reference.yaml` is only a human inventory — chezmoi
 does not load it; this local config is the source of truth.)
 
-## Workflow CLIs
+## Workflow tools
 
-A few small, public command-line tools, all installable with uv (or `pip`):
-
-```bash
-uv tool install workset quick-status veneer-py agent-chat-reader
-```
-
-- **`workset`** — make a **workset**: a directory of git worktrees for one task.
-- **`veneer`** — per-worktree Python env: a thin venv "veneer" over a shared conda base.
-- **`quick-status`** (`qs`) — one-shot snapshot of repo, worktree, CI, and env state.
-- **`agent-chat-reader`** — read and search past Codex & Claude CLI history.
-
-`workset` reads `~/.config/workset/repos.toml`, which maps a short name to a
-**local clone you've already made**. It isn't shipped (it points at your own
-paths), so create it — `api`/`web` here are placeholders:
-
-```toml
-[workset]
-root = "~/worksets"
-date_prefix = true
-timezone = "America/New_York"
-
-[repos]
-api = "~/repos/api"   # placeholder: your short-name = local clone path
-web = "~/repos/web"
-```
-
-First run (replace the `your-org`/`api` placeholders):
+Install the usual helpers during bootstrap so they are available; their use is
+optional for each task. `uv tool install` takes one package at a time:
 
 ```bash
-git clone https://github.com/your-org/api.git ~/repos/api
-workset new api-refactor api:feat/refactor
+uv tool install agent-chat-reader && \
+  uv tool install quick-status && \
+  uv tool install workset
 ```
+
+For projects needing a Conda base, `uv tool install veneer-py` adds the veneer CLI.
+
+- `agent-chat-reader`: prior Codex/Claude chat search and reading.
+- `quick-status`: combined repository, CI, and environment snapshots.
+- `workset`: groups Git worktrees for multi-repository changes; ordinary Git
+  worktrees or existing checkouts are also fine. Its optional local repo map
+  is `~/.config/workset/repos.toml`.
+- `veneer-py`: the `veneer` CLI for projects needing a shared Conda base.
+  Install Conda only when the project needs it; uv is the usual Python starting point.
+
+See [workspace reference](dot_agent_files/docs/workspace-setup.md) for locations.
 
 ## How it works
 
@@ -148,9 +136,9 @@ Two `pre-commit` checks guard the public repo (install with
 ### Codex / agent files
 `dot_codex/` and `dot_agent_files/` provide the global Codex/Claude agent setup:
 `~/.agent_files/AGENTS.md` is the source of truth, and `~/.codex/AGENTS.md` /
-`~/.claude/CLAUDE.md` point to it. `~/.codex/config.toml` is managed from the
-private repo (absent on public-only clones); Codex rewrites parts of it at
-runtime, so expect `chezmoi diff` to show drift there.
+`~/.claude/CLAUDE.md` point to it. With the private companion installed, chezmoi
+updates shared Codex settings without overwriting other settings.
+See [browser setup](dot_codex/README.md).
 
 Standalone skills live under `~/.agents/skills`; Claude links to those same
 installations when present. Plugin-installed skills belong to their plugin
