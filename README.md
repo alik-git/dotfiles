@@ -52,8 +52,8 @@ private targets.
 
 After reconciling the source, preview the intended targets with `chezmoi diff`,
 then apply that same scope. Recheck it afterward. A whole-home apply is optional,
-not part of every update. Machine-specific `[data]` and the age identity stay
-local; do not copy another computer's configuration wholesale.
+not part of every update. Machine-specific `[data]` stays local; do not copy another computer's
+configuration wholesale. Keep the age decryption key only in the password manager.
 
 If chezmoi reports that its config template changed, review `.chezmoi.toml.tmpl`
 and run `chezmoi init` to regenerate the local config from the existing answers.
@@ -73,15 +73,11 @@ machine_class = "work"          # work | personal  -> task shell layer
 has_gui       = false           # gate GUI-only targets (VS Code, Nautilus)
 ```
 
-The OS is auto-detected (you don't declare it). To configure by hand instead, just
-write that block yourself; with the private repo + encrypted secrets, also add:
-
-```toml
-encryption = "age"
-[age]
-    identity = "~/.config/chezmoi/key.txt"
-    recipient = "<your age recipient>"
-```
+The OS is auto-detected (you don't declare it). To configure by hand instead,
+write that block yourself. Keep the age decryption key only in the password
+manager, not in a persistent local identity file. Encrypted targets require
+explicitly supplying the key for that operation; ordinary configuration should
+not depend on a stored key. Never include the key in shell commands, logs, or Git.
 
 (`dotfiles_private/machines.reference.yaml` is only a human inventory — chezmoi
 does not load it; this local config is the source of truth.)
@@ -147,7 +143,8 @@ secrets -> this machine's secrets       (private, age-encrypted)
 Private tracked files live in the `dotfiles_private` submodule; public targets
 that need them are thin templates that include from it. The public-repo privacy
 denylist is `dotfiles_private/privacy/denylist.tsv`. Machine secrets are
-`age`-encrypted; the age identity is machine-local and lives outside the repo.
+`age`-encrypted; the decryption key belongs only in the password manager.
+Do not distribute it through bootstrap or retain it on development machines.
 
 ### Privacy checks
 Two `pre-commit` checks guard the public repo (install with
