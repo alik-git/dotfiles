@@ -1,9 +1,11 @@
-# Codex configuration ownership
+# Codex settings
 
-Chezmoi manages the explicitly listed defaults in `modify_private_config.toml`.
-Other keys, including model selection, trusted project paths, and desktop browser
-preferences, belong to the application/user and pass through unchanged.
+For click → Chrome and ⌘-click → the in-app browser:
 
-Browser preferences are set in the app. Applying dotfiles does not force either
-browser choice or reset an existing preference. The modifier's permission and
-MCP defaults are unchanged by this ownership cleanup.
+- Make Chrome the macOS default browser.
+- In the app, set **Web URL and link open destination** to **Default browser**
+  (and **Local URL open destination** if desired).
+- Leave **Open web link in default browser** under keyboard shortcuts **Unassigned**.
+
+Chezmoi leaves these app preferences alone. `modify_private_config.toml` updates
+our other shared settings without replacing the rest of `config.toml`.
