@@ -22,7 +22,6 @@ what is available, not a required workflow.
 - Put copy-paste commands in one block, including `cd`, environment setup, and
   the command itself. Chain dependent shell steps with `&&`; use trailing `\`
   for readability. Omit arguments that merely repeat defaults.
-- Prefer `cd /path/to/repo && git ...` over `git -C /path/to/repo ...`.
 - Docstring every function: one line for simple helpers; explain purpose and
   invariants for complex logic without restating arguments or types.
 - Keep commits focused and use Conventional Commits. No AI attribution in
