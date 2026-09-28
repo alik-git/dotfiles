@@ -1,135 +1,48 @@
 # AGENTS.md
 
-Ali K's personal global `AGENTS.md`.
+Ali K's cross-project preferences. Repository instructions own project setup.
+Choose the tools and approach that fit the task; the references below describe
+what is available, not a required workflow.
 
-## Core Rules
+## Working style
 
-- Do not store, commit, or push secrets, credentials, or other sensitive information.
-- If this file conflicts with the code or repo docs, trust the code and docs, then update `AGENTS.md`.
-- When unsure, ask a short question or make the smallest reversible change. Do not invent local workflow assumptions.
+- Be direct about mistakes or a flawed premise. Use judgment on routine,
+  reversible decisions; ask when missing information materially changes the work.
+- Preserve unrelated changes and ongoing work. An appropriate existing checkout
+  is fine; worktrees and worksets are available when isolation is useful.
+- Chat is the default task record. Create plan files, worklogs, or companion
+  notes only when requested. Older `~/worklog` files are historical.
+- Keep secrets out of chat and Git. Private machine/account references belong
+  in the private companion repository; credentials remain in their secure stores.
+- For chezmoi-managed files, edit source rather than live files. Inspect the
+  scoped `chezmoi diff` before applying, preserving unrelated drift.
 
-## Scope
+## Commands and code
 
-This file is only for persistent cross-project instructions. Put repo-specific workflow, commands, architecture, and environment details in the repo's own `AGENTS.md`.
+- Put copy-paste commands in one block, including `cd`, environment setup, and
+  the command itself. Chain dependent shell steps with `&&`; use trailing `\`
+  for readability. Omit arguments that merely repeat defaults.
+- Docstring every function: one line for simple helpers; explain purpose and
+  invariants for complex logic without restating arguments or types.
+- Keep commits focused and use Conventional Commits. No AI attribution in
+  commits or PRs. A request to push includes committing the intended changes.
+- Use the repository's PR template when present; the personal fallback is
+  `~/.agent_files/PULL_REQUEST_TEMPLATE.md`.
+- Default to H.264 when creating or converting video.
 
-## Physical Robot Safety
+## Physical robots
 
-Never execute anything that could physically actuate a robot; the user must run it.
-When an action may enter a live robot path, load and follow `private-safety-skill`; if the
-skill is unavailable, stop rather than proceeding. Clearly local/offline work does
-not activate it.
+Never execute anything that could physically actuate a robot; the user runs it.
+For actions that may enter a live robot path, use `private-safety-skill`; stop if it is
+unavailable. Clearly local/offline work does not activate it.
 
-## quick-status
+## Available context
 
-Use the `quick-status` CLI command whenever it would help quickly understand repo,
-worktree, GitHub CI, or Python environment state. Prefer it over reconstructing
-those facts with multiple ad hoc commands when its snapshot fits the question.
+- `~/.agent_files/docs/workspace-setup.md`: tools and workspace locations.
+- `~/.agent_files/local/docs/resources.md`: services, accounts, and artifact locations.
+- `~/.agent_files/local/docs/machines.md`: host roles, OS users, and configuration ownership.
+  Private references are available when the companion repository is installed.
+- `agent-chat-reader`: search/read prior Codex and Claude chats when useful.
+  Historical chat claims may need current verification.
 
-## Worksets
-
-When a machine has a configured workset workflow, do active task work in an
-isolated workset or worktree rather than editing stable/reference checkouts
-directly. Prefer local machine docs for the exact roots and commands.
-
-## Shorthand
-
-- `wt` = `worktree`
-- `p` = `push`
-
-## User Control and Pushback
-
-If the user's request appears to rest on a clearly false premise or important
-misunderstanding, especially about software or workflow design, pause, push back
-directly, and ask a concise clarification instead of doing it; the user's main
-goal is good work, not agreement, so do not let sloppy or harmful design
-patterns pass silently.
-
-If the user understands the tradeoff and is making an intentional design or
-workflow decision, trust that decision and implement it; the user is ultimately
-responsible for the work.
-
-## Task Artifacts
-
-Use the chat as the default working record. Do not create worklogs, plan files,
-companion notes, investigation documents, or similar task artifacts unless the
-user explicitly asks for one. Commits, pull requests, issues, and repository
-documentation are the normal durable engineering record.
-
-**Temporary note:** Older chats and files may mention the retired `~/worklog`
-workflow and its plan, companion, or investigation files. That workflow was
-removed as bloated ceremony; treat existing files as historical and do not
-create new ones unless the user explicitly asks.
-
-If a referenced file under `~/.agent_files` is missing or unavailable, say that explicitly instead of assuming its contents.
-
-## Codex Chat History
-
-When local Codex or Claude chat/session history would help with the current
-task, investigation, or debugging problem, use `agent-chat-reader` first unless
-explicitly told not to. Prefer the installed command directly, or run it through
-uv:
-
-- `agent-chat-reader --list`
-- `agent-chat-reader --find <keyword>`
-- `uv run agent-chat-reader --list`
-
-If `agent-chat-reader` is unavailable or cannot answer the question for some
-reason, fall back to manually reading local history files. Codex chat/session
-history is under `~/.codex/sessions`.
-
-## Working Style
-
-### Chezmoi
-
-- For files managed by chezmoi, edit the chezmoi source under `~/.local/share/chezmoi`, not the live file path.
-- For chezmoi-managed files, always run `chezmoi diff` before `chezmoi apply`.
-- For small changes, if `chezmoi apply` is being difficult, and it would be easier to manually bring the live files up to date with the chezmoi source, do that and then verify the affected paths with `chezmoi diff`.
-
-### Commands
-
-- When running Git commands in a repo, prefer `cd /path/to/repo && git ...` over `git -C /path/to/repo ...` wherever possible.
-- When giving the user a command that spans multiple shell steps, chain them with `&&`. For readability, break long commands across lines with trailing `\` while keeping the `&&` chaining.
-- When giving commands for the user to run, omit arguments that only restate current defaults unless there is a reason to show them explicitly.
-
-### Media
-
-- When creating or converting videos, use H.264 by default unless repo-specific docs or the user explicitly asks for another codec.
-
-### Git
-
-- Keep commits small and logically separate.
-- Never add AI/agent attribution to commits or pull requests: no `Co-Authored-By` trailers (e.g. Claude) and no "Generated with ..." lines.
-- If I ask you to push and there are uncommitted changes, commit and push.
-- For large or complex changes, use a feature branch, split the work into multiple commits, and ask if you should open a draft pull request.
-- For pull request guidance, see `~/.agent_files/PULL_REQUEST_TEMPLATE.md`.
-- Before creating or materially editing a pull request body, read the repo's `.github/PULL_REQUEST_TEMPLATE.md` if present; otherwise read `~/.agent_files/PULL_REQUEST_TEMPLATE.md`.
-- Use the template structure unless there is a clear reason not to, and verify the final PR body describes the final state without stale or deferred features.
-- Use Conventional Commits for commit messages: `type(scope): description` when a scope helps, otherwise `type: description`.
-- Common types include `fix`, `feat`, `docs`, `refactor`, `test`, `chore`, `perf`, and `style`.
-- Examples: `fix(auth): handle expired token refresh` and `docs: clarify setup steps`.
-
-### Python
-
-- Use the Python environment tooling documented by the repo or local machine
-  docs.
-- For ad hoc plotting, data analysis, image/video inspection, MCAP or ROS bag
-  decoding, and temporary Python scripts, use the shared scratch interpreter:
-  `~/.agent_files/tooling/ai-scratch/bin/ai-python`. It is available to Codex,
-  Claude, and other local agents without shell activation.
-- Do not install repository code or heavy project runtimes into the shared
-  scratch environment. Continue using each repository's documented uv, veneer,
-  Conda, or ROS environment for repository tests and runtime work.
-- Docstring every function: one line for simple helpers; a concise purpose and
-  invariants paragraph for complex logic. Do not restate arguments or types.
-- Prefer `pathlib` over `os` for path-related code.
-- Use `tqdm` for long-running loops or processes.
-- Organize code as a proper Python package unless there is a good reason not to.
-
-## References
-
-- Pull request guidance: `~/.agent_files/PULL_REQUEST_TEMPLATE.md`
-{{ $mn := index . "machine_name" | default "" -}}
-{{- $msec := joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "AGENTS.md.d" (printf "section_%s.md.tmpl" $mn) -}}
-{{- if and (ne $mn "") (stat $msec) }}
-{{ include $msec -}}
-{{- end -}}
+If a referenced resource is unavailable, say so rather than inventing its contents.
