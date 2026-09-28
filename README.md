@@ -152,15 +152,26 @@ Two `pre-commit` checks guard the public repo (install with
 private repo (absent on public-only clones); Codex rewrites parts of it at
 runtime, so expect `chezmoi diff` to show drift there.
 
-Agent skills are standalone Git clones under `~/.agents/skills`, where Codex
-discovers them directly. Claude uses symlinks to the same clones. Install or
-update a skill with ordinary Git commands; skill releases do not require
-dotfiles commits. For example:
+Standalone skills live under `~/.agents/skills`; Claude links to those same
+installations when present. Plugin-installed skills belong to their plugin
+manager. Neither kind needs a submodule or a custom skill-update wrapper.
+
+The local `ali-code-review` skill is owned by this repository under
+`dot_agent_files/skills/`; its Codex and Claude entries link to that one source.
+Older unmanaged copies under `~/.agent_files/skills` are not updated by this repo;
+compare them with their maintained installation before retiring them.
+
+For a standalone skill, ordinary Git commands are enough:
 
 ```bash
 git clone https://github.com/alik-git/frontier-advisor-skill.git \
   ~/.agents/skills/frontier-advisor
-git -C ~/.agents/skills/frontier-advisor pull --ff-only
+```
+
+Later, after accounting for any local edits:
+
+```bash
+cd ~/.agents/skills/frontier-advisor && git pull --ff-only
 ```
 
 Private skills use the same layout with their authorized repository URL.

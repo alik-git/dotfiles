@@ -18,7 +18,6 @@ dotfiles_private/**
 {{- if eq .chezmoi.os "darwin" }}{{- $osType = "macos" }}{{- end }}
 {{/* Public-only clones have no private companion submodule. */}}
 {{- $hasPrivateRepo := stat (joinPath .chezmoi.sourceDir "dotfiles_private" "privacy" "denylist.tsv") }}
-{{- $hasRobotSafetySkill := stat (joinPath .chezmoi.sourceDir "dotfiles_private" "vendor" "skills" "robot-safety" "SKILL.md") }}
 {{- if not $hasPrivateRepo }}
 .codex/config.toml
 .gitconfig.work
@@ -42,9 +41,11 @@ dotfiles_private/**
 {{- if or (not $hasPrivateRepo) (ne .chezmoi.os "darwin") }}
 .ssh/known_hosts_mnv
 {{- end }}
-{{- if not $hasRobotSafetySkill }}
-.agents/skills/robot-safety
-.claude/skills/robot-safety
+{{/* Standalone skills are installed independently of the private submodule. */}}
+{{- range $skill := list "robot-safety" "frontier-advisor" }}
+{{- if not (stat (joinPath $.chezmoi.homeDir ".agents" "skills" $skill "SKILL.md")) }}
+.claude/skills/{{ $skill }}
+{{- end }}
 {{- end }}
 {{/* Manage ~/.profile on work machines and macOS machines for login-shell environment. */}}
 {{- if and (ne $machineClass "work") (ne .chezmoi.os "darwin") }}
