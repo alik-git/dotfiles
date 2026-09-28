@@ -41,12 +41,6 @@ dotfiles_private/**
 {{- if or (not $hasPrivateRepo) (ne .chezmoi.os "darwin") }}
 .ssh/known_hosts_mnv
 {{- end }}
-{{/* Standalone skills are installed independently of the private submodule. */}}
-{{- range $skill := list "private-safety-skill" "frontier-advisor" }}
-{{- if not (stat (joinPath $.chezmoi.homeDir ".agents" "skills" $skill "SKILL.md")) }}
-.claude/skills/{{ $skill }}
-{{- end }}
-{{- end }}
 {{/* Manage ~/.profile on work machines and macOS machines for login-shell environment. */}}
 {{- if and (ne $machineClass "work") (ne .chezmoi.os "darwin") }}
 .profile
