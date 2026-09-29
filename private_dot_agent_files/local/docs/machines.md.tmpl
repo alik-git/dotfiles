@@ -1,4 +1,10 @@
-{{- $f := joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" "shared" "docs" "machines.md" -}}
+{{- $role := index . "machine_role" | default "workstation" -}}
+{{- if not (has $role (list "workstation" "compute")) -}}
+{{- fail "machine_role must be workstation or compute" -}}
+{{- end -}}
+{{- $scope := "shared" -}}
+{{- if eq $role "compute" -}}{{- $scope = "compute" -}}{{- end -}}
+{{- $f := joinPath .chezmoi.sourceDir "dotfiles_private" "dot_agent_files" $scope "docs" "machines.md" -}}
 {{- if stat $f -}}
 {{ include $f }}
 {{- end -}}

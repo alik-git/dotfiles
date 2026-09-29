@@ -5,6 +5,10 @@
        so it is not asked here. */ -}}
 {{- $machineName := promptStringOnce . "machine_name" "machine_name - short identity for this machine, type a name (e.g. workstation, laptop)" -}}
 {{- $machineClass := promptStringOnce . "machine_class" "machine_class - type exactly: work  OR  personal" "personal" -}}
+{{- $machineRole := promptStringOnce . "machine_role" "machine_role - workstation OR compute" "workstation" -}}
+{{- if not (has $machineRole (list "workstation" "compute")) -}}
+{{- fail "machine_role must be workstation or compute" -}}
+{{- end -}}
 {{- $hasGui := promptBoolOnce . "has_gui" "has_gui - does this machine have a desktop GUI? type: true  OR  false" true -}}
 {{- $sshClient := index . "ssh_client_key" | default "" -}}
 {{- $ageKey := joinPath .chezmoi.homeDir ".config" "chezmoi" "key.txt" -}}
@@ -17,6 +21,7 @@ encryption = "age"
 [data]
     machine_name = {{ $machineName | quote }}
     machine_class = {{ $machineClass | quote }}
+    machine_role = {{ $machineRole | quote }}
     has_gui = {{ $hasGui }}
 {{ if $sshClient }}    ssh_client_key = {{ $sshClient | quote }}
 {{ end }}

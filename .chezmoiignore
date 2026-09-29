@@ -124,3 +124,8 @@ Library/Application Support/Code/**
 .config/wireplumber
 .config/wireplumber/**
 {{- end }}
+
+{{/* Compute machines use the short maps, not workstation setup notes. */}}
+{{- if eq (index . "machine_role" | default "workstation") "compute" }}
+.agent_files/local/docs/google_cloud_services_setup.md
+{{- end }}
