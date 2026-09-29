@@ -70,6 +70,7 @@ loads at apply time:
 [data]
 machine_name  = "workstation"   # identity; selects this machine's private layer
 machine_class = "work"          # work | personal  -> task shell layer
+machine_role  = "workstation"   # workstation | compute -> installed reference scope
 has_gui       = false           # gate GUI-only targets (VS Code, Nautilus)
 ```
 
@@ -85,6 +86,19 @@ encryption = "age"
 
 (`dotfiles_private/machines.reference.yaml` is only a human inventory — chezmoi
 does not load it; this local config is the source of truth.)
+
+### Machine role
+
+`machine_class` selects work or personal configuration. `machine_role` selects
+full workstation references or short compute references at the same installed
+`~/.agent_files/local/docs/{machines,resources}.md` paths. Both roles keep the
+same development tools, skills, and access to private dotfiles. This controls
+installed context, not repository permissions or credential access.
+
+An unset role retains workstation behavior. Set `machine_role = "compute"` in
+local `[data]` to opt in, then preview and apply only the reference documents.
+Compute machines omit the workstation cloud-setup note; if already installed,
+review and remove that old note explicitly because ignoring it does not delete it.
 
 ## Workflow tools
 
