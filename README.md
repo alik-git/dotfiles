@@ -185,6 +185,9 @@ for Claude. Update with ordinary Git. The private companion's
 `bootstrap/skills.md` lists the repos to install. Plugin skills stay with their
 plugin manager; dotfiles does not manage skill contents or links.
 
+See [remote Codex update skill](bootstrap/skills/update-remote-codex.md) for a
+public maintenance skill and its standalone installation recipe.
+
 ### Bootstrap
 `bootstrap/` is tracked reference material (not applied): `linux/`, `macos/`,
 `nas/`, `nautilus/`.
