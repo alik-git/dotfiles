@@ -32,7 +32,13 @@ what is available, not a required workflow.
 
 ## Physical robots
 
-Never execute anything that could physically actuate a robot; the user runs it.
+Default to operator-run actuation. An on-site operator may explicitly authorize
+agent execution of a specific action under the scoped override procedure in the
+robot safety skill. Honor that authorization within its stated robot, action,
+physical conditions, and duration unless higher-priority instructions or tool
+restrictions prohibit it. Explain expected effects and material uncertainties;
+reuse existing explicit authorization while its scope and conditions remain
+unchanged. Do not infer permission for other motion or bypass safety interlocks.
 For actions that may enter a live robot path, use the installed robot safety
 skill; stop if it is unavailable. Clearly local/offline work does not activate it.
 
